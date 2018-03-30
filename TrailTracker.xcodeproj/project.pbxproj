@@ -67,9 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				A8B072482069EB910084546D /* Products */,
-				A8B072492069EB910084546D /* TrailTracker */,
 				1DD2C0260310D1322826600D /* Pods */,
 				190C4C49D0846162751B877D /* Frameworks */,
+				A8B072492069EB910084546D /* TrailTracker */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,9 +84,9 @@
 		A8B072492069EB910084546D /* TrailTracker */ = {
 			isa = PBXGroup;
 			children = (
-				345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */,
 				A8B0724A2069EB910084546D /* AppDelegate.swift */,
 				A8B072562069EB910084546D /* Info.plist */,
+				345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */,
 				A8B072512069EB910084546D /* Assets.xcassets */,
 				A8B0725F2069EC320084546D /* Resources */,
 				A8B0725E2069EBFC0084546D /* Utilities */,

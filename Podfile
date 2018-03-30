@@ -6,5 +6,5 @@ target 'TrailTracker' do
   use_frameworks!
 
   # Pods for TrailTracker
-pod 'Firebase/Core'
+  pod 'Firebase/Core'
 end
