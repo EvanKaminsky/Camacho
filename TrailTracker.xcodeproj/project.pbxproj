@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		345F9BCE206C3EDC0003A725 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */; };
+		A89450BA2071684800949948 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450B92071684800949948 /* Member.swift */; };
+		A89450BC2071691600949948 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BB2071691600949948 /* Utils.swift */; };
+		A89450BE2071698800949948 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BD2071698800949948 /* Trip.swift */; };
+		A89450C020716BA400949948 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BF20716BA400949948 /* Date+.swift */; };
 		A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724A2069EB910084546D /* AppDelegate.swift */; };
 		A8B0724D2069EB910084546D /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724C2069EB910084546D /* MainController.swift */; };
 		A8B072502069EB910084546D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B0724E2069EB910084546D /* Main.storyboard */; };
@@ -22,6 +26,10 @@
 		14692E58D7222312F85B14BD /* Pods_TrailTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrailTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45E07772B75B0DB72E6D0D6E /* Pods-TrailTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.release.xcconfig"; sourceTree = "<group>"; };
+		A89450B92071684800949948 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		A89450BB2071691600949948 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A89450BD2071698800949948 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		A89450BF20716BA400949948 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		A8B072472069EB910084546D /* TrailTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrailTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8B0724A2069EB910084546D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8B0724C2069EB910084546D /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -63,6 +71,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A89450B8207165D300949948 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A89450B92071684800949948 /* Member.swift */,
+				A89450BD2071698800949948 /* Trip.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A8B0723E2069EB910084546D = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +109,7 @@
 				A8B0725E2069EBFC0084546D /* Utilities */,
 				A8B0725C2069EBF10084546D /* Storyboards */,
 				A8B0725D2069EBF60084546D /* View Controllers */,
+				A89450B8207165D300949948 /* Models */,
 			);
 			path = TrailTracker;
 			sourceTree = "<group>";
@@ -116,6 +134,8 @@
 		A8B0725E2069EBFC0084546D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A89450BB2071691600949948 /* Utils.swift */,
+				A89450BF20716BA400949948 /* Date+.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -263,8 +283,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A89450BE2071698800949948 /* Trip.swift in Sources */,
 				A8B0724D2069EB910084546D /* MainController.swift in Sources */,
+				A89450BA2071684800949948 /* Member.swift in Sources */,
+				A89450C020716BA400949948 /* Date+.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
+				A89450BC2071691600949948 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
