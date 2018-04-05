@@ -36,7 +36,8 @@ class Trip {
     private(set) var starttime: Date?
     private(set) var endtime: Date?             // ETA for in-progress trips, actual end time for complete trips
     
-    private(set) var member_ids: Set<String>
+//    private(set) var member_ids: Set<String>
+    private(set) var attendance_ids: Set<String>
     private(set) var staff_count: Int
     private(set) var participant_count: Int
     
@@ -48,19 +49,19 @@ class Trip {
         }
     }
     
-    var members: [Member] {
-        return []
-    }
+//    var members: [Member] {
+//        return []
+//    }
 
     
     // Methods //
     
-    init(id: String, type: TripType, status: Status, title: String, memberIDs: [String], staffCount: Int, participantCount: Int) {
+    init(id: String, type: TripType, status: Status, title: String, attendance_ids: [String], staffCount: Int, participantCount: Int) {
         self.id = id
         self.type = type
         self.status = status
         self.title = title
-        self.member_ids = Set(memberIDs)
+        self.attendance_ids = Set(attendance_ids)
         self.staff_count = staffCount
         self.participant_count = participantCount
     }
@@ -81,19 +82,23 @@ class Trip {
         self.distance = distance
     }
     
-    func add(memberID: String) {
-        member_ids.insert(memberID)
+    func add(member_id: String) {
+        // Generate ID
+        let a = Attendance(id: "attendance1",trip_id: self.id,member_id: member_id)
+        attendance_ids.insert(a.id)
     }
     
     func remove(memberID: String) {
-        member_ids.remove(memberID)
+        //query for Attendance with member_id = memberID & trip_id = self.id
+        attendance_ids.remove(memberID)
     }
     
     
     // Spoof Data //
     
     static func spoofA() -> Trip {
-        let trip = Trip(id: "tripA", type: .biking, status: .complete, title: "Trip 1", memberIDs: ["member1", "member2"], staffCount: 3, participantCount: 12)
+//        let trip = Trip(id: "tripA", type: .biking, status: .complete, title: "Trip 1", memberIDs: ["member1", "member2"], staffCount: 3, participantCount: 12)
+        let trip = Trip(id: "tripA", type: .biking, status: .complete, title: "Trip 1", attendance_ids: ["attendance1", "attendance2"], staffCount: 3, participantCount: 12)
         trip.set(distance: 4.8)
         trip.set(startTime: Date(iso8601: "2018-03-20T14:15:00 CST"))
         trip.set(endTime: Date(iso8601: "2018-03-20T14:41:00 CST"))
