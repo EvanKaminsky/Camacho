@@ -14,7 +14,7 @@ extension Date {
     init(iso8601 input: String) {
         let init_formatter = DateFormatter()
         init_formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
-        init_formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+        init_formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
         self.init(timeInterval: 0, since: init_formatter.date(from: input)!)
     }
     
