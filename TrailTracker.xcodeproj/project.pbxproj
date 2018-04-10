@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		345F9BCE206C3EDC0003A725 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */; };
-		349741C22075DB270088B94E /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349741C12075DB270088B94E /* Attendance.swift */; };
+		349741C22075DB270088B94E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349741C12075DB270088B94E /* Activity.swift */; };
 		A89450BA2071684800949948 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450B92071684800949948 /* Member.swift */; };
 		A89450BC2071691600949948 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BB2071691600949948 /* Utils.swift */; };
 		A89450BE2071698800949948 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BD2071698800949948 /* Trip.swift */; };
@@ -26,7 +26,7 @@
 /* Begin PBXFileReference section */
 		14692E58D7222312F85B14BD /* Pods_TrailTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrailTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		349741C12075DB270088B94E /* Attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		349741C12075DB270088B94E /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		45E07772B75B0DB72E6D0D6E /* Pods-TrailTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.release.xcconfig"; sourceTree = "<group>"; };
 		A89450B92071684800949948 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		A89450BB2071691600949948 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			children = (
 				A89450B92071684800949948 /* Member.swift */,
 				A89450BD2071698800949948 /* Trip.swift */,
-				349741C12075DB270088B94E /* Attendance.swift */,
+				349741C12075DB270088B94E /* Activity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,7 +303,7 @@
 				A89450BE2071698800949948 /* Trip.swift in Sources */,
 				A8B0724D2069EB910084546D /* MainController.swift in Sources */,
 				A89450BA2071684800949948 /* Member.swift in Sources */,
-				349741C22075DB270088B94E /* Attendance.swift in Sources */,
+				349741C22075DB270088B94E /* Activity.swift in Sources */,
 				A89450C020716BA400949948 /* Date+.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
 				A89450BC2071691600949948 /* Utils.swift in Sources */,
