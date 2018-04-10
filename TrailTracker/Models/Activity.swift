@@ -1,5 +1,5 @@
 //
-//  Attendance.swift
+//  Activity.swift
 //  TrailTracker
 //
 //  Created by Matthew on 4/4/18.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Attendance{
+class Activity{
     
     // Fields //
     
@@ -24,18 +24,23 @@ class Attendance{
         self.trip_id = trip_id
         self.member_id = member_id
     }
+    init(trip_id: String, member_id: String) {
+        self.id = "Activity1"
+        self.trip_id = trip_id
+        self.member_id = member_id
+    }
     
     
     // Spoof Data //
     
-    static func SpoofA() -> Attendance{
-        let attendance = Attendance(id:"attendance1",trip_id: "tripA", member_id: "member1")
-        return attendance
+    static func SpoofA() -> Activity{
+        let activity = Activity(id:"activity1",trip_id: "tripA", member_id: "member1")
+        return activity
     }
     
-    static func SpoofB() -> Attendance{
-        let attendance = Attendance(id:"attendance2",trip_id: "tripA", member_id: "member2")
-        return attendance
+    static func SpoofB() -> Activity{
+        let activity = Activity(id:"activity2",trip_id: "tripA", member_id: "member2")
+        return activity
     }
 }
 
