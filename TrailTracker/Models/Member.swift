@@ -24,7 +24,7 @@ class Member {
     private(set) var guardian_email: String?
     
 //    private(set) var trip_ids: Set<String>
-    private(set) var attendance_ids: Set<String>
+    private(set) var activity_ids: Set<String>
     private(set) var total_distance: Double
     private(set) var total_duration: Double
     
@@ -35,11 +35,11 @@ class Member {
     
     // Methods //
     
-    init(id: String, type: MemberType, name: String, attendance_ids: [String], totalDistance: Double, totalDuration: Double) {
+    init(id: String, type: MemberType, name: String, activity_ids: [String], totalDistance: Double, totalDuration: Double) {
         self.id = id
         self.type = type
         self.full_name = name
-        self.attendance_ids = Set(attendance_ids)
+        self.activity_ids = Set(activity_ids)
         self.total_distance = totalDistance
         self.total_duration = totalDuration
     }
@@ -62,13 +62,13 @@ class Member {
     
     func add(tripID: String) {
         // Generate ID
-        let a = Attendance(id: "1234",trip_id: tripID, member_id: self.id)
-        self.attendance_ids.insert(a.id)
+        let a = Activity(trip_id: tripID, member_id: self.id)
+        self.activity_ids.insert(a.id)
     }
     
     func remove(tripID: String) {
-        //qeuery for Attendance with trip_id = tripID and member_id = self.id
-        self.attendance_ids.remove(tripID)
+        //qeuery for Activity with trip_id = tripID and member_id = self.id
+        self.activity_ids.remove(tripID)
     }
     
 
@@ -76,12 +76,12 @@ class Member {
     // Spoof Data //
     
     static func spoofA() -> Member {
-        let member = Member(id: "member1", type: .staff, name: "Danny Quance", attendance_ids: ["attendance1"], totalDistance: 7.835, totalDuration: 2880)
+        let member = Member(id: "member1", type: .staff, name: "Danny Quance", activity_ids: ["activity1"], totalDistance: 7.835, totalDuration: 2880)
         return member
     }
     
     static func spoofB() -> Member {
-        let member = Member(id: "member2", type: .participant, name: "Brit McKyle", attendance_ids: ["attendance2"], totalDistance: 5.222, totalDuration: 2160)
+        let member = Member(id: "member2", type: .participant, name: "Brit McKyle", activity_ids: ["activity2"], totalDistance: 5.222, totalDuration: 2160)
         member.set(guardianName: "Lloyd McKyle")
         member.set(guardianEmail: "lloydswagger@gmail.com")
         return member
