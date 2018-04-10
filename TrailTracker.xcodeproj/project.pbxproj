@@ -56,6 +56,69 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		152FD489207D7904009049FF /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				152FD490207D7975009049FF /* Home Screen */,
+				152FD48D207D795C009049FF /* Trips */,
+				152FD48B207D791F009049FF /* Participants */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		152FD48B207D791F009049FF /* Participants */ = {
+			isa = PBXGroup;
+			children = (
+				152FD492207D79BA009049FF /* Manage List */,
+				152FD491207D79B4009049FF /* Create */,
+			);
+			path = Participants;
+			sourceTree = "<group>";
+		};
+		152FD48D207D795C009049FF /* Trips */ = {
+			isa = PBXGroup;
+			children = (
+				152FD48F207D796A009049FF /* Tracking */,
+				152FD48E207D7964009049FF /* Workflow */,
+			);
+			path = Trips;
+			sourceTree = "<group>";
+		};
+		152FD48E207D7964009049FF /* Workflow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Workflow;
+			sourceTree = "<group>";
+		};
+		152FD48F207D796A009049FF /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tracking;
+			sourceTree = "<group>";
+		};
+		152FD490207D7975009049FF /* Home Screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Home Screen";
+			sourceTree = "<group>";
+		};
+		152FD491207D79B4009049FF /* Create */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		152FD492207D79BA009049FF /* Manage List */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Manage List";
+			sourceTree = "<group>";
+		};
 		190C4C49D0846162751B877D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +167,7 @@
 		A8B072492069EB910084546D /* TrailTracker */ = {
 			isa = PBXGroup;
 			children = (
+				152FD489207D7904009049FF /* Features */,
 				A8B0724A2069EB910084546D /* AppDelegate.swift */,
 				A8B072562069EB910084546D /* Info.plist */,
 				345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */,
