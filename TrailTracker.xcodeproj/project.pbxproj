@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		152FD4B2207EB398009049FF /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4B1207EB398009049FF /* Home.storyboard */; };
-		152FD4B5207EB3CB009049FF /* TripTracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4B4207EB3CB009049FF /* TripTracking.storyboard */; };
-		152FD4B9207EB3F0009049FF /* AddTrip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4B8207EB3F0009049FF /* AddTrip.storyboard */; };
-		152FD4BF207EB446009049FF /* CreateParticipants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4BE207EB446009049FF /* CreateParticipants.storyboard */; };
-		152FD4C2207EB46F009049FF /* ManageParticipants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4C1207EB46F009049FF /* ManageParticipants.storyboard */; };
 		345F9BCE206C3EDC0003A725 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */; };
 		349741C22075DB270088B94E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349741C12075DB270088B94E /* Activity.swift */; };
 		A89450BA2071684800949948 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450B92071684800949948 /* Member.swift */; };
@@ -19,22 +14,22 @@
 		A89450BE2071698800949948 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BD2071698800949948 /* Trip.swift */; };
 		A89450C020716BA400949948 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BF20716BA400949948 /* Date+.swift */; };
 		A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724A2069EB910084546D /* AppDelegate.swift */; };
-		A8B0724D2069EB910084546D /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724C2069EB910084546D /* MainController.swift */; };
+		A8B0724D2069EB910084546D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724C2069EB910084546D /* HomeController.swift */; };
 		A8B072502069EB910084546D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B0724E2069EB910084546D /* Main.storyboard */; };
 		A8B072522069EB910084546D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B072512069EB910084546D /* Assets.xcassets */; };
 		A8B072552069EB910084546D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B072532069EB910084546D /* LaunchScreen.storyboard */; };
 		A8B072612069ECD70084546D /* SUNN.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8B072602069ECD70084546D /* SUNN.otf */; };
 		A8B072632069ECF00084546D /* PaneuropaNeueRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */; };
+		A8F0F17F207EC53900CDFE1D /* TripTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F17E207EC53900CDFE1D /* TripTableController.swift */; };
+		A8F0F181207EC55900CDFE1D /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */; };
+		A8F0F183207EC58A00CDFE1D /* ParticipantTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */; };
+		A8F0F185207EC5AC00CDFE1D /* CreateParticipantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */; };
+		A8F0F187207EC5E600CDFE1D /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F186207EC5E600CDFE1D /* TripViewController.swift */; };
 		C2F0223D0F401AF660FCFA98 /* Pods_TrailTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14692E58D7222312F85B14BD /* Pods_TrailTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14692E58D7222312F85B14BD /* Pods_TrailTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrailTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		152FD4B1207EB398009049FF /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		152FD4B4207EB3CB009049FF /* TripTracking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TripTracking.storyboard; sourceTree = "<group>"; };
-		152FD4B8207EB3F0009049FF /* AddTrip.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTrip.storyboard; sourceTree = "<group>"; };
-		152FD4BE207EB446009049FF /* CreateParticipants.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateParticipants.storyboard; sourceTree = "<group>"; };
-		152FD4C1207EB46F009049FF /* ManageParticipants.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ManageParticipants.storyboard; sourceTree = "<group>"; };
 		345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		349741C12075DB270088B94E /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		45E07772B75B0DB72E6D0D6E /* Pods-TrailTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -44,13 +39,18 @@
 		A89450BF20716BA400949948 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		A8B072472069EB910084546D /* TrailTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrailTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8B0724A2069EB910084546D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A8B0724C2069EB910084546D /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		A8B0724C2069EB910084546D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		A8B0724F2069EB910084546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8B072512069EB910084546D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8B072542069EB910084546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8B072562069EB910084546D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8B072602069ECD70084546D /* SUNN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SUNN.otf; sourceTree = "<group>"; };
 		A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaneuropaNeueRegular.otf; sourceTree = "<group>"; };
+		A8F0F17E207EC53900CDFE1D /* TripTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableController.swift; sourceTree = "<group>"; };
+		A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
+		A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantTableController.swift; sourceTree = "<group>"; };
+		A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateParticipantController.swift; sourceTree = "<group>"; };
+		A8F0F186207EC5E600CDFE1D /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		F4194C9F05F65DF62F820500 /* Pods-TrailTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,74 +66,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		152FD4B0207EB37C009049FF /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B3207EB3A4009049FF /* Home Screen */,
-				152FD4BC207EB40B009049FF /* Trip */,
-				152FD4C4207EB47C009049FF /* Participants */,
-			);
-			name = Features;
-			sourceTree = "<group>";
-		};
-		152FD4B3207EB3A4009049FF /* Home Screen */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B1207EB398009049FF /* Home.storyboard */,
-			);
-			name = "Home Screen";
-			sourceTree = "<group>";
-		};
-		152FD4B7207EB3DD009049FF /* Trip Tracking */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B4207EB3CB009049FF /* TripTracking.storyboard */,
-			);
-			name = "Trip Tracking";
-			sourceTree = "<group>";
-		};
-		152FD4BB207EB3FC009049FF /* Add Trip Workflow */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B8207EB3F0009049FF /* AddTrip.storyboard */,
-			);
-			name = "Add Trip Workflow";
-			sourceTree = "<group>";
-		};
-		152FD4BC207EB40B009049FF /* Trip */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B7207EB3DD009049FF /* Trip Tracking */,
-				152FD4BB207EB3FC009049FF /* Add Trip Workflow */,
-			);
-			name = Trip;
-			sourceTree = "<group>";
-		};
-		152FD4C0207EB451009049FF /* Create Participants */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4BE207EB446009049FF /* CreateParticipants.storyboard */,
-			);
-			name = "Create Participants";
-			sourceTree = "<group>";
-		};
-		152FD4C3207EB472009049FF /* Manage Participants */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4C1207EB46F009049FF /* ManageParticipants.storyboard */,
-			);
-			name = "Manage Participants";
-			sourceTree = "<group>";
-		};
-		152FD4C4207EB47C009049FF /* Participants */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4C0207EB451009049FF /* Create Participants */,
-				152FD4C3207EB472009049FF /* Manage Participants */,
-			);
-			name = Participants;
-			sourceTree = "<group>";
-		};
 		190C4C49D0846162751B877D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,35 +114,18 @@
 		A8B072492069EB910084546D /* TrailTracker */ = {
 			isa = PBXGroup;
 			children = (
-				152FD4B0207EB37C009049FF /* Features */,
 				A8B0724A2069EB910084546D /* AppDelegate.swift */,
 				A8B072562069EB910084546D /* Info.plist */,
 				345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */,
 				A8B072512069EB910084546D /* Assets.xcassets */,
+				A8B0724E2069EB910084546D /* Main.storyboard */,
+				A8B072532069EB910084546D /* LaunchScreen.storyboard */,
+				A8F0F188207EC6B200CDFE1D /* View Controllers */,
 				A8B0725F2069EC320084546D /* Resources */,
 				A8B0725E2069EBFC0084546D /* Utilities */,
-				A8B0725C2069EBF10084546D /* Storyboards */,
-				A8B0725D2069EBF60084546D /* View Controllers */,
 				A89450B8207165D300949948 /* Models */,
 			);
 			path = TrailTracker;
-			sourceTree = "<group>";
-		};
-		A8B0725C2069EBF10084546D /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				A8B072532069EB910084546D /* LaunchScreen.storyboard */,
-				A8B0724E2069EB910084546D /* Main.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		A8B0725D2069EBF60084546D /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A8B0724C2069EB910084546D /* MainController.swift */,
-			);
-			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		A8B0725E2069EBFC0084546D /* Utilities */ = {
@@ -229,6 +144,19 @@
 				A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A8F0F188207EC6B200CDFE1D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A8B0724C2069EB910084546D /* HomeController.swift */,
+				A8F0F186207EC5E600CDFE1D /* TripViewController.swift */,
+				A8F0F17E207EC53900CDFE1D /* TripTableController.swift */,
+				A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */,
+				A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */,
+				A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,17 +221,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				152FD4BF207EB446009049FF /* CreateParticipants.storyboard in Resources */,
-				152FD4B5207EB3CB009049FF /* TripTracking.storyboard in Resources */,
-				152FD4B2207EB398009049FF /* Home.storyboard in Resources */,
 				A8B072632069ECF00084546D /* PaneuropaNeueRegular.otf in Resources */,
 				A8B072552069EB910084546D /* LaunchScreen.storyboard in Resources */,
-				152FD4C2207EB46F009049FF /* ManageParticipants.storyboard in Resources */,
 				A8B072522069EB910084546D /* Assets.xcassets in Resources */,
 				A8B072502069EB910084546D /* Main.storyboard in Resources */,
 				A8B072612069ECD70084546D /* SUNN.otf in Resources */,
 				345F9BCE206C3EDC0003A725 /* GoogleService-Info.plist in Resources */,
-				152FD4B9207EB3F0009049FF /* AddTrip.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,12 +308,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A89450BE2071698800949948 /* Trip.swift in Sources */,
-				A8B0724D2069EB910084546D /* MainController.swift in Sources */,
+				A8B0724D2069EB910084546D /* HomeController.swift in Sources */,
+				A8F0F185207EC5AC00CDFE1D /* CreateParticipantController.swift in Sources */,
+				A8F0F183207EC58A00CDFE1D /* ParticipantTableController.swift in Sources */,
 				A89450BA2071684800949948 /* Member.swift in Sources */,
 				349741C22075DB270088B94E /* Activity.swift in Sources */,
 				A89450C020716BA400949948 /* Date+.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
 				A89450BC2071691600949948 /* Utils.swift in Sources */,
+				A8F0F187207EC5E600CDFE1D /* TripViewController.swift in Sources */,
+				A8F0F181207EC55900CDFE1D /* ParticipantViewController.swift in Sources */,
+				A8F0F17F207EC53900CDFE1D /* TripTableController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
