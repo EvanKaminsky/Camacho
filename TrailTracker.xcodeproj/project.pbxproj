@@ -21,6 +21,11 @@
 		A8B072552069EB910084546D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B072532069EB910084546D /* LaunchScreen.storyboard */; };
 		A8B072612069ECD70084546D /* SUNN.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8B072602069ECD70084546D /* SUNN.otf */; };
 		A8B072632069ECF00084546D /* PaneuropaNeueRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */; };
+		A8D76985207FE86300F1A4A0 /* CamachoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D76984207FE86300F1A4A0 /* CamachoButton.swift */; };
+		A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D76986207FE98C00F1A4A0 /* ClosureButton.swift */; };
+		A8D76989207FE9F800F1A4A0 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D76988207FE9F800F1A4A0 /* Font.swift */; };
+		A8D7698B207FEB7100F1A4A0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D7698A207FEB7100F1A4A0 /* Color.swift */; };
+		A8D7698D207FEDF700F1A4A0 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D7698C207FEDF700F1A4A0 /* UIView+.swift */; };
 		A8F0F17F207EC53900CDFE1D /* TripTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F17E207EC53900CDFE1D /* TripTableController.swift */; };
 		A8F0F181207EC55900CDFE1D /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */; };
 		A8F0F183207EC58A00CDFE1D /* ParticipantTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */; };
@@ -48,6 +53,11 @@
 		A8B072562069EB910084546D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8B072602069ECD70084546D /* SUNN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SUNN.otf; sourceTree = "<group>"; };
 		A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaneuropaNeueRegular.otf; sourceTree = "<group>"; };
+		A8D76984207FE86300F1A4A0 /* CamachoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamachoButton.swift; sourceTree = "<group>"; };
+		A8D76986207FE98C00F1A4A0 /* ClosureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureButton.swift; sourceTree = "<group>"; };
+		A8D76988207FE9F800F1A4A0 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		A8D7698A207FEB7100F1A4A0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A8D7698C207FEDF700F1A4A0 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		A8F0F17E207EC53900CDFE1D /* TripTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableController.swift; sourceTree = "<group>"; };
 		A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
 		A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantTableController.swift; sourceTree = "<group>"; };
@@ -126,6 +136,7 @@
 				A8B0725F2069EC320084546D /* Resources */,
 				A8B0725E2069EBFC0084546D /* Utilities */,
 				A89450B8207165D300949948 /* Models */,
+				A8D76983207FE82E00F1A4A0 /* UI Controls */,
 			);
 			path = TrailTracker;
 			sourceTree = "<group>";
@@ -134,7 +145,10 @@
 			isa = PBXGroup;
 			children = (
 				A89450BB2071691600949948 /* Utils.swift */,
+				A8D76988207FE9F800F1A4A0 /* Font.swift */,
+				A8D7698A207FEB7100F1A4A0 /* Color.swift */,
 				A89450BF20716BA400949948 /* Date+.swift */,
+				A8D7698C207FEDF700F1A4A0 /* UIView+.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -146,6 +160,15 @@
 				A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A8D76983207FE82E00F1A4A0 /* UI Controls */ = {
+			isa = PBXGroup;
+			children = (
+				A8D76986207FE98C00F1A4A0 /* ClosureButton.swift */,
+				A8D76984207FE86300F1A4A0 /* CamachoButton.swift */,
+			);
+			path = "UI Controls";
 			sourceTree = "<group>";
 		};
 		A8F0F188207EC6B200CDFE1D /* View Controllers */ = {
@@ -310,16 +333,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8D76985207FE86300F1A4A0 /* CamachoButton.swift in Sources */,
 				A89450BE2071698800949948 /* Trip.swift in Sources */,
 				A8B0724D2069EB910084546D /* HomeController.swift in Sources */,
 				A8F0F185207EC5AC00CDFE1D /* CreateParticipantController.swift in Sources */,
+				A8D7698B207FEB7100F1A4A0 /* Color.swift in Sources */,
 				A8F0F183207EC58A00CDFE1D /* ParticipantTableController.swift in Sources */,
+				A8D7698D207FEDF700F1A4A0 /* UIView+.swift in Sources */,
 				A89450BA2071684800949948 /* Member.swift in Sources */,
 				349741C22075DB270088B94E /* Activity.swift in Sources */,
 				A89450C020716BA400949948 /* Date+.swift in Sources */,
+				A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
 				A89450BC2071691600949948 /* Utils.swift in Sources */,
 				A8F0F187207EC5E600CDFE1D /* TripViewController.swift in Sources */,
+				A8D76989207FE9F800F1A4A0 /* Font.swift in Sources */,
 				A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */,
 				A8F0F181207EC55900CDFE1D /* ParticipantViewController.swift in Sources */,
 				A8F0F17F207EC53900CDFE1D /* TripTableController.swift in Sources */,

@@ -9,12 +9,22 @@
 import Foundation
 import Firebase
 
+
+let DEBUG_ON = true
+
+
 typealias HardJSON = [String : Any]
 typealias JSON     = [String : Any]?
 typealias ObjJSON  = [String : AnyObject]
 
 typealias VoidBlock = () -> ()
 
+
+func debugPrint(_ text: String) {
+    if DEBUG_ON {
+        print("[\(Date())] > \(text)")
+    }
+}
 
 class Utils {
     
