@@ -8,4 +8,10 @@ target 'TrailTracker' do
   # Pods for TrailTracker
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  
+  target 'TrailTrackerTests' do
+    inherit! :search_paths
+    pod 'Firebase/Core'
+    pod 'Firebase/Firestore'
+  end
 end

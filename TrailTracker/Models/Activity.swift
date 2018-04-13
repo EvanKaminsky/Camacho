@@ -30,6 +30,13 @@ class Activity{
         self.member_id = member_id
     }
     
+    func save(){
+        let ref = Utils.db.collection("Trips").document(self.id)
+        ref.updateData([
+            "trip_id" : self.trip_id,
+            "member_id" : self.member_id
+            ])
+    }
     
     // Spoof Data //
     

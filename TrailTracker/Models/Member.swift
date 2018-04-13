@@ -28,10 +28,6 @@ class Member {
     private(set) var total_distance: Double
     private(set) var total_duration: Double
     
-//    var trips: [Trip] {
-//        return []
-//    }
-    
     
     // Methods //
     
@@ -69,6 +65,18 @@ class Member {
     func remove(tripID: String) {
         //qeuery for Activity with trip_id = tripID and member_id = self.id
         self.activity_ids.remove(tripID)
+    }
+    func save(){
+        let ref = Utils.db.collection("Members").document(self.id)
+        ref.updateData([
+            "type" : self.type,
+            "full_name" : self.full_name,
+            "guardian_name" : self.guardian_name,
+            "guardian_email" : self.guardian_email,
+            "activitiy_ids" : self.activity_ids,
+            "total_distance" : self.total_distance,
+            "total_duration" : self.total_duration
+            ])
     }
     
 
