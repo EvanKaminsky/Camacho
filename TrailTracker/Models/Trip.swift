@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import Firebase
 
 class Trip {
     
@@ -90,8 +91,21 @@ class Trip {
     }
     
     func save(){
-        let ref = Utils.db.collection("Trips").document(self.id)
-        print(ref)
+//        var ref: DocumentReference? = nil
+//        ref = Utils.db.collection("users").addDocument(data: [
+//            "first": "Ada",
+//            "last": "Lovelace",
+//            "born": 1815
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
+        
+        let db = Utils.db
+        let ref = db.collection("trips").document(self.id)
         ref.setData([
             "type" : self.type.rawValue,
             "status" : self.status.rawValue,
@@ -99,8 +113,13 @@ class Trip {
             "path" : self.path,
             "activitiy_ids" : self.activity_ids,
             "staff_count" : self.staff_count,
-            "participant_count" : self.participant_count
-        ]){ err in
+            "participant_count" : self.participant_count,
+            "destination" : self.destination,
+            "distance" : self.distance,
+            "starttime" : self.starttime,
+            "endtime" : self.endtime,
+            "duration" : self.duration
+        ],options: SetOptions.merge()){ err in
             if let err = err {
                 print("Error updating document: \(err)")
             } else {
@@ -108,38 +127,38 @@ class Trip {
             }
         }
 
-        // Check for null values in optionals, convert to NSNull type
+        // Check for null values in optionals, convert to NSNull type, probably don't need these
 
-        if self.destination == nil {
-            ref.setData(["destination" : NSNull()])
-        }
-        else{
-            ref.setData(["destination" : self.destination])
-        }
-        if self.distance == nil {
-            ref.setData(["distance" : NSNull()])
-        }
-        else{
-            ref.setData(["distance" : self.destination])
-        }
-        if self.starttime == nil {
-            ref.setData(["starttime" : NSNull()])
-        }
-        else{
-            ref.setData(["starttime" : self.starttime])
-        }
-        if self.endtime == nil {
-            ref.setData(["endtime" : NSNull()])
-        }
-        else{
-            ref.setData(["endtime" : self.endtime])
-        }
-        if self.duration == nil {
-            ref.setData(["duration" : NSNull()])
-        }
-        else{
-            ref.setData(["duration" : self.duration])
-        }
+//        if self.destination == nil {
+//            ref.setData(["destination" : NSNull()],options: SetOptions.merge())
+//        }
+//        else{
+//            ref.setData(["destination" : self.destination],options: SetOptions.merge())
+//        }
+//        if self.distance == nil {
+//            ref.setData(["distance" : NSNull()],options: SetOptions.merge())
+//        }
+//        else{
+//            ref.setData(["distance" : self.destination],options: SetOptions.merge())
+//        }
+//        if self.starttime == nil {
+//            ref.setData(["starttime" : NSNull()],options: SetOptions.merge())
+//        }
+//        else{
+//            ref.setData(["starttime" : self.starttime],options: SetOptions.merge())
+//        }
+//        if self.endtime == nil {
+//            ref.setData(["endtime" : NSNull()],options: SetOptions.merge())
+//        }
+//        else{
+//            ref.setData(["endtime" : self.endtime],options: SetOptions.merge())
+//        }
+//        if self.duration == nil {
+//            ref.setData(["duration" : NSNull()],options: SetOptions.merge())
+//        }
+//        else{
+//            ref.setData(["duration" : self.duration],options: SetOptions.merge())
+//        }
     }
     
     // Spoof Data //
