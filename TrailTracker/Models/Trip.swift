@@ -79,31 +79,33 @@ class Trip {
     }
     
     func add(member_id: String) {
-        // Generate ID
         let a = Activity(trip_id: self.id,member_id: member_id)
         activity_ids.append(a.id)
     }
     
     func remove(memberID: String) {
         //query for Activity with member_id = memberID & trip_id = self.id
-        let ind = activity_ids.index(of:"123")
-        activity_ids.remove(at: ind!)
+        var activity_id = String()
+        Utils.db.collection("activities").whereField("trip_id", isEqualTo: self.id).whereField("member_id", isEqualTo: memberID).getDocuments{(snapshot,error) in
+            for document in (snapshot?.documents)!{
+                activity_id = document.documentID
+            }
+        }
+        let ind = activity_ids.index(of:activity_id)
+        self.activity_ids.remove(at: ind!)
+        save()
+        let ref = Utils.db.collection("members").document(memberID)
+        ref.getDocument{(document,error) in
+            if var a_ids = document?.data()!["activity_ids"] as? Array<String>{
+                let i = a_ids.index(of: activity_id)
+                a_ids.remove(at: i!)
+                ref.updateData(["activity_ids": a_ids])
+            }
+        }
+        
     }
     
     func save(){
-//        var ref: DocumentReference? = nil
-//        ref = Utils.db.collection("users").addDocument(data: [
-//            "first": "Ada",
-//            "last": "Lovelace",
-//            "born": 1815
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
-//        }
-        
         let db = Utils.db
         let ref = db.collection("trips").document(self.id)
         ref.setData([

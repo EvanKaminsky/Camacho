@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 class Member {
     
@@ -24,7 +25,7 @@ class Member {
     private(set) var guardian_email: String?
     
 //    private(set) var trip_ids: Set<String>
-    private(set) var activity_ids: Set<String>
+    private(set) var activity_ids: Array<String>
     private(set) var total_distance: Double
     private(set) var total_duration: Double
     
@@ -35,7 +36,7 @@ class Member {
         self.id = id
         self.type = type
         self.full_name = name
-        self.activity_ids = Set(activity_ids)
+        self.activity_ids = activity_ids
         self.total_distance = totalDistance
         self.total_duration = totalDuration
     }
@@ -59,24 +60,41 @@ class Member {
     func add(tripID: String) {
         // Generate ID
         let a = Activity(trip_id: tripID, member_id: self.id)
-        self.activity_ids.insert(a.id)
+        self.activity_ids.append(a.id)
     }
     
     func remove(tripID: String) {
-        //qeuery for Activity with trip_id = tripID and member_id = self.id
-        self.activity_ids.remove(tripID)
+        var activity_id = String()
+        Utils.db.collection("activities").whereField("trip_id", isEqualTo: tripID).whereField("member_id", isEqualTo: self.id).getDocuments{(snapshot,error) in
+            for document in (snapshot?.documents)!{
+                activity_id = document.documentID
+            }
+        }
+        let ind = activity_ids.index(of:activity_id)
+        self.activity_ids.remove(at: ind!)
+        save()
+        let ref = Utils.db.collection("trips").document(tripID)
+        ref.getDocument{(document,error) in
+            if var a_ids = document?.data()!["activity_ids"] as? Array<String>{
+                let i = a_ids.index(of: activity_id)
+                a_ids.remove(at: i!)
+                ref.updateData(["activity_ids": a_ids])
+            }
+        }
+        
     }
+    
     func save(){
         let ref = Utils.db.collection("Members").document(self.id)
-        ref.updateData([
-            "type" : self.type,
+        ref.setData([
+            "type" : self.type.rawValue,
             "full_name" : self.full_name,
             "guardian_name" : self.guardian_name,
             "guardian_email" : self.guardian_email,
             "activitiy_ids" : self.activity_ids,
             "total_distance" : self.total_distance,
             "total_duration" : self.total_duration
-            ])
+            ],options: SetOptions.merge())
     }
     
 

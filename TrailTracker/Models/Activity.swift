@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Firebase
 
 class Activity{
     
@@ -16,7 +16,7 @@ class Activity{
     private(set) var id: String
     private(set) var trip_id: String
     private(set) var member_id: String
-    
+    static var count: Int = 1
     // Methods //
     
     init(id: String, trip_id: String, member_id: String) {
@@ -25,17 +25,18 @@ class Activity{
         self.member_id = member_id
     }
     init(trip_id: String, member_id: String) {
-        self.id = "Activity1"
+        self.id = "Activity\(Activity.count)"
+        Activity.count+=1
         self.trip_id = trip_id
         self.member_id = member_id
     }
     
     func save(){
         let ref = Utils.db.collection("Trips").document(self.id)
-        ref.updateData([
+        ref.setData([
             "trip_id" : self.trip_id,
             "member_id" : self.member_id
-            ])
+            ],options: SetOptions.merge())
     }
     
     // Spoof Data //

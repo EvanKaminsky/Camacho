@@ -33,9 +33,7 @@ class TrailTrackerTests: XCTestCase {
         trip.set(distance: 4.8)
         trip.set(startTime: Date())
         trip.set(endTime: Date())
-        print("Going to save")
         trip.save()
-        print("Just Saved")
         db.collection("trips").whereField("type", isEqualTo: "biking").getDocuments{(snapshot,error) in
             if error != nil{
                 print(error)
