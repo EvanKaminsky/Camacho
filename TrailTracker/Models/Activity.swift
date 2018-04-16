@@ -25,14 +25,30 @@ class Activity{
         self.member_id = member_id
     }
     init(trip_id: String, member_id: String) {
-        self.id = "Activity\(Activity.count)"
-        Activity.count+=1
+//        self.id = "Activity\(Activity.count)"
+//        Activity.count+=1
+        self.id = "none"
         self.trip_id = trip_id
         self.member_id = member_id
     }
     
     func save(){
-        let ref = Utils.db.collection("Trips").document(self.id)
+        if(self.id == "none"){
+            save2()
+        }
+        else{
+            let ref = Utils.db.collection("trips").document(self.id)
+            ref.setData([
+                "trip_id" : self.trip_id,
+                "member_id" : self.member_id
+                ],options: SetOptions.merge())
+        }
+    }
+    
+//    Creates ID before saving to Firestore and keeps it 
+    func save2(){
+        let ref = Utils.db.collection("trips").document()
+        self.id = ref.documentID
         ref.setData([
             "trip_id" : self.trip_id,
             "member_id" : self.member_id

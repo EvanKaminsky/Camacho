@@ -61,6 +61,15 @@ class Trip {
         self.staff_count = staffCount
         self.participant_count = participantCount
     }
+    init(type: TripType, status: Status, title: String, activity_ids: [String], staffCount: Int, participantCount: Int) {
+        self.id = "none"
+        self.type = type
+        self.status = status
+        self.title = title
+        self.activity_ids = activity_ids
+        self.staff_count = staffCount
+        self.participant_count = participantCount
+    }
     
     static func parse(json: ObjJSON) -> Trip? {
         return nil
@@ -76,6 +85,12 @@ class Trip {
     
     func set(distance: Double) {
         self.distance = distance
+    }
+    func set(destination: CLLocation) {
+        self.destination = destination
+    }
+    func set(path: [CLLocation]) {
+        self.path = path
     }
     
     func add(member_id: String) {
@@ -106,8 +121,37 @@ class Trip {
     }
     
     func save(){
-        let db = Utils.db
-        let ref = db.collection("trips").document(self.id)
+        if(self.id == "none"){
+            save2()
+        }else{
+        let ref = Utils.db.collection("trips").document(self.id)
+            ref.setData([
+                "type" : self.type.rawValue,
+                "status" : self.status.rawValue,
+                "title" : self.title,
+                "path" : self.path,
+                "activitiy_ids" : self.activity_ids,
+                "staff_count" : self.staff_count,
+                "participant_count" : self.participant_count,
+                "destination" : self.destination as Any,
+                "distance" : self.distance as Any,
+                "starttime" : self.starttime as Any,
+                "endtime" : self.endtime as Any,
+                "duration" : self.duration as Any
+            ],options: SetOptions.merge()){ err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+        }
+    }
+    
+    // Generate ID before saving to Firestore
+    func save2(){
+        let ref = Utils.db.collection("trips").document()
+        self.id = ref.documentID
         ref.setData([
             "type" : self.type.rawValue,
             "status" : self.status.rawValue,
@@ -116,11 +160,11 @@ class Trip {
             "activitiy_ids" : self.activity_ids,
             "staff_count" : self.staff_count,
             "participant_count" : self.participant_count,
-            "destination" : self.destination,
-            "distance" : self.distance,
-            "starttime" : self.starttime,
-            "endtime" : self.endtime,
-            "duration" : self.duration
+            "destination" : self.destination as Any,
+            "distance" : self.distance as Any,
+            "starttime" : self.starttime as Any,
+            "endtime" : self.endtime as Any,
+            "duration" : self.duration as Any
         ],options: SetOptions.merge()){ err in
             if let err = err {
                 print("Error updating document: \(err)")
@@ -128,39 +172,39 @@ class Trip {
                 print("Document successfully updated")
             }
         }
-
-        // Check for null values in optionals, convert to NSNull type, probably don't need these
-
-//        if self.destination == nil {
-//            ref.setData(["destination" : NSNull()],options: SetOptions.merge())
-//        }
-//        else{
-//            ref.setData(["destination" : self.destination],options: SetOptions.merge())
-//        }
-//        if self.distance == nil {
-//            ref.setData(["distance" : NSNull()],options: SetOptions.merge())
-//        }
-//        else{
-//            ref.setData(["distance" : self.destination],options: SetOptions.merge())
-//        }
-//        if self.starttime == nil {
-//            ref.setData(["starttime" : NSNull()],options: SetOptions.merge())
-//        }
-//        else{
-//            ref.setData(["starttime" : self.starttime],options: SetOptions.merge())
-//        }
-//        if self.endtime == nil {
-//            ref.setData(["endtime" : NSNull()],options: SetOptions.merge())
-//        }
-//        else{
-//            ref.setData(["endtime" : self.endtime],options: SetOptions.merge())
-//        }
-//        if self.duration == nil {
-//            ref.setData(["duration" : NSNull()],options: SetOptions.merge())
-//        }
-//        else{
-//            ref.setData(["duration" : self.duration],options: SetOptions.merge())
-//        }
+    }
+    
+    static func getTrips() -> [Trip]{
+        var trips = [Trip]()
+        Utils.db.collection("trips").getDocuments{(querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let id = document.documentID
+                    var arr : [String: Any] = document.data()
+                    let type = arr["type"] as? String
+                    let status = arr["status"] as? String
+                    let title = arr["title"] as? String
+                    let path = arr["path"] as? String //Change this to doubles later
+                    let destination = arr["destination"] as? String //Change this to doubles later
+                    let distance = arr["distance"] as? Double
+                    let starttime = arr["starttime"] as? Date
+                    let endtime = arr["endtime"] as? Date
+                    let activity_ids = arr["activity_ids"] as? [String]
+                    let staff_count = arr["staff_count"] as? Int
+                    let participant_count = arr["participant_count"] as? Int
+                    let t = Trip(id: id, type: Trip.TripType(rawValue: type!)!, status: Trip.Status(rawValue: status!)!, title: title!, activity_ids: activity_ids!, staffCount: staff_count!, participantCount: participant_count!)
+                    t.set(endTime: endtime!)
+                    t.set(startTime: starttime!)
+                    t.set(distance: distance!)
+//                    t.set(destination: destination!)
+//                    t.set(path: path)
+                    trips.append(t)
+                }
+            }
+        }
+        return trips
     }
     
     // Spoof Data //

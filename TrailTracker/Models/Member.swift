@@ -85,7 +85,26 @@ class Member {
     }
     
     func save(){
-        let ref = Utils.db.collection("Members").document(self.id)
+        if (self.id == "none"){
+            save2()
+        } else{
+        let ref = Utils.db.collection("members").document(self.id)
+        ref.setData([
+            "type" : self.type.rawValue,
+            "full_name" : self.full_name,
+            "guardian_name" : self.guardian_name,
+            "guardian_email" : self.guardian_email,
+            "activitiy_ids" : self.activity_ids,
+            "total_distance" : self.total_distance,
+            "total_duration" : self.total_duration
+            ],options: SetOptions.merge())
+        }
+    }
+    
+    //  Set Document ID before saving to Firestore
+    func save2(){
+        let ref = Utils.db.collection("members").document()
+        self.id = ref.documentID
         ref.setData([
             "type" : self.type.rawValue,
             "full_name" : self.full_name,
@@ -97,7 +116,34 @@ class Member {
             ],options: SetOptions.merge())
     }
     
-
+    // Get Methods
+    
+    static func getMembers() -> [Member]{
+        var members = [Member]()
+        Utils.db.collection("members").getDocuments{(querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let id = document.documentID
+                    var arr : [String: Any] = document.data()
+                    let type = arr["type"] as? String
+                    let full_name = arr["full_name"] as? String
+                    let guardian_name = arr["guardian_name"] as? String
+                    let guardian_email = arr["guardian_email"] as? String
+                    let activity_ids = arr["activitiy_ids"] as? [String]
+                    let total_distance = arr["total_distance"] as? Double
+                    let total_duration = arr["total_duration"] as? Double
+                    
+                    let m = Member(id: id, type: Member.MemberType(rawValue: type!)!, name: full_name!, activity_ids: activity_ids!, totalDistance: total_distance!, totalDuration: total_duration!)
+                    m.set(guardianName: guardian_name!)
+                    m.set(guardianEmail: guardian_email!)
+                    members.append(m)
+                }
+            }
+        }
+        return members
+    }
     
     // Spoof Data //
     
