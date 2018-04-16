@@ -10,6 +10,8 @@ import UIKit
 
 class ParticipantTableController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    
     
     
     

@@ -10,6 +10,7 @@ import UIKit
 
 class TripTableController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
