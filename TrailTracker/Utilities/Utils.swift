@@ -10,21 +10,56 @@ import Foundation
 import Firebase
 
 
-let DEBUG_ON = true
+// Global Fields //
 
+let DEBUG_ON = true
 
 typealias HardJSON = [String : Any]
 typealias JSON     = [String : Any]?
 typealias ObjJSON  = [String : AnyObject]
-
 typealias VoidBlock = () -> ()
+typealias MembersBlock = (NetworkingStatus, [Member]) -> ()
+typealias TripsBlock = (NetworkingStatus, [Trip]) -> ()
 
+
+enum NetworkingStatus {
+    case success
+    case error
+}
+
+enum Collection: String {
+    case activites = "activities"
+    case members   = "members"
+    case trips     = "trips"
+}
+
+enum IDField: String {
+    case tripID      = "trip_id"
+    case memberID    = "member_id"
+    case activityIDs = "activity_ids"
+    case none        = "none"
+}
+
+
+// Global Functions //
 
 func debugPrint(_ text: String) {
     if DEBUG_ON {
         print("[\(Date())] > \(text)")
     }
 }
+
+
+// Foundation Extensions //
+
+extension Array {
+    subscript (safe index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
+
+// Utility Singleton Class //
 
 class Utils {
     

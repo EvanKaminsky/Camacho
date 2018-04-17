@@ -17,7 +17,7 @@ class Font {
         case paneuropa  = "PaneuropaNeueRegular"
     }
 
-    static func makeAttrs(size: CGFloat, color: UIColor, type: Font.Name = .sunn) -> FontAttributes {
+    static func makeAttrs(size: CGFloat, color: UIColor, type: Font.Name) -> FontAttributes {
         if let font = UIFont(name: type.rawValue, size: size) {
             return [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: color]
         }
@@ -27,8 +27,8 @@ class Font {
     }
     
     
-    static func make(text: String, size: CGFloat, color: UIColor) -> NSAttributedString {
-        return NSAttributedString(string: text, attributes: Font.makeAttrs(size: size, color: color))
+    static func make(text: String, size: CGFloat, color: UIColor, type: Font.Name) -> NSAttributedString {
+        return NSAttributedString(string: text, attributes: Font.makeAttrs(size: size, color: color, type: type))
     }
     
     

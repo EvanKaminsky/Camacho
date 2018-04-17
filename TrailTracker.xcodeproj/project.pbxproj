@@ -14,6 +14,7 @@
 		A7928F10208534D20080671A /* MemberTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F0F208534D20080671A /* MemberTableCell.swift */; };
 		A7928F12208535630080671A /* TripTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F11208535630080671A /* TripTableCell.swift */; };
 		A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */; };
+		A815F9992086B87800D42011 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815F9982086B87800D42011 /* UIExtensions.swift */; };
 		A89450BA2071684800949948 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450B92071684800949948 /* Member.swift */; };
 		A89450BC2071691600949948 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BB2071691600949948 /* Utils.swift */; };
 		A89450BE2071698800949948 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BD2071698800949948 /* Trip.swift */; };
@@ -61,6 +62,7 @@
 		A7928F0F208534D20080671A /* MemberTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableCell.swift; sourceTree = "<group>"; };
 		A7928F11208535630080671A /* TripTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableCell.swift; sourceTree = "<group>"; };
 		A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripParticipantTableViewController.swift; sourceTree = "<group>"; };
+		A815F9982086B87800D42011 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		A89450B92071684800949948 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		A89450BB2071691600949948 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A89450BD2071698800949948 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -171,11 +173,11 @@
 				A8B0724A2069EB910084546D /* AppDelegate.swift */,
 				A8B072562069EB910084546D /* Info.plist */,
 				345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */,
-				A7928F0E208534AD0080671A /* Custom Table Cells */,
 				A8B072512069EB910084546D /* Assets.xcassets */,
 				A8B0724E2069EB910084546D /* Main.storyboard */,
 				A8B072532069EB910084546D /* LaunchScreen.storyboard */,
 				A8F0F188207EC6B200CDFE1D /* View Controllers */,
+				A7928F0E208534AD0080671A /* Custom Table Cells */,
 				A8B0725F2069EC320084546D /* Resources */,
 				A8B0725E2069EBFC0084546D /* Utilities */,
 				A89450B8207165D300949948 /* Models */,
@@ -192,6 +194,7 @@
 				A8D7698A207FEB7100F1A4A0 /* Color.swift */,
 				A89450BF20716BA400949948 /* Date+.swift */,
 				A8D7698C207FEDF700F1A4A0 /* UIView+.swift */,
+				A815F9982086B87800D42011 /* UIExtensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
 				A89450BC2071691600949948 /* Utils.swift in Sources */,
+				A815F9992086B87800D42011 /* UIExtensions.swift in Sources */,
 				A8F0F187207EC5E600CDFE1D /* TripViewController.swift in Sources */,
 				A8D76989207FE9F800F1A4A0 /* Font.swift in Sources */,
 				A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */,
