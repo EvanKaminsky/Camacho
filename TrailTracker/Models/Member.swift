@@ -55,23 +55,25 @@ class Member {
     
     // Networking //
     
-    // TODO: Make these setters call firebase code to set on the backend as well
     func set(name: String) {
         self.full_name = name
+        save()
     }
     
     func set(guardianName: String) {
         self.guardian_name = guardianName
+        save()
     }
     
     func set(guardianEmail: String) {
         self.guardian_email = guardianEmail
+        save()
     }
     
     func add(tripID: String) {
-        // TOOD: Generate ID
         let a = Activity(trip_id: tripID, member_id: self.id)
         self.activity_ids.append(a.id)
+        save()
     }
     
     
@@ -86,7 +88,7 @@ class Member {
                 }
         }
         
-        let ind = activity_ids.index(of:activity_id)
+        let ind = activity_ids.index(of: activity_id)
         self.activity_ids.remove(at: ind!)
         save()
         
@@ -101,13 +103,15 @@ class Member {
         
     }
     
-    func save() {
+    private func save() {
+        var ref: DocumentReference!
         if (self.id == IDField.none.rawValue) {
-            save2()
-            return
+            // Set Document ID before saving to Firestore
+            ref = Utils.db.collection(Collection.members.rawValue).document()
+            self.id = ref.documentID
+        } else {
+            ref = Utils.db.collection(Collection.members.rawValue).document(self.id)
         }
-
-        let ref = Utils.db.collection(Collection.members.rawValue).document(self.id)
         
         ref.setData([
             Field.type.rawValue: self.type.rawValue,
@@ -118,22 +122,6 @@ class Member {
             Field.totalDistance.rawValue: self.total_distance,
             Field.totalDuration.rawValue : self.total_duration
         ], options: SetOptions.merge())
-    }
-    
-    // Set Document ID before saving to Firestore
-    func save2() {
-        let ref = Utils.db.collection(Collection.members.rawValue).document()
-        self.id = ref.documentID
-        
-        ref.setData([
-            Field.type.rawValue: self.type.rawValue,
-            Field.fullName.rawValue: self.full_name,
-            Field.guardianName.rawValue: self.guardian_name as Any,
-            Field.guardianEmail.rawValue: self.guardian_email as Any,
-            Field.activityIds.rawValue: self.activity_ids,
-            Field.totalDistance.rawValue: self.total_distance,
-            Field.totalDuration.rawValue: self.total_duration
-        ] ,options: SetOptions.merge())
     }
     
     
