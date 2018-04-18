@@ -10,12 +10,12 @@ import UIKit
 
 class TripTableCell: UITableViewCell {
 
-    @IBOutlet weak var tripLabel: UILabel!
-    @IBOutlet weak var participantsLabel: UILabel!
+    @IBOutlet weak var tripLabel: UILabel?
+    @IBOutlet weak var participantsLabel: UILabel?
     
-    @IBOutlet weak var staffLabel: UILabel!
-    @IBOutlet weak var milesLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var staffLabel: UILabel?
+    @IBOutlet weak var milesLabel: UILabel?
+    @IBOutlet weak var timeLabel: UILabel?
     
     
     

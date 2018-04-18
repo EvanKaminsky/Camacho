@@ -27,7 +27,7 @@ class ParticipantTableController: UIViewController {
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
-        tableView.register(MemberTableCell.self, forCellReuseIdentifier: MemberTableCell.identifier)
+        tableView.register(MemberTableCell.self, forCellReuseIdentifier: "MemberTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         refresher.addTarget(self, action: #selector(ParticipantTableController.update), for: .valueChanged)
@@ -75,7 +75,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
         guard let participant = participants[safe: indexPath.row] else {
             return UITableViewCell()
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableCell.identifier, for: indexPath) as! MemberTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemberTableViewCell", for: indexPath) as! MemberTableCell
         cell.update(with: participant)
         return cell
     }
