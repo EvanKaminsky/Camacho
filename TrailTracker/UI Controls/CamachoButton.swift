@@ -27,7 +27,7 @@ class CamachoButton: ClosureButton {
         label.isUserInteractionEnabled = false
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
-        self.addSubview(label)
+        self.addSubviewInCenter(label)
     }
     
 }

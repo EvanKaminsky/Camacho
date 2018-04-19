@@ -63,6 +63,11 @@ extension UIView {
         self.layer.borderColor = color.cgColor
     }
     
+    func deleteBorder() {
+        self.layer.borderWidth = 0
+        self.layer.borderColor = UIColor.clear.cgColor
+    }
+    
     func makeShadow(opacity: Float = 0.2, radius: CGFloat = 4.0, offsetWidth: CGFloat = 0, offsetHeight: CGFloat = 0) {
         self.layer.shadowColor   = UIColor.black.cgColor
         self.layer.shadowOffset  = CGSize(width: offsetWidth, height: offsetHeight)

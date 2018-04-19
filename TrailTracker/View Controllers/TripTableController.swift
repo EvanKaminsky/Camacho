@@ -38,7 +38,32 @@ class TripTableController: UIViewController {
         self.view.addSubview(badge_2)
         self.view.addSubview(badge_3)
         
+        // Test Member Type Button
+        let member_width = 0.35 * view.width
+        let member_height = 0.07 * view.height
+        let member_button_1 = MemberTypeButton(frame: CGRect(x: 0, y: 0, width: member_width, height: member_height), text: "Staff", image: "staff", isSelected: true, themeColor: Color.orange)
+        member_button_1.center = CGPoint(x: 0.7 * view.width, y: 0.15 * view.height)
+        member_button_1.touchUpInside = { button in
+            button.bubble(x: 0.9, y: 0.9, velocity: 5, options: .allowUserInteraction)
+            member_button_1.toggleSelected()
+        }
+        
+        let member_button_2 = MemberTypeButton(frame: CGRect(x: 0, y: 0, width: member_width, height: member_height), text: "Participant", image: "peep", isSelected: true, themeColor: Color.blue)
+        member_button_2.center = CGPoint(x: 0.7 * view.width, y: 0.25 * view.height)
+        member_button_2.touchUpInside = { button in
+            button.bubble(x: 0.9, y: 0.9, velocity: 5, options: .allowUserInteraction)
+            member_button_2.toggleSelected()
+        }
+            
+        self.view.addSubview(member_button_1)
+        self.view.addSubview(member_button_2)
+        
     }
+    
+    
+    
+    
+    
     
     
 }

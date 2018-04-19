@@ -34,7 +34,7 @@ class ParticipantTableController: UIViewController {
         refresher.addTarget(self, action: #selector(ParticipantTableController.update), for: .valueChanged)
         
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refresher.beginRefreshingManually(animated: false)

@@ -26,7 +26,7 @@ class Badge: UIView {
         label.isUserInteractionEnabled = false
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
-        self.addSubview(label)
+        self.addSubviewInCenter(label)
     }
     
 }
