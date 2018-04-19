@@ -58,6 +58,21 @@ extension Array {
     }
 }
 
+extension CGFloat {
+    func roundDigits(from minSig: Int, to maxSig: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumIntegerDigits = 1
+        formatter.minimumSignificantDigits = minSig
+        formatter.maximumSignificantDigits = maxSig
+        
+        if let string = formatter.string(from: NSNumber(floatLiteral: Double(self))) {
+            return string
+        }
+        return ""
+    }
+}
+
 
 // Utility Singleton Class //
 
@@ -69,6 +84,10 @@ class Utils {
     
     static var db: Firestore {
         return Utils.app_delegate.db
+    }
+    
+    static var screen: CGSize {
+        return UIScreen.main.bounds.size
     }
     
 }

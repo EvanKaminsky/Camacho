@@ -83,21 +83,25 @@ class Member {
             .whereField(IDField.tripID.rawValue, isEqualTo: tripID)
             .whereField(IDField.memberID.rawValue, isEqualTo: self.id)
             .getDocuments { (snapshot, error) in
-                for document in (snapshot?.documents)!{
-                    activity_id = document.documentID
+                if let documents = snapshot?.documents {
+                    for document in documents {
+                        activity_id = document.documentID
+                    }
                 }
         }
         
-        let ind = activity_ids.index(of: activity_id)
-        self.activity_ids.remove(at: ind!)
+        if let index = activity_ids.index(of: activity_id) {
+            self.activity_ids.remove(at: index)
+        }
         save()
         
         let ref = Utils.db.collection(Collection.trips.rawValue).document(tripID)
         ref.getDocument { (document, error) in
-            if var a_ids = document?.data()![IDField.activityIDs.rawValue] as? Array<String> {
-                let i = a_ids.index(of: activity_id)
-                a_ids.remove(at: i!)
-                ref.updateData([IDField.activityIDs.rawValue: a_ids])
+            if let data = document?.data(), var activity_ids = data[IDField.activityIDs.rawValue] as? [String] {
+                if let index = activity_ids.index(of: activity_id) {
+                    activity_ids.remove(at: index)
+                    ref.updateData([IDField.activityIDs.rawValue: activity_ids])
+                }
             }
         }
         

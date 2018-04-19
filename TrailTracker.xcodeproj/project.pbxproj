@@ -15,6 +15,7 @@
 		A7928F12208535630080671A /* TripTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F11208535630080671A /* TripTableCell.swift */; };
 		A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */; };
 		A815F9992086B87800D42011 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815F9982086B87800D42011 /* UIExtensions.swift */; };
+		A831DCC2208943D50058019A /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A831DCC1208943D50058019A /* Badge.swift */; };
 		A89450BA2071684800949948 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450B92071684800949948 /* Member.swift */; };
 		A89450BC2071691600949948 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BB2071691600949948 /* Utils.swift */; };
 		A89450BE2071698800949948 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BD2071698800949948 /* Trip.swift */; };
@@ -63,6 +64,7 @@
 		A7928F11208535630080671A /* TripTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableCell.swift; sourceTree = "<group>"; };
 		A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripParticipantTableViewController.swift; sourceTree = "<group>"; };
 		A815F9982086B87800D42011 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		A831DCC1208943D50058019A /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		A89450B92071684800949948 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		A89450BB2071691600949948 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A89450BD2071698800949948 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			children = (
 				A8D76986207FE98C00F1A4A0 /* ClosureButton.swift */,
 				A8D76984207FE86300F1A4A0 /* CamachoButton.swift */,
+				A831DCC1208943D50058019A /* Badge.swift */,
 			);
 			path = "UI Controls";
 			sourceTree = "<group>";
@@ -221,11 +224,11 @@
 			isa = PBXGroup;
 			children = (
 				A8B0724C2069EB910084546D /* HomeController.swift */,
-				A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */,
 				A8F0F186207EC5E600CDFE1D /* TripViewController.swift */,
 				A8F0F17E207EC53900CDFE1D /* TripTableController.swift */,
 				A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */,
 				A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */,
+				A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */,
 				A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */,
 			);
 			path = "View Controllers";
@@ -512,6 +515,7 @@
 				349741C22075DB270088B94E /* Activity.swift in Sources */,
 				A89450C020716BA400949948 /* Date+.swift in Sources */,
 				A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */,
+				A831DCC2208943D50058019A /* Badge.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
 				A89450BC2071691600949948 /* Utils.swift in Sources */,
 				A815F9992086B87800D42011 /* UIExtensions.swift in Sources */,

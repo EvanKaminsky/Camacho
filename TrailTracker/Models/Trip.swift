@@ -243,18 +243,6 @@ class Trip {
         return trips
     }
     
-    // Spoof Data //
-    
-    static func spoofA() -> Trip {
-        let trip = Trip(id: "tripA", type: .biking, status: .complete, title: "Trip 1", activity_ids: ["activity1", "activity2"], staffCount: 3, participantCount: 12)
-        trip.set(distance: 4.8)
-        trip.set(startTime: Date())
-        trip.set(endTime: Date())
-        let loc = CLLocation(latitude:37.09,longitude: -95.71)
-        trip.set(destination: loc)
-    }
-    
-    
     
     
 }

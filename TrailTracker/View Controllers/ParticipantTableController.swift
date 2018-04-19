@@ -30,6 +30,7 @@ class ParticipantTableController: UIViewController {
         tableView.register(MemberTableCell.self, forCellReuseIdentifier: "MemberTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.refreshControl = refresher
         refresher.addTarget(self, action: #selector(ParticipantTableController.update), for: .valueChanged)
         
     }
