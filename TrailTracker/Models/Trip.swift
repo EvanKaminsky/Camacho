@@ -37,7 +37,7 @@ class Trip {
     private(set) var starttime: Date?
     private(set) var endtime: Date?             // ETA for in-progress trips, actual end time for complete trips
     
-    private(set) var activity_ids: Array<String>
+    private(set) var activity_ids: [String]
     private(set) var staff_count: Int
     private(set) var participant_count: Int
     
@@ -120,7 +120,38 @@ class Trip {
         
     }
     
+    func CL2Geo(loc: CLLocation) -> GeoPoint {
+        let coord = loc.coordinate
+        let dest = GeoPoint(latitude: coord.latitude,longitude: coord.longitude)
+        return dest
+    }
+    
+    func CL2GeoArray(locs: [CLLocation]) -> [GeoPoint]{
+        var points = [GeoPoint]()
+        for loc in locs{
+            let gp = CL2Geo(loc: loc)
+            points.append(gp)
+        }
+        return points
+    }
+    
+    func Geo2CL(gp: GeoPoint) -> CLLocation{
+        let loc = CLLocation(latitude: gp.latitude,longitude: gp.longitude)
+        return loc
+    }
+    
+    func Geo2CLArray(locs: [GeoPoint]) -> [CLLocation]{
+        var points = [CLLocation]()
+        for gp in locs{
+            let loc = Geo2CL(gp: gp)
+            points.append(loc)
+        }
+        return points
+    }
+    
     func save(){
+        let dest = CL2Geo(loc: self.destination!)
+        let paths = CL2GeoArray(locs: self.path)
         if(self.id == "none"){
             save2()
         }else{
@@ -129,11 +160,11 @@ class Trip {
                 "type" : self.type.rawValue,
                 "status" : self.status.rawValue,
                 "title" : self.title,
-                "path" : self.path,
-                "activitiy_ids" : self.activity_ids,
+                "path" : paths,
+                "activity_ids" : self.activity_ids,
                 "staff_count" : self.staff_count,
                 "participant_count" : self.participant_count,
-                "destination" : self.destination as Any,
+                "destination" : dest,
                 "distance" : self.distance as Any,
                 "starttime" : self.starttime as Any,
                 "endtime" : self.endtime as Any,
@@ -150,17 +181,19 @@ class Trip {
     
     // Generate ID before saving to Firestore
     func save2(){
+        let dest = CL2Geo(loc: self.destination!)
+        let paths = CL2GeoArray(locs: self.path)
         let ref = Utils.db.collection("trips").document()
         self.id = ref.documentID
         ref.setData([
             "type" : self.type.rawValue,
             "status" : self.status.rawValue,
             "title" : self.title,
-            "path" : self.path,
-            "activitiy_ids" : self.activity_ids,
+            "path" : paths,
+            "activity_ids" : self.activity_ids,
             "staff_count" : self.staff_count,
             "participant_count" : self.participant_count,
-            "destination" : self.destination as Any,
+            "destination" : dest,
             "distance" : self.distance as Any,
             "starttime" : self.starttime as Any,
             "endtime" : self.endtime as Any,
@@ -175,6 +208,7 @@ class Trip {
     }
     
     static func getTrips() -> [Trip]{
+        print("Getting Trips")
         var trips = [Trip]()
         Utils.db.collection("trips").getDocuments{(querySnapshot, err) in
             if let err = err {
@@ -186,8 +220,8 @@ class Trip {
                     let type = arr["type"] as? String
                     let status = arr["status"] as? String
                     let title = arr["title"] as? String
-                    let path = arr["path"] as? String //Change this to doubles later
-                    let destination = arr["destination"] as? String //Change this to doubles later
+                    let path = arr["path"] as? [GeoPoint] //Change this to doubles later
+                    let destination = arr["destination"] as? GeoPoint
                     let distance = arr["distance"] as? Double
                     let starttime = arr["starttime"] as? Date
                     let endtime = arr["endtime"] as? Date
@@ -198,8 +232,10 @@ class Trip {
                     t.set(endTime: endtime!)
                     t.set(startTime: starttime!)
                     t.set(distance: distance!)
-//                    t.set(destination: destination!)
-//                    t.set(path: path)
+                    let dest = t.Geo2CL(gp: destination!)
+                    t.set(destination: dest)
+                    let paths = t.Geo2CLArray(locs: path!)
+                    t.set(path: paths)
                     trips.append(t)
                 }
             }
@@ -212,9 +248,10 @@ class Trip {
     static func spoofA() -> Trip {
         let trip = Trip(id: "tripA", type: .biking, status: .complete, title: "Trip 1", activity_ids: ["activity1", "activity2"], staffCount: 3, participantCount: 12)
         trip.set(distance: 4.8)
-        trip.set(startTime: Date(iso8601: "2018-03-20T14:15:00 CST"))
-        trip.set(endTime: Date(iso8601: "2018-03-20T14:41:00 CST"))
-        return trip
+        trip.set(startTime: Date())
+        trip.set(endTime: Date())
+        let loc = CLLocation(latitude:37.09,longitude: -95.71)
+        trip.set(destination: loc)
     }
     
     
