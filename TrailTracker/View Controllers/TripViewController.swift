@@ -110,7 +110,7 @@ class TripViewController: UIViewController {
         startButton.isHidden = false
         stopButton.isHidden = true
         locationManager.stopUpdatingLocation()
-        timer?.invalidate()
+//        timer?.invalidate()
     }
     
     private func startLocationUpdates() {
@@ -122,7 +122,8 @@ class TripViewController: UIViewController {
     }
 
     private func saveRun() {
-        trip.set(distance: distance.value)
+        let distanceInMiles = distance.converted(to: .miles)
+        trip.set(distance: distanceInMiles.value)
         trip.set(endTime: Date())
         trip.set(path: locationList)
         
