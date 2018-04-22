@@ -105,6 +105,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
         guard let _ = participants[safe: indexPath.row] else {
             return
         }
+        tableView.deselectSelectedRow()
         
         // TODO: Go to ParticipantViewController
         // let vc = ParticipantViewController(nibName: nil, bundle: nil)

@@ -21,3 +21,15 @@ extension UIRefreshControl {
     }
     
 }
+
+extension UITableView {
+    
+    func deselectSelectedRow(animated: Bool = true) {
+        if let indexPathForSelectedRow = self.indexPathForSelectedRow {
+            UIView.animate(withDuration: animated ? 0.3 : 0, delay: animated ? 0.3 : 0, options: .curveEaseInOut, animations: {
+                self.deselectRow(at: indexPathForSelectedRow, animated: false)
+            }, completion: nil)
+        }
+    }
+    
+}
