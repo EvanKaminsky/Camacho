@@ -19,14 +19,14 @@ extension Date {
     }
     
     func deltaStringSinceNow(display: TimeUnit.Display) -> String {
-        return deltaString(for: self.timeIntervalSinceNow, display: display)
+        return Date.deltaString(for: self.timeIntervalSinceNow, display: display)
     }
     
     func deltaStringSince(date: Date, display: TimeUnit.Display) -> String {
-        return deltaString(for: self.timeIntervalSince(date), display: display)
+        return Date.deltaString(for: self.timeIntervalSince(date), display: display)
     }
     
-    func deltaString(for interval: TimeInterval, display: TimeUnit.Display) -> String {
+    static func deltaString(for interval: TimeInterval, display: TimeUnit.Display) -> String {
         let seconds: TimeInterval = max(1.0, fabs(interval))
         if seconds < 60 {
             return Date.makeDeltaString(interval: seconds, unit: .second, display: display)
@@ -56,7 +56,7 @@ extension Date {
     }
     
     private static func makeDeltaString(interval: TimeInterval, unit: TimeUnit.Unit, display: TimeUnit.Display) -> String {
-        return "\(String(Int(interval))) \(TimeUnit.string(unit: unit, display: display, plural: Int(interval) != 1))"
+        return "\(String(Int(interval).roundDigits(from: 1, to: 3))) \(TimeUnit.string(unit: unit, display: display, plural: Int(interval) != 1))"
     }
     
 }

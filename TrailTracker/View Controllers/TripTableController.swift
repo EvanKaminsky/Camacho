@@ -15,6 +15,8 @@ class TripTableController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
+    var camachoButton: CamachoButton!
+    
     let refresher = UIRefreshControl()
     var trips: [Trip] = []
     
@@ -25,29 +27,23 @@ class TripTableController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Nav Bar
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
+        // Table
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = refresher
         refresher.addTarget(self, action: #selector(TripTableController.update), for: .valueChanged)
-        
-        // Test Camacho Button (TODO: Put in front of toolbar)
+     
+        // Camacho Button
         let button_width = 0.2 * view.width
-        let button = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
-        button.center = CGPoint(x: 0.5 * view.width, y: 0.85 * view.height)
-        button.touchUpInside = { [weak self] button in
+        camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
+        camachoButton.touchUpInside = { [weak self] button in
             button.bubble()
             self?.startTrip()
         }
-        self.view.addSubview(button)
-        
-        // Test Badges (TODO: Add to table cells and overlay mapview in the TripViewController)
-        //let badge_1 = Badge(frame: CGRect(x: 0, y: 0, width: badge_width, height: badge_height), text: "3 Trips", backgroundColor: Color.blue)
-        //let badge_2 = Badge(frame: CGRect(x: 0, y: 0, width: badge_width, height: badge_height), text: "28.1 mi.", backgroundColor: Color.green)
-        //let badge_3 = Badge(frame: CGRect(x: 0, y: 0, width: badge_width, height: badge_height), text: "36 min", backgroundColor: Color.red)
-
         
         // Test Member Type Button
         // let member_button_1 = MemberTypeButton(frame: CGRect(x: 0, y: 0, width: member_width, height: member_height), text: "Staff", image: "staff", isSelected: true, themeColor: Color.orange)
@@ -61,10 +57,16 @@ class TripTableController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        camachoButton.addToView()
         if self.trips.isEmpty {
             refresher.beginRefreshingManually(animated: false)
             self.update()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        camachoButton.removeFromSuperview()
     }
     
     @objc func update() {
