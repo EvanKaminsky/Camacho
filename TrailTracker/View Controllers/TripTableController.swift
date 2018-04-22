@@ -13,13 +13,13 @@ class TripTableController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // Needed for mapView
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
-        
-        
         
         
         // Test Camacho Button (TODO: Put in front of toolbar)
@@ -70,6 +70,10 @@ class TripTableController: UIViewController {
     
     func startTrip() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
+
+        vc.trip = Trip.init(type: Trip.TripType(rawValue: "hiking")!, status: Trip.Status(rawValue: "new")!, title: "Test Run From View Controller!", activity_ids: ["1"], staffCount: 1, participantCount: 1)
+        
+        // Open MapView ViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
