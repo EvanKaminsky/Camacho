@@ -51,6 +51,12 @@ func debugPrint(_ text: String) {
     }
 }
 
+func async(after seconds: Double, function: @escaping VoidBlock) {
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
+        function()
+    }
+}
+
 
 // Foundation Extensions //
 

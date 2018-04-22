@@ -14,16 +14,14 @@ class MemberTableCell: UITableViewCell {
     
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var tripsLabel: UILabel!
-    @IBOutlet weak var milesLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var tripsBadge: UIView!
+    @IBOutlet weak var milesBadge: UIView!
+    @IBOutlet weak var timeBadge: UIView!
+    
+    
     
         
     // Methods //
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     func update(with member: Member) {
         switch member.type {
@@ -36,9 +34,9 @@ class MemberTableCell: UITableViewCell {
         
         nameLabel.attributedText = Font.make(text: member.full_name, size: 30, color: Color.shade, type: .sunn)
         
-        tripsLabel.attributedText = Font.make(text: String(member.activity_ids.count), size: 15, color: Color.white, type: .paneuropa)
-        milesLabel.attributedText = Font.make(text: String(member.total_distance), size: 15, color: Color.white, type: .paneuropa)
-        timeLabel.attributedText = Font.make(text: String(member.total_distance), size: 15, color: Color.white, type: .paneuropa)
+        //tripsLabel.attributedText = Font.make(text: String(member.activity_ids.count), size: 15, color: Color.white, type: .paneuropa)
+        //milesLabel.attributedText = Font.make(text: String(member.total_distance), size: 15, color: Color.white, type: .paneuropa)
+        //.timeLabel.attributedText = Font.make(text: String(member.total_distance), size: 15, color: Color.white, type: .paneuropa)
     }
 
 
