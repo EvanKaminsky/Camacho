@@ -21,6 +21,7 @@ typealias VoidBlock = () -> ()
 typealias MembersBlock = (NetworkingStatus, [Member]) -> ()
 typealias MemberBlock = (NetworkingStatus, Member?) -> ()
 typealias TripsBlock = (NetworkingStatus, [Trip]) -> ()
+typealias TripBlock = (NetworkingStatus, Trip?) -> ()
 
 
 enum NetworkingStatus {

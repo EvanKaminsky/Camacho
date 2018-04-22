@@ -108,11 +108,11 @@ class Member {
             }
         }
         // Remove orphaned activity
-        Utils.db.collection("activities").document(activity_id).delete(){ err in
+        Utils.db.collection(Collection.activites.rawValue).document(activity_id).delete(){ err in
             if let err = err {
-                print("Error removing document: \(err)")
+                debugPrint("Error removing document: \(err)")
             } else {
-                print("Document successfully removed!")
+                debugPrint("Document successfully removed!")
             }
         }
         
