@@ -32,9 +32,15 @@ class TripViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let locationManager = LocationManager.shared
-//        locationManager.requestWhenInUseAuthorization()
+        // Asking for permissions like a nice person
         enableBasicLocationServices(locationManager: locationManager)
+        
+        //mapview setup to show user location
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        mapView.mapType = MKMapType(rawValue: 0)!
+        mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
+        
         
         //This ensures that location updates, a big battery consumer,
         //and the timer is stopped when the user navigates away from the view.
@@ -120,6 +126,7 @@ class TripViewController: UIViewController {
         locationManager.activityType = .fitness
         locationManager.distanceFilter = 10
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
 
     private func saveRun() {
@@ -158,6 +165,17 @@ extension TripViewController: CLLocationManagerDelegate {
             break
         }
     }
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+        //drawing path or route covered
+        if let oldLocationNew = oldLocation as CLLocation?{
+            let oldCoordinates = oldLocationNew.coordinate
+            let newCoordinates = newLocation.coordinate
+            var area = [oldCoordinates, newCoordinates]
+            var polyline = MKPolyline(coordinates: area, count: area.count)
+            mapView.add(polyline)
+            print("getting new location!!")
+        }
+    }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for newLocation in locations {
@@ -168,9 +186,30 @@ extension TripViewController: CLLocationManagerDelegate {
                 let delta = newLocation.distance(from: lastLocation)
                 distance = distance + Measurement(value: delta, unit: UnitLength.meters)
             }
+            print("appending new location to locationlist")
+            if locationList.count > 0 {
+                let area = [locationList[locationList.count - 1].coordinate, newLocation.coordinate]
+                let polyline = MKPolyline(coordinates: area, count: area.count)
+                mapView.add(polyline)
+                print("getting new location!!")
+            }
             
             locationList.append(newLocation)
         }
+    }
+}
+
+extension TripViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView!, rendererFor overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if (overlay is MKPolyline) {
+            print("in mapView function about to return PR")
+            let pr = MKPolylineRenderer(overlay: overlay)
+            pr.strokeColor = UIColor.red
+            pr.lineWidth = 5
+            return pr
+        }
+        print("Going to return nil as the overlay")
+        return nil
     }
 }
 
