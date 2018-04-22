@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol getMemberInfoPrototcol {
+    func getMemberInfo() -> Member
+}
+
 class ParticipantViewController: UIViewController {
     
     // Fields
@@ -19,22 +23,24 @@ class ParticipantViewController: UIViewController {
     @IBOutlet weak var durationBadge: Badge!
     @IBOutlet weak var distanceBadge: Badge!
     
-    
-    var member: Member!
+    var membersDelegate: getMemberInfoPrototcol?
+  
     
     
     // Methods //
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.title = member.full_name
+       
 
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        participantLabel.text = membersDelegate?.getMemberInfo().full_name
+        
         // Set member before coming here!
         
         // Nav Bar

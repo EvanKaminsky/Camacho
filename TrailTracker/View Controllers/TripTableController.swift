@@ -93,6 +93,8 @@ class TripTableController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    
 
 }
 

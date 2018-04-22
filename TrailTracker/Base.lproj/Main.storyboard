@@ -299,6 +299,7 @@
                                             <outlet property="nameLabel" destination="ldT-Lu-YeJ" id="APq-dL-bpZ"/>
                                             <outlet property="timeBadge" destination="FIq-Bo-RBA" id="0Bi-kC-Vij"/>
                                             <outlet property="tripsBadge" destination="3dp-tO-4X5" id="QWq-tf-Pqy"/>
+                                            <segue destination="wxc-fT-cNp" kind="show" identifier="memberSegue" id="O2q-xU-KFX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
