@@ -36,8 +36,10 @@ class ParticipantTableController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refresher.beginRefreshingManually(animated: false)
-        self.update()
+        if self.participants.isEmpty {
+            refresher.beginRefreshingManually(animated: false)
+            self.update()
+        }
     }
     
     

@@ -21,10 +21,6 @@ class MemberTableCell: UITableViewCell {
         
     // Methods //
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     func update(with member: Member) {
         switch member.type {
         case .staff:
