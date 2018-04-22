@@ -117,16 +117,79 @@ class Trip {
                 ref.updateData(["activity_ids": a_ids])
             }
         }
-        
+        // Remove orphaned activity
+        Utils.db.collection("activities").document(activity_id).delete(){ err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
     }
     
-    func CL2Geo(loc: CLLocation) -> GeoPoint {
+    static func getTrip(trip_id: String) -> Trip {
+        var t2 = [Trip]() //This is really bad but temporary until asynchronous
+        Utils.db.collection("trips").document(trip_id).getDocument{(document, err) in
+            if let err = err{
+                debugPrint("Error getting document: \(err)")
+            }else{
+                let id = document!.documentID
+                var arr : HardJSON = document!.data()!
+                let type = arr["type"] as? String
+                let status = arr["status"] as? String
+                let title = arr["title"] as? String
+                let path = arr["path"] as? [GeoPoint]
+                let destination = arr["destination"] as? GeoPoint
+                let distance = arr["distance"] as? Double
+                let starttime = arr["starttime"] as? Date
+                let endtime = arr["endtime"] as? Date
+                let activity_ids = arr["activity_ids"] as? [String]
+                let staff_count = arr["staff_count"] as? Int
+                let participant_count = arr["participant_count"] as? Int
+                let t = Trip(id: id, type: Trip.TripType(rawValue: type!)!, status: Trip.Status(rawValue: status!)!, title: title!, activity_ids: activity_ids!, staffCount: staff_count!, participantCount: participant_count!)
+                t.set(endTime: endtime!)
+                t.set(startTime: starttime!)
+                t.set(distance: distance!)
+                let dest = Trip.Geo2CL(gp: destination!)
+                t.set(destination: dest)
+                let paths = Trip.Geo2CLArray(locs: path!)
+                t.set(path: paths)
+                t2.append(t)
+            }
+        }
+        return t2[0]
+    }
+    
+    func getMembers() -> [Member]{
+        var members = [Member]()
+        for aid in self.activity_ids{
+            Utils.db.collection("activities").document(aid).getDocument{(document,err) in
+                if let err = err{
+                    debugPrint("Error getting document: \(err)")
+                }else{
+                    var arr : [String: Any] = document!.data()!
+                    let member_id  = arr["member_id"] as? String
+                    Member.getMember(member_id: member_id!) { (status, member) in
+                        if status == .error{
+                            debugPrint("Member does not Exist: \(status)")
+                        }else{
+                            members.append(member!)
+                        }
+                    }
+                }
+            }
+        }
+        return members
+    }
+    
+    
+    static func CL2Geo(loc: CLLocation) -> GeoPoint {
         let coord = loc.coordinate
         let dest = GeoPoint(latitude: coord.latitude,longitude: coord.longitude)
         return dest
     }
     
-    func CL2GeoArray(locs: [CLLocation]) -> [GeoPoint]{
+    static func CL2GeoArray(locs: [CLLocation]) -> [GeoPoint]{
         var points = [GeoPoint]()
         for loc in locs{
             let gp = CL2Geo(loc: loc)
@@ -135,12 +198,12 @@ class Trip {
         return points
     }
     
-    func Geo2CL(gp: GeoPoint) -> CLLocation{
+    static func Geo2CL(gp: GeoPoint) -> CLLocation{
         let loc = CLLocation(latitude: gp.latitude,longitude: gp.longitude)
         return loc
     }
     
-    func Geo2CLArray(locs: [GeoPoint]) -> [CLLocation]{
+    static func Geo2CLArray(locs: [GeoPoint]) -> [CLLocation]{
         var points = [CLLocation]()
         for gp in locs{
             let loc = Geo2CL(gp: gp)
@@ -150,8 +213,8 @@ class Trip {
     }
     
     func save(){
-        let dest = CL2Geo(loc: self.destination!)
-        let paths = CL2GeoArray(locs: self.path)
+        let dest = Trip.CL2Geo(loc: self.destination!)
+        let paths = Trip.CL2GeoArray(locs: self.path)
         if(self.id == "none"){
             save2()
         }else{
@@ -181,8 +244,8 @@ class Trip {
     
     // Generate ID before saving to Firestore
     func save2(){
-        let dest = CL2Geo(loc: self.destination!)
-        let paths = CL2GeoArray(locs: self.path)
+        let dest = Trip.CL2Geo(loc: self.destination!)
+        let paths = Trip.CL2GeoArray(locs: self.path)
         let ref = Utils.db.collection("trips").document()
         self.id = ref.documentID
         ref.setData([
@@ -191,7 +254,7 @@ class Trip {
             "title" : self.title,
             "path" : paths,
             "activity_ids" : self.activity_ids,
-            "staff_count" : self.staff_count,
+            "staff_count" : self.staff_count as Any,
             "participant_count" : self.participant_count,
             "destination" : dest,
             "distance" : self.distance as Any,
@@ -232,9 +295,9 @@ class Trip {
                     t.set(endTime: endtime!)
                     t.set(startTime: starttime!)
                     t.set(distance: distance!)
-                    let dest = t.Geo2CL(gp: destination!)
+                    let dest = Trip.Geo2CL(gp: destination!)
                     t.set(destination: dest)
-                    let paths = t.Geo2CLArray(locs: path!)
+                    let paths = Trip.Geo2CLArray(locs: path!)
                     t.set(path: paths)
                     trips.append(t)
                 }
