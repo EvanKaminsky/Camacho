@@ -24,7 +24,9 @@ class TripTableCell: UITableViewCell {
     
     func update(with trip: Trip) {
         
-        tripLabel.attributedText = Font.make(text: "Super Awesome Tripperdoodle xxxafhaiufheihfaiehx", size: 30, color: Color.shade, type: .sunn)
+        tripLabel.attributedText = Font.make(text: trip.title, size: 30, color: Color.shade, type: .sunn)
+        
+        // Participant & Staff labels
         
         let participant_text = "\(trip.participant_count) Participant\(trip.participant_count == 1 ? "" : "s")"
         participantsLabel.attributedText = Font.make(text: participant_text, size: 23, color: Color.shade, type: .sunn)
