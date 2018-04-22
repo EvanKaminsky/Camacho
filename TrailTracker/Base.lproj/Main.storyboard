@@ -12,7 +12,7 @@
         <!--Trip View Controller-->
         <scene sceneID="Nix-0q-COZ">
             <objects>
-                <viewController id="yHX-5P-15N" customClass="TripViewController" customModule="TrailTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TripViewController" id="yHX-5P-15N" customClass="TripViewController" customModule="TrailTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0gi-vU-vEL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,7 +26,7 @@
                         <viewLayoutGuide key="safeArea" id="eoY-76-RkL"/>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="gUF-1k-lDv" id="tk6-zb-Vi2"/>
+                        <outlet property="mapView" destination="gUF-1k-lDv" id="lOv-BF-IhV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qj-Gg-OnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
