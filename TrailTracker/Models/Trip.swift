@@ -103,25 +103,25 @@ class Trip {
     
     func set(startTime: Date) {
         self.starttime = startTime
-        save()
+//        save()
     }
     
     func set(endTime: Date) {
         self.endtime = endTime
-        save()
+//        save()
     }
     
     func set(distance: Double) {
         self.distance = distance
-        save()
+//        save()
     }
     func set(destination: CLLocation) {
         self.destination = destination
-        save()
+//        save()
     }
     func set(path: [CLLocation]) {
         self.path = path
-        save()
+//        save()
     }
     
     func add(member_id: String, callback: @escaping StatusBlock) {
@@ -264,7 +264,7 @@ class Trip {
             ref = Utils.db.collection(Collection.trips.rawValue).document(self.id)
         }
         
-        let dest = Trip.CL2Geo(loc: self.destination!)
+//        let dest = Trip.CL2Geo(loc: self.destination!)
         let paths = Trip.CL2GeoArray(locs: self.path)
         ref.setData([
             Field.type.rawValue: self.type.rawValue,
@@ -274,7 +274,7 @@ class Trip {
             Field.activityIds.rawValue : self.activity_ids,
             Field.staffCount.rawValue : self.staff_count,
             Field.participantCount.rawValue : self.participant_count,
-            Field.destination.rawValue : dest,
+//            Field.destination.rawValue : dest,
             Field.distance.rawValue : self.distance as Any,
             Field.starttime.rawValue : self.starttime as Any,
             Field.endtime.rawValue : self.endtime as Any,

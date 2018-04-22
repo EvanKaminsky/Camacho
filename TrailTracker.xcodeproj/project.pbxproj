@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15C509BF208D1F2200087812 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C509BE208D1F2200087812 /* UnitExtensions.swift */; };
+		15C509C1208D1F4300087812 /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C509C0208D1F4300087812 /* FormatDisplay.swift */; };
+		15C509C3208D1F5D00087812 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C509C2208D1F5D00087812 /* LocationManager.swift */; };
+		15C509C5208D28C500087812 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C509C4208D28C500087812 /* MapKit.framework */; };
 		345F9BCE206C3EDC0003A725 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */; };
 		349741C22075DB270088B94E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349741C12075DB270088B94E /* Activity.swift */; };
 		34C057D820802861004C3BF9 /* TrailTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C057D720802861004C3BF9 /* TrailTrackerTests.swift */; };
@@ -53,6 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15C509BE208D1F2200087812 /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
+		15C509C0208D1F4300087812 /* FormatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
+		15C509C2208D1F5D00087812 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		15C509C4208D28C500087812 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		243F54609B4311F7D4D1DC05 /* Pods-TrailTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		349741C12075DB270088B94E /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
@@ -109,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15C509C5208D28C500087812 /* MapKit.framework in Frameworks */,
 				953F1034EFBC770F3C8C14CA /* Pods_TrailTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,6 +137,7 @@
 		743AFA77367DAA1E0B572C4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15C509C4208D28C500087812 /* MapKit.framework */,
 				3D20D31595C7F8B66A207B25 /* Pods_TrailTracker.framework */,
 				C9D170723383DA51FF244C7A /* Pods_TrailTrackerTests.framework */,
 			);
@@ -201,6 +211,9 @@
 				A89450BF20716BA400949948 /* Date+.swift */,
 				A8D7698C207FEDF700F1A4A0 /* UIView+.swift */,
 				A815F9982086B87800D42011 /* UIExtensions.swift */,
+				15C509BE208D1F2200087812 /* UnitExtensions.swift */,
+				15C509C0208D1F4300087812 /* FormatDisplay.swift */,
+				15C509C2208D1F5D00087812 /* LocationManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -313,6 +326,11 @@
 					A8B072462069EB910084546D = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -516,9 +534,12 @@
 				A8D7698B207FEB7100F1A4A0 /* Color.swift in Sources */,
 				A7928F12208535630080671A /* TripTableCell.swift in Sources */,
 				A8F0F183207EC58A00CDFE1D /* ParticipantTableController.swift in Sources */,
+				15C509BF208D1F2200087812 /* UnitExtensions.swift in Sources */,
+				15C509C1208D1F4300087812 /* FormatDisplay.swift in Sources */,
 				A8D7698D207FEDF700F1A4A0 /* UIView+.swift in Sources */,
 				A89450BA2071684800949948 /* Member.swift in Sources */,
 				A7928F10208534D20080671A /* MemberTableCell.swift in Sources */,
+				15C509C3208D1F5D00087812 /* LocationManager.swift in Sources */,
 				349741C22075DB270088B94E /* Activity.swift in Sources */,
 				A89450C020716BA400949948 /* Date+.swift in Sources */,
 				A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */,
