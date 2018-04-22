@@ -26,6 +26,7 @@ class Trip {
         case activityIds = "activity_ids"
         case staffCount = "staff_count"
         case participantCount = "participant_count"
+        case duration = "duration"
     }
     
     
@@ -102,25 +103,50 @@ class Trip {
     
     func set(startTime: Date) {
         self.starttime = startTime
+        save()
     }
     
     func set(endTime: Date) {
         self.endtime = endTime
+        save()
     }
     
     func set(distance: Double) {
         self.distance = distance
+        save()
     }
     func set(destination: CLLocation) {
         self.destination = destination
+        save()
     }
     func set(path: [CLLocation]) {
         self.path = path
+        save()
     }
     
-    func add(member_id: String) {
+    func add(member_id: String, callback: @escaping StatusBlock) {
         let a = Activity(trip_id: self.id,member_id: member_id)
-        activity_ids.append(a.id)
+        self.activity_ids.append(a.id)
+        save()
+        
+        // Add activity id to the member
+        var activity_ids = [String]()
+        Utils.db.collection(Collection.members.rawValue).document(member_id)
+        .addSnapshotListener{(documentSnapshot,error) in
+            guard let document = documentSnapshot, error == nil else{
+                debugPrint("Error getting document: \(String(describing: error))")
+                callback(.error)
+                return
+            }
+            let arr: HardJSON = document.data()!
+            activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
+            activity_ids.append(a.id)
+        }
+        let ref = Utils.db.collection(Collection.members.rawValue).document(member_id)
+        ref.setData([
+            Field.activityIds.rawValue: activity_ids
+            ], options: SetOptions.merge())
+        callback(.success)
     }
     
     func remove(memberID: String) {
@@ -160,59 +186,42 @@ class Trip {
         }
     }
     
-    static func getTrip(trip_id: String) -> Trip {
-        var t2 = [Trip]() //This is really bad but temporary until asynchronous
-        Utils.db.collection("trips").document(trip_id).getDocument{(document, err) in
-            if let err = err{
-                debugPrint("Error getting document: \(err)")
-            }else{
-                let id = document!.documentID
-                var arr : HardJSON = document!.data()!
-                let type = arr["type"] as? String
-                let status = arr["status"] as? String
-                let title = arr["title"] as? String
-                let path = arr["path"] as? [GeoPoint]
-                let destination = arr["destination"] as? GeoPoint
-                let distance = arr["distance"] as? Double
-                let starttime = arr["starttime"] as? Date
-                let endtime = arr["endtime"] as? Date
-                let activity_ids = arr["activity_ids"] as? [String]
-                let staff_count = arr["staff_count"] as? Int
-                let participant_count = arr["participant_count"] as? Int
-                let t = Trip(id: id, type: Trip.TripType(rawValue: type!)!, status: Trip.Status(rawValue: status!)!, title: title!, activity_ids: activity_ids!, staffCount: staff_count!, participantCount: participant_count!)
-                t.set(endTime: endtime!)
-                t.set(startTime: starttime!)
-                t.set(distance: distance!)
-                let dest = Trip.Geo2CL(gp: destination!)
-                t.set(destination: dest)
-                let paths = Trip.Geo2CLArray(locs: path!)
-                t.set(path: paths)
-                t2.append(t)
-            }
-        }
-        return t2[0]
-    }
-    
-    func getMembers() -> [Member]{
-        var members = [Member]()
-        for aid in self.activity_ids{
-            Utils.db.collection("activities").document(aid).getDocument{(document,err) in
-                if let err = err{
-                    debugPrint("Error getting document: \(err)")
-                }else{
-                    var arr : [String: Any] = document!.data()!
-                    let member_id  = arr["member_id"] as? String
-                    Member.getMember(member_id: member_id!) { (status, member) in
-                        if status == .error{
-                            debugPrint("Member does not Exist: \(status)")
-                        }else{
-                            members.append(member!)
-                        }
-                    }
+    static func getTrip(trip_id: String, callback: @escaping TripBlock){
+        Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+            .addSnapshotListener{(documentSnapshot, error) in
+                guard let document = documentSnapshot, error == nil else {
+                    debugPrint("Error getting document: \(String(describing: error))")
+                    callback(.error,nil)
+                    return
                 }
-            }
+                let id = document.documentID
+                var arr: HardJSON = document.data()!
+                guard
+                    let type_raw = arr[Field.type.rawValue] as? String,
+                    let type = Trip.TripType(rawValue: type_raw),
+                    let status_raw = arr[Field.type.rawValue] as? String,
+                    let status = Trip.Status(rawValue: status_raw),
+                    let title = arr[Field.title.rawValue] as? String,
+                    let g_path = arr[Field.path.rawValue] as? [GeoPoint],
+                    let activity_ids = arr[Field.activityIds.rawValue] as? [String],
+                    let staff_count = arr[Field.staffCount.rawValue] as? Int,
+                    let participant_count = arr[Field.participantCount.rawValue] as? Int
+                    else{
+                        debugPrint("Failed instantiating Trip object with data: \(arr)")
+                        callback(.error,nil)
+                        return
+                    }
+                let t = Trip(id: id, type: type, status: status, title: title, activity_ids: activity_ids, staffCount: staff_count, participantCount: participant_count)
+                let path = Trip.Geo2CLArray(locs: g_path)
+                let g_destination = arr[Field.destination.rawValue] as? GeoPoint
+                let destination = Geo2CL(gp: g_destination!)
+                let distance = arr[Field.distance.rawValue] as? Double
+                let starttime = arr[Field.starttime.rawValue] as? Date
+                let endtime = arr[Field.endtime.rawValue] as? Date
+                t.setOptionalFields(destination: destination, distance: distance, starttime: starttime, endtime: endtime)
+                t.set(path: path)
+                callback(.success,t)
         }
-        return members
     }
     
     
@@ -246,61 +255,54 @@ class Trip {
     }
     
     func save(){
+        var ref: DocumentReference!
+        if (self.id == IDField.none.rawValue){
+            // Set Document ID before saving to Firestore
+            ref = Utils.db.collection(Collection.trips.rawValue).document()
+            self.id = ref.documentID
+        } else {
+            ref = Utils.db.collection(Collection.trips.rawValue).document(self.id)
+        }
+        
         let dest = Trip.CL2Geo(loc: self.destination!)
         let paths = Trip.CL2GeoArray(locs: self.path)
-        if(self.id == "none"){
-            save2()
-        }else{
-        let ref = Utils.db.collection("trips").document(self.id)
-            ref.setData([
-                "type" : self.type.rawValue,
-                "status" : self.status.rawValue,
-                "title" : self.title,
-                "path" : paths,
-                "activity_ids" : self.activity_ids,
-                "staff_count" : self.staff_count,
-                "participant_count" : self.participant_count,
-                "destination" : dest,
-                "distance" : self.distance as Any,
-                "starttime" : self.starttime as Any,
-                "endtime" : self.endtime as Any,
-                "duration" : self.duration as Any
-            ],options: SetOptions.merge()){ err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated")
+        ref.setData([
+            Field.type.rawValue: self.type.rawValue,
+            Field.status.rawValue : self.status.rawValue,
+            Field.title.rawValue : self.title,
+            Field.path.rawValue : paths,
+            Field.activityIds.rawValue : self.activity_ids,
+            Field.staffCount.rawValue : self.staff_count,
+            Field.participantCount.rawValue : self.participant_count,
+            Field.destination.rawValue : dest,
+            Field.distance.rawValue : self.distance as Any,
+            Field.starttime.rawValue : self.starttime as Any,
+            Field.endtime.rawValue : self.endtime as Any,
+            Field.duration.rawValue : self.duration as Any
+        ],options: SetOptions.merge())
+    }
+
+    
+    func getMembers() -> [Member]{
+        var members = [Member]()
+        for aid in self.activity_ids{
+            Utils.db.collection(Collection.activites.rawValue).document(aid).getDocument{(document,err) in
+                if let err = err{
+                    debugPrint("Error getting document: \(err)")
+                }else{
+                    var arr : HardJSON = document!.data()!
+                    let member_id  = arr[IDField.memberID.rawValue] as? String
+                    Member.getMember(member_id: member_id!) { (status, member) in
+                        if status == .error{
+                            debugPrint("Member does not Exist: \(status)")
+                        }else{
+                            members.append(member!)
+                        }
+                    }
                 }
             }
         }
-    }
-    
-    // Generate ID before saving to Firestore
-    func save2(){
-        let dest = Trip.CL2Geo(loc: self.destination!)
-        let paths = Trip.CL2GeoArray(locs: self.path)
-        let ref = Utils.db.collection("trips").document()
-        self.id = ref.documentID
-        ref.setData([
-            "type" : self.type.rawValue,
-            "status" : self.status.rawValue,
-            "title" : self.title,
-            "path" : paths,
-            "activity_ids" : self.activity_ids,
-            "staff_count" : self.staff_count as Any,
-            "participant_count" : self.participant_count,
-            "destination" : dest,
-            "distance" : self.distance as Any,
-            "starttime" : self.starttime as Any,
-            "endtime" : self.endtime as Any,
-            "duration" : self.duration as Any
-        ],options: SetOptions.merge()){ err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
-            }
-        }
+        return members
     }
     
     static func getTrips(callback: @escaping TripsBlock){
@@ -344,6 +346,4 @@ class Trip {
             callback(.success,trips)
         }
     }
-
-
 }

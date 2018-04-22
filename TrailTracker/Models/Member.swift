@@ -74,10 +74,28 @@ class Member {
         save()
     }
     
-    func add(tripID: String) {
-        let a = Activity(trip_id: tripID, member_id: self.id)
+    func add(trip_id: String, callback: @escaping StatusBlock) {
+        let a = Activity(trip_id: trip_id, member_id: self.id)
         self.activity_ids.append(a.id)
         save()
+        // Add activity id to the Trip
+        var activity_ids = [String]()
+        Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+            .addSnapshotListener{(documentSnapshot,error) in
+                guard let document = documentSnapshot, error == nil else{
+                    debugPrint("Error getting document: \(String(describing: error))")
+                    callback(.error)
+                    return
+                }
+                let arr: HardJSON = document.data()!
+                activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
+                activity_ids.append(a.id)
+        }
+        let ref = Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+        ref.setData([
+            Field.activityIds.rawValue: activity_ids
+            ], options: SetOptions.merge())
+        callback(.success)
     }
     
     
@@ -177,14 +195,19 @@ class Member {
     func getTrips() -> [Trip]{
         var trips = [Trip]()
         for aid in self.activity_ids{
-            Utils.db.collection("activities").document(aid).getDocument{(document,err) in
+            Utils.db.collection(Collection.activites.rawValue).document(aid).getDocument{(document,err) in
                 if let err = err{
                     debugPrint("Error getting document: \(err)")
                 }else{
                     var arr : HardJSON = document!.data()!
-                    let trip_id  = arr["trip_id"] as? String
-                    let t = Trip.getTrip(trip_id: trip_id!)
-                    trips.append(t)
+                    let trip_id  = arr[IDField.tripID.rawValue] as? String
+                    Trip.getTrip(trip_id: trip_id!) { (status,trip) in
+                        if status == .error{
+                            debugPrint("Trip does not Exist: \(status)")
+                        }else{
+                            trips.append(trip!)
+                        }
+                    }
                 }
             }
         }
