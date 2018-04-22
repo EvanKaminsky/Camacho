@@ -74,10 +74,28 @@ class Member {
         save()
     }
     
-    func add(tripID: String) {
-        let a = Activity(trip_id: tripID, member_id: self.id)
+    func add(trip_id: String, callback: @escaping StatusBlock) {
+        let a = Activity(trip_id: trip_id, member_id: self.id)
         self.activity_ids.append(a.id)
         save()
+        // Add activity id to the Trip
+        var activity_ids = [String]()
+        Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+            .addSnapshotListener{(documentSnapshot,error) in
+                guard let document = documentSnapshot, error == nil else{
+                    debugPrint("Error getting document: \(String(describing: error))")
+                    callback(.error)
+                    return
+                }
+                let arr: HardJSON = document.data()!
+                activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
+                activity_ids.append(a.id)
+        }
+        let ref = Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+        ref.setData([
+            Field.activityIds.rawValue: activity_ids
+            ], options: SetOptions.merge())
+        callback(.success)
     }
     
     
