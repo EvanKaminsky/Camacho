@@ -19,6 +19,7 @@ typealias JSON     = [String : Any]?
 typealias ObjJSON  = [String : AnyObject]
 typealias VoidBlock = () -> ()
 typealias MembersBlock = (NetworkingStatus, [Member]) -> ()
+typealias MemberBlock = (NetworkingStatus, Member?) -> ()
 typealias TripsBlock = (NetworkingStatus, [Trip]) -> ()
 
 
