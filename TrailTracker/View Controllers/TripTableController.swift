@@ -70,21 +70,15 @@ class TripTableController: UIViewController {
     }
     
     @objc func update() {
-        async(after: 1.3) { [weak self] in
-            self?.refresher.endRefreshing()
-        }
-        
-        /*
         Trip.getTrips { [weak self] (status, trips) in
             DispatchQueue.main.async {
                 self?.refresher.endRefreshing()
                 if status == .success {
-                    self?.participants = members
+                    self?.trips = trips
                     self?.tableView.reloadData()
                 }
             }
         }
-        */
     }
 
     
@@ -127,6 +121,7 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
         guard let _ = trips[safe: indexPath.row] else {
             return
         }
+        tableView.deselectSelectedRow()
         
         // TODO: Go to TripViewController, something like
         // self.startTrip(trip)
