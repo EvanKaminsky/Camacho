@@ -31,6 +31,7 @@ class ParticipantTableController: UIViewController {
         tableView.dataSource = self
         tableView.refreshControl = refresher
         refresher.addTarget(self, action: #selector(ParticipantTableController.update), for: .valueChanged)
+
         
     }
 
