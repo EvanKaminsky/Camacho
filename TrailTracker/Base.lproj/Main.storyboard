@@ -90,13 +90,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="milesLabel" destination="aP9-VQ-Weg" id="ZB2-af-mZc"/>
-                                            <outlet property="minutesLabel" destination="Ii0-ur-uCl" id="hlC-ja-YBU"/>
-                                            <outlet property="nameLabel" destination="dzm-1f-t7u" id="6ZV-ol-6Ic"/>
-                                            <outlet property="tripsLabel" destination="boX-Lw-oKb" id="hbS-28-jSD"/>
-                                            <outlet property="userIconImage" destination="mvN-tk-UEm" id="dwk-vu-FOb"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -110,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeC-BG-aQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2496.8000000000002" y="786.65667166416802"/>
+            <point key="canvasLocation" x="2289" y="787"/>
         </scene>
         <!--Trips-->
         <scene sceneID="bea-GL-2Po">
@@ -258,7 +251,6 @@
                                         <connections>
                                             <outlet property="iconImage" destination="0tP-6i-GSo" id="TDX-5C-NQ9"/>
                                             <outlet property="milesLabel" destination="6HZ-VD-d9e" id="yIW-b0-dIf"/>
-                                            <outlet property="minutesLabel" destination="fp4-qn-olE" id="gsZ-9A-9t1"/>
                                             <outlet property="nameLabel" destination="ldT-Lu-YeJ" id="APq-dL-bpZ"/>
                                             <outlet property="timeLabel" destination="fp4-qn-olE" id="dMY-Xg-5hJ"/>
                                             <outlet property="tripsLabel" destination="IXd-CY-g9r" id="63C-dN-13T"/>

@@ -37,7 +37,7 @@ class MemberTypeButton: ClosureButton {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
         
-        icon.center = CGPoint(x: 0.3 * self.width, y: 0.5 * self.height)
+        icon.center = CGPoint(x: 0.2 * self.width, y: 0.5 * self.height)
         label.center = CGPoint(x: 0.6 * self.width, y: 0.53 * self.height)
         self.addSubview(icon)
         self.addSubview(label)
