@@ -18,8 +18,11 @@ typealias HardJSON = [String : Any]
 typealias JSON     = [String : Any]?
 typealias ObjJSON  = [String : AnyObject]
 typealias VoidBlock = () -> ()
+typealias StatusBlock = (NetworkingStatus) -> ()
 typealias MembersBlock = (NetworkingStatus, [Member]) -> ()
+typealias MemberBlock = (NetworkingStatus, Member?) -> ()
 typealias TripsBlock = (NetworkingStatus, [Trip]) -> ()
+typealias TripBlock = (NetworkingStatus, Trip?) -> ()
 
 
 enum NetworkingStatus {
@@ -49,6 +52,12 @@ func debugPrint(_ text: String) {
     }
 }
 
+func async(after seconds: Double, function: @escaping VoidBlock) {
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
+        function()
+    }
+}
+
 
 // Foundation Extensions //
 
@@ -72,6 +81,21 @@ extension CGFloat {
         return ""
     }
 }
+
+extension Int {
+    func roundDigits(from minSig: Int, to maxSig: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumIntegerDigits = 1
+        formatter.minimumSignificantDigits = minSig
+        formatter.maximumSignificantDigits = maxSig
+        
+        if let string = formatter.string(from: NSNumber(integerLiteral: self)) {
+            return string
+        }
+        return ""
+    }
+}
+
 
 
 // Utility Singleton Class //

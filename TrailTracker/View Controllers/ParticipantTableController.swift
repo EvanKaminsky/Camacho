@@ -13,6 +13,7 @@ class ParticipantTableController: UIViewController {
     // Fields //
     
     @IBOutlet weak var tableView: UITableView!
+    var camachoButton: CamachoButton!
     let refresher = UIRefreshControl()
     
     var participants: [Member] = []
@@ -24,20 +25,42 @@ class ParticipantTableController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Nav Bar
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
+        // Table
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = refresher
         refresher.addTarget(self, action: #selector(ParticipantTableController.update), for: .valueChanged)
+
+        // Camacho Button
+        let button_width = 0.2 * view.width
+        camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "New", backgroundColor: Color.orange)
+        camachoButton.touchUpInside = { button in
+            button.bubble()
+            let newMemberView = self.storyboard?.instantiateViewController(withIdentifier: "CreateParticipantController")
+            self.navigationController?.pushViewController(newMemberView!, animated: false)
+            
+        }
+        
+        
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refresher.beginRefreshingManually(animated: false)
-        self.update()
+        camachoButton.addToView()
+        if self.participants.isEmpty {
+            refresher.beginRefreshingManually(animated: false)
+            self.update()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        camachoButton.removeFromSuperview()
     }
     
     
@@ -67,7 +90,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return MemberTableCell.height
+        return 60
     }
     
     // Cell Creation
@@ -86,6 +109,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
         guard let _ = participants[safe: indexPath.row] else {
             return
         }
+        tableView.deselectSelectedRow()
         
         // TODO: Go to ParticipantViewController
         // let vc = ParticipantViewController(nibName: nil, bundle: nil)

@@ -30,4 +30,16 @@ class CamachoButton: ClosureButton {
         self.addSubviewInCenter(label)
     }
     
+    func addToView() {
+        guard let window = UIApplication.shared.keyWindow else {
+            debugPrint("Error: Couldn't access application's key window")
+            return
+        }
+        self.center = CGPoint(x: window.frame.midX, y: 0.92 * Utils.screen.height)
+        window.addSubview(self)
+    }
+    
+    
+    
+    
 }

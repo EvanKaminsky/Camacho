@@ -35,10 +35,14 @@ class Member {
     private(set) var guardian_email: String?
     
     private(set) var activity_ids: Array<String>
-    private(set) var total_distance: Double
-    private(set) var total_duration: Double
+    private(set) var total_distance: CGFloat
+    private(set) var total_duration: CGFloat
     
-    init(id: String, type: MemberType, name: String, activity_ids: [String], totalDistance: Double, totalDuration: Double) {
+    var total_trips: Int {
+        return activity_ids.count
+    }
+    
+    init(id: String, type: MemberType, name: String, activity_ids: [String], totalDistance: CGFloat, totalDuration: CGFloat) {
         self.id = id
         self.type = type
         self.full_name = name
@@ -70,10 +74,28 @@ class Member {
         save()
     }
     
-    func add(tripID: String) {
-        let a = Activity(trip_id: tripID, member_id: self.id)
+    func add(trip_id: String, callback: @escaping StatusBlock) {
+        let a = Activity(trip_id: trip_id, member_id: self.id)
         self.activity_ids.append(a.id)
         save()
+        // Add activity id to the Trip
+        var activity_ids = [String]()
+        Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+            .addSnapshotListener{(documentSnapshot,error) in
+                guard let document = documentSnapshot, error == nil else{
+                    debugPrint("Error getting document: \(String(describing: error))")
+                    callback(.error)
+                    return
+                }
+                let arr: HardJSON = document.data()!
+                activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
+                activity_ids.append(a.id)
+        }
+        let ref = Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+        ref.setData([
+            Field.activityIds.rawValue: activity_ids
+            ], options: SetOptions.merge())
+        callback(.success)
     }
     
     
@@ -94,7 +116,6 @@ class Member {
             self.activity_ids.remove(at: index)
         }
         save()
-        
         let ref = Utils.db.collection(Collection.trips.rawValue).document(tripID)
         ref.getDocument { (document, error) in
             if let data = document?.data(), var activity_ids = data[IDField.activityIDs.rawValue] as? [String] {
@@ -102,6 +123,14 @@ class Member {
                     activity_ids.remove(at: index)
                     ref.updateData([IDField.activityIDs.rawValue: activity_ids])
                 }
+            }
+        }
+        // Remove orphaned activity
+        Utils.db.collection(Collection.activites.rawValue).document(activity_id).delete(){ err in
+            if let err = err {
+                debugPrint("Error removing document: \(err)")
+            } else {
+                debugPrint("Document successfully removed!")
             }
         }
         
@@ -131,6 +160,60 @@ class Member {
     
     // Get Methods //
     
+    static func getMember(member_id: String, callback: @escaping MemberBlock){
+        Utils.db.collection(Collection.members.rawValue).document(member_id)
+        .addSnapshotListener{ (documentSnapshot, error) in
+            guard let document = documentSnapshot, error == nil else {
+                debugPrint("Error getting document: \(String(describing: error))")
+                callback(.error,nil)
+                return
+            }
+            let id = document.documentID
+            var arr: HardJSON = document.data()!    
+            guard
+                let type_raw = arr[Field.type.rawValue] as? String,
+                let type = Member.MemberType(rawValue: type_raw),
+                let full_name = arr[Field.fullName.rawValue] as? String,
+                let activity_ids = arr[Field.activityIds.rawValue] as? [String],
+                let total_distance = arr[Field.totalDistance.rawValue] as? CGFloat,
+                let total_duration = arr[Field.totalDuration.rawValue] as? CGFloat
+                else {
+                    debugPrint("Failed instantiating member object with data: \(arr)")
+                    callback(.error,nil)
+                    return
+                }
+            let m = Member(id: id, type: type, name: full_name, activity_ids: activity_ids, totalDistance: total_distance, totalDuration: total_duration)
+            
+            let guardian_name = arr[Field.guardianName.rawValue] as? String
+            let guardian_email = arr[Field.guardianEmail.rawValue] as? String
+            m.setOptionalFields(guardianName: guardian_name, guardianEmail: guardian_email)
+            callback(.success, m)
+        }
+    }
+    
+    
+    func getTrips() -> [Trip]{
+        var trips = [Trip]()
+        for aid in self.activity_ids{
+            Utils.db.collection(Collection.activites.rawValue).document(aid).getDocument{(document,err) in
+                if let err = err{
+                    debugPrint("Error getting document: \(err)")
+                }else{
+                    var arr : HardJSON = document!.data()!
+                    let trip_id  = arr[IDField.tripID.rawValue] as? String
+                    Trip.getTrip(trip_id: trip_id!) { (status,trip) in
+                        if status == .error{
+                            debugPrint("Trip does not Exist: \(status)")
+                        }else{
+                            trips.append(trip!)
+                        }
+                    }
+                }
+            }
+        }
+        return trips
+    }
+    
     static func getMembers(callback: @escaping MembersBlock) {
         Utils.db.collection(Collection.members.rawValue).getDocuments { (querySnapshot, error) in
             guard let snapshot = querySnapshot, error == nil else {
@@ -149,8 +232,8 @@ class Member {
                     let type = Member.MemberType(rawValue: type_raw),
                     let full_name = arr[Field.fullName.rawValue] as? String,
                     let activity_ids = arr[Field.activityIds.rawValue] as? [String],
-                    let total_distance = arr[Field.totalDistance.rawValue] as? Double,
-                    let total_duration = arr[Field.totalDuration.rawValue] as? Double
+                    let total_distance = arr[Field.totalDistance.rawValue] as? CGFloat,
+                    let total_duration = arr[Field.totalDuration.rawValue] as? CGFloat
                 else {
                     debugPrint("Failed instantiating member object with data: \(arr)")
                     continue

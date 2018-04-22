@@ -11,62 +11,78 @@ import CoreLocation
 
 class TripTableController: UIViewController {
     
+    // Fields //
+    
     @IBOutlet weak var tableView: UITableView!
+
+    var camachoButton: CamachoButton!
+    
+    let refresher = UIRefreshControl()
+    var trips: [Trip] = []
+    
+    
+    
+    // Methods //
     
     // Needed for mapView
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Nav Bar
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
-        
-        // Test Camacho Button (TODO: Put in front of toolbar)
+        // Table
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.refreshControl = refresher
+        refresher.addTarget(self, action: #selector(TripTableController.update), for: .valueChanged)
+     
+        // Camacho Button
         let button_width = 0.2 * view.width
-        let button = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
-        button.center = CGPoint(x: 0.5 * view.width, y: 0.85 * view.height)
-        button.touchUpInside = { [weak self] button in
+        camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
+        camachoButton.touchUpInside = { [weak self] button in
             button.bubble()
             self?.startTrip()
         }
-        self.view.addSubview(button)
-        
-        // Test Badges (TODO: Add to table cells and overlay mapview in the TripViewController)
-        let badge_width = 0.14 * view.width
-        let badge_height = 0.04 * view.height
-        let badge_1 = Badge(frame: CGRect(x: 0, y: 0, width: badge_width, height: badge_height), text: "3 Trips", backgroundColor: Color.blue)
-        let badge_2 = Badge(frame: CGRect(x: 0, y: 0, width: badge_width, height: badge_height), text: "28.1 mi.", backgroundColor: Color.green)
-        let badge_3 = Badge(frame: CGRect(x: 0, y: 0, width: badge_width, height: badge_height), text: "36 min", backgroundColor: Color.red)
-        badge_1.center = CGPoint(x: 0.12 * view.width, y: 0.14 * view.height)
-        badge_2.center = CGPoint(x: 0.12 * view.width, y: 0.19 * view.height)
-        badge_3.center = CGPoint(x: 0.12 * view.width, y: 0.24 * view.height)
-        self.view.addSubview(badge_1)
-        self.view.addSubview(badge_2)
-        self.view.addSubview(badge_3)
         
         // Test Member Type Button
-        let member_width = 0.35 * view.width
-        let member_height = 0.07 * view.height
-        let member_button_1 = MemberTypeButton(frame: CGRect(x: 0, y: 0, width: member_width, height: member_height), text: "Staff", image: "staff", isSelected: true, themeColor: Color.orange)
-        member_button_1.center = CGPoint(x: 0.7 * view.width, y: 0.15 * view.height)
-        member_button_1.touchUpInside = { button in
-            button.bubble(x: 0.9, y: 0.9, velocity: 5, options: .allowUserInteraction)
-            member_button_1.toggleSelected()
-        }
-        
-        let member_button_2 = MemberTypeButton(frame: CGRect(x: 0, y: 0, width: member_width, height: member_height), text: "Participant", image: "peep", isSelected: true, themeColor: Color.blue)
-        member_button_2.center = CGPoint(x: 0.7 * view.width, y: 0.25 * view.height)
-        member_button_2.touchUpInside = { button in
-            button.bubble(x: 0.9, y: 0.9, velocity: 5, options: .allowUserInteraction)
-            member_button_2.toggleSelected()
-        }
-            
-        self.view.addSubview(member_button_1)
-        self.view.addSubview(member_button_2)
-        
+        // let member_button_1 = MemberTypeButton(frame: CGRect(x: 0, y: 0, width: member_width, height: member_height), text: "Staff", image: "staff", isSelected: true, themeColor: Color.orange)
+        // member_button_1.center = CGPoint(x: 0.7 * view.width, y: 0.15 * view.height)
+        // member_button_1.touchUpInside = { button in
+        //     button.bubble(x: 0.9, y: 0.9, velocity: 5, options: .allowUserInteraction)
+        //     member_button_1.toggleSelected()
+        // }
+    
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        camachoButton.addToView()
+        if self.trips.isEmpty {
+            refresher.beginRefreshingManually(animated: false)
+            self.update()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        camachoButton.removeFromSuperview()
+    }
+    
+    @objc func update() {
+        Trip.getTrips { [weak self] (status, trips) in
+            DispatchQueue.main.async {
+                self?.refresher.endRefreshing()
+                if status == .success {
+                    self?.trips = trips
+                    self?.tableView.reloadData()
+                }
+            }
+        }
+    }
+
     
     func startTrip() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
@@ -77,9 +93,48 @@ class TripTableController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+
+}
+
+
+extension TripTableController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return trips.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    // Cell Creation
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let trip = trips[safe: indexPath.row] else {
+            return UITableViewCell()
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TripTableCell", for: indexPath) as! TripTableCell
+        cell.update(with: trip)
+        return cell
+    }
+    
+    
+    // Cell Selection
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let _ = trips[safe: indexPath.row] else {
+            return
+        }
+        tableView.deselectSelectedRow()
+        
+        // TODO: Go to TripViewController, something like
+        // self.startTrip(trip)
+    }
     
 }
+
 
 
 

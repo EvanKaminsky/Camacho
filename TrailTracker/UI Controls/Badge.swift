@@ -12,21 +12,35 @@ class Badge: UIView {
     
     let label = UILabel()
     
-    required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initialize()
+    }
     
     init(frame: CGRect, text: String, backgroundColor: UIColor) {
         super.init(frame: frame)
-        self.backgroundColor = backgroundColor
-        
+        self.initialize()
+    }
+    
+    func initialize() {
         self.makeRound(radius: 5)
-
-        label.attributedText = Font.make(text: text, size: 17, color: Color.white, type: .paneuropa)
+        
         label.textAlignment = .center
         label.frame = self.frame
         label.isUserInteractionEnabled = false
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
         self.addSubviewInCenter(label)
+        
     }
+    
+    func set(text: String, backgroundColor: UIColor) {
+        self.backgroundColor = backgroundColor
+        label.attributedText = Font.make(text: text, size: 17, color: Color.white, type: .paneuropa)
+    }
+    
+    
+    
+    
     
 }

@@ -19,14 +19,14 @@ extension Date {
     }
     
     func deltaStringSinceNow(display: TimeUnit.Display) -> String {
-        return deltaString(for: self.timeIntervalSinceNow, display: display)
+        return Date.deltaString(for: self.timeIntervalSinceNow, display: display)
     }
     
     func deltaStringSince(date: Date, display: TimeUnit.Display) -> String {
-        return deltaString(for: self.timeIntervalSince(date), display: display)
+        return Date.deltaString(for: self.timeIntervalSince(date), display: display)
     }
     
-    func deltaString(for interval: TimeInterval, display: TimeUnit.Display) -> String {
+    static func deltaString(for interval: TimeInterval, display: TimeUnit.Display) -> String {
         let seconds: TimeInterval = max(1.0, fabs(interval))
         if seconds < 60 {
             return Date.makeDeltaString(interval: seconds, unit: .second, display: display)
@@ -56,7 +56,7 @@ extension Date {
     }
     
     private static func makeDeltaString(interval: TimeInterval, unit: TimeUnit.Unit, display: TimeUnit.Display) -> String {
-        return "\(String(Int(interval))) \(TimeUnit.string(unit: unit, display: display, plural: Int(interval) != 1))"
+        return "\(String(Int(interval).roundDigits(from: 1, to: 3))) \(TimeUnit.string(unit: unit, display: display, plural: Int(interval) != 1))"
     }
     
 }
@@ -87,13 +87,13 @@ class TimeUnit {
     }
     
     private static let unit_strings: [Unit : [StringType: String]] = [
-        .second: [.full_singular: "second", .full_plural: "seconds", .abbrv_singular: "sec", .abbrv_plural: "secs"],
-        .minute: [.full_singular: "minute", .full_plural: "minutes", .abbrv_singular: "min", .abbrv_plural: "mins"],
-        .hour: [.full_singular: "hour", .full_plural: "hours", .abbrv_singular: "hr", .abbrv_plural: "hrs"],
-        .day: [.full_singular: "day", .full_plural: "days", .abbrv_singular: "day", .abbrv_plural: "days"],
-        .week: [.full_singular: "week", .full_plural: "weeks", .abbrv_singular: "wk", .abbrv_plural: "wks"],
-        .month: [.full_singular: "month", .full_plural: "months", .abbrv_singular: "mo", .abbrv_plural: "mns"],
-        .year: [.full_singular: "year", .full_plural: "years", .abbrv_singular: "yr", .abbrv_plural: "yrs"],
+        .second: [.full_singular: "second", .full_plural: "seconds", .abbrv_singular: "sec", .abbrv_plural: "sec"],
+        .minute: [.full_singular: "minute", .full_plural: "minutes", .abbrv_singular: "min", .abbrv_plural: "min"],
+        .hour: [.full_singular: "hour", .full_plural: "hours", .abbrv_singular: "hr", .abbrv_plural: "hr"],
+        .day: [.full_singular: "day", .full_plural: "days", .abbrv_singular: "d", .abbrv_plural: "d"],
+        .week: [.full_singular: "week", .full_plural: "weeks", .abbrv_singular: "wk", .abbrv_plural: "wk"],
+        .month: [.full_singular: "month", .full_plural: "months", .abbrv_singular: "mo", .abbrv_plural: "mo"],
+        .year: [.full_singular: "year", .full_plural: "years", .abbrv_singular: "yr", .abbrv_plural: "yr"],
     ]
 
     static func string(unit: Unit, display: Display, plural: Bool) -> String {

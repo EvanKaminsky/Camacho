@@ -15,6 +15,7 @@
 		349741C22075DB270088B94E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349741C12075DB270088B94E /* Activity.swift */; };
 		34C057D820802861004C3BF9 /* TrailTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C057D720802861004C3BF9 /* TrailTrackerTests.swift */; };
 		953F1034EFBC770F3C8C14CA /* Pods_TrailTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D20D31595C7F8B66A207B25 /* Pods_TrailTracker.framework */; };
+		A73C2287208D32CB006A84A1 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73C2286208D32CB006A84A1 /* TabViewController.swift */; };
 		A7928F10208534D20080671A /* MemberTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F0F208534D20080671A /* MemberTableCell.swift */; };
 		A7928F12208535630080671A /* TripTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F11208535630080671A /* TripTableCell.swift */; };
 		A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */; };
@@ -69,6 +70,7 @@
 		3D20D31595C7F8B66A207B25 /* Pods_TrailTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrailTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		662D67A647B7BDD03F8A1149 /* Pods-TrailTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTrackerTests/Pods-TrailTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		7BE0265BC6EE8FBEC0404A81 /* Pods-TrailTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTrackerTests/Pods-TrailTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A73C2286208D32CB006A84A1 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		A7928F0F208534D20080671A /* MemberTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableCell.swift; sourceTree = "<group>"; };
 		A7928F11208535630080671A /* TripTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableCell.swift; sourceTree = "<group>"; };
 		A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripParticipantTableViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */,
 				A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */,
 				A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */,
+				A73C2286208D32CB006A84A1 /* TabViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73C2287208D32CB006A84A1 /* TabViewController.swift in Sources */,
 				A8D76985207FE86300F1A4A0 /* CamachoButton.swift in Sources */,
 				A89450BE2071698800949948 /* Trip.swift in Sources */,
 				A8B0724D2069EB910084546D /* HomeController.swift in Sources */,
@@ -733,7 +737,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Camacho.TrailTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -749,7 +753,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Camacho.TrailTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

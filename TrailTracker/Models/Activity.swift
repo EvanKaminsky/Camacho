@@ -16,7 +16,6 @@ class Activity{
     private(set) var id: String
     private(set) var trip_id: String
     private(set) var member_id: String
-    static var count: Int = 1
     
     
     // Methods //
@@ -28,8 +27,7 @@ class Activity{
     }
     
     init(trip_id: String, member_id: String) {
-        // self.id = "Activity\(Activity.count)"
-        // Activity.count+=1
+
         self.id = "none"
         self.trip_id = trip_id
         self.member_id = member_id
