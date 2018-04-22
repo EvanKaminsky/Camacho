@@ -67,7 +67,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return MemberTableCell.height
+        return 60
     }
     
     // Cell Creation

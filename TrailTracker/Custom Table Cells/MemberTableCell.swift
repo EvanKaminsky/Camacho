@@ -18,12 +18,7 @@ class MemberTableCell: UITableViewCell {
     @IBOutlet weak var milesLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    
-    // Fields //
-    
-    static let height: CGFloat = 80
-
-    
+        
     // Methods //
     
     override func awakeFromNib() {
@@ -33,12 +28,13 @@ class MemberTableCell: UITableViewCell {
     func update(with member: Member) {
         switch member.type {
         case .staff:
-            iconImage.image = UIImage(named: "staff")
+            iconImage.image = UIImage(named: "staff")?.withRenderingMode(.alwaysTemplate)
         case .participant:
-            iconImage.image = UIImage(named: "peep")
+            iconImage.image = UIImage(named: "peep")?.withRenderingMode(.alwaysTemplate)
         }
+        iconImage.tintColor = Color.gray
         
-        nameLabel.attributedText = Font.make(text: member.full_name, size: 20, color: Color.shade, type: .sunn)
+        nameLabel.attributedText = Font.make(text: member.full_name, size: 30, color: Color.shade, type: .sunn)
         
         tripsLabel.attributedText = Font.make(text: String(member.activity_ids.count), size: 15, color: Color.white, type: .paneuropa)
         milesLabel.attributedText = Font.make(text: String(member.total_distance), size: 15, color: Color.white, type: .paneuropa)

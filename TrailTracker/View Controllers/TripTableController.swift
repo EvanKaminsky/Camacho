@@ -20,8 +20,6 @@ class TripTableController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
         
-        
-        
         // Test Camacho Button (TODO: Put in front of toolbar)
         let button_width = 0.2 * view.width
         let button = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
@@ -66,7 +64,7 @@ class TripTableController: UIViewController {
         self.view.addSubview(member_button_2)
         
     }
-    
+
     
     func startTrip() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
