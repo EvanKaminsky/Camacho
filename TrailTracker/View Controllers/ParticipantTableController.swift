@@ -40,7 +40,11 @@ class ParticipantTableController: UIViewController {
         camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "New", backgroundColor: Color.orange)
         camachoButton.touchUpInside = { button in
             button.bubble()
+            let newMemberView = self.storyboard?.instantiateViewController(withIdentifier: "CreateParticipantController")
+            self.navigationController?.pushViewController(newMemberView!, animated: false)
+            
         }
+        
         
         
     }
