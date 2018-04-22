@@ -103,25 +103,50 @@ class Trip {
     
     func set(startTime: Date) {
         self.starttime = startTime
+        save()
     }
     
     func set(endTime: Date) {
         self.endtime = endTime
+        save()
     }
     
     func set(distance: Double) {
         self.distance = distance
+        save()
     }
     func set(destination: CLLocation) {
         self.destination = destination
+        save()
     }
     func set(path: [CLLocation]) {
         self.path = path
+        save()
     }
     
-    func add(member_id: String) {
+    func add(member_id: String, callback: @escaping StatusBlock) {
         let a = Activity(trip_id: self.id,member_id: member_id)
-        activity_ids.append(a.id)
+        self.activity_ids.append(a.id)
+        save()
+        
+        // Add activity id to the member
+        var activity_ids = [String]()
+        Utils.db.collection(Collection.members.rawValue).document(member_id)
+        .addSnapshotListener{(documentSnapshot,error) in
+            guard let document = documentSnapshot, error == nil else{
+                debugPrint("Error getting document: \(String(describing: error))")
+                callback(.error)
+                return
+            }
+            let arr: HardJSON = document.data()!
+            activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
+            activity_ids.append(a.id)
+        }
+        let ref = Utils.db.collection(Collection.members.rawValue).document(member_id)
+        ref.setData([
+            Field.activityIds.rawValue: activity_ids
+            ], options: SetOptions.merge())
+        callback(.success)
     }
     
     func remove(memberID: String) {

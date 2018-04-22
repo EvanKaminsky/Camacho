@@ -25,19 +25,26 @@ class ParticipantViewController: UIViewController {
     
     // Methods //
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.title = member.full_name
+
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set member before coming here!
         
         // Nav Bar
-        self.title = member.full_name
         
         //navigationController?.navigationBar.barTintColor = Color.forest
         //navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
         
         // Table
-        tableView.register(TripTableController, forCellReuseIdentifier: "TripTableCell")
+        //tableView.register(TripTableController, forCellReuseIdentifier: "TripTableCell")
         
         
     }
