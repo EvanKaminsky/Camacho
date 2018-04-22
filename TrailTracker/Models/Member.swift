@@ -35,10 +35,14 @@ class Member {
     private(set) var guardian_email: String?
     
     private(set) var activity_ids: Array<String>
-    private(set) var total_distance: Double
-    private(set) var total_duration: Double
+    private(set) var total_distance: CGFloat
+    private(set) var total_duration: CGFloat
     
-    init(id: String, type: MemberType, name: String, activity_ids: [String], totalDistance: Double, totalDuration: Double) {
+    var total_trips: Int {
+        return activity_ids.count
+    }
+    
+    init(id: String, type: MemberType, name: String, activity_ids: [String], totalDistance: CGFloat, totalDuration: CGFloat) {
         self.id = id
         self.type = type
         self.full_name = name
@@ -153,8 +157,8 @@ class Member {
                 let type = Member.MemberType(rawValue: type_raw),
                 let full_name = arr[Field.fullName.rawValue] as? String,
                 let activity_ids = arr[Field.activityIds.rawValue] as? [String],
-                let total_distance = arr[Field.totalDistance.rawValue] as? Double,
-                let total_duration = arr[Field.totalDuration.rawValue] as? Double
+                let total_distance = arr[Field.totalDistance.rawValue] as? CGFloat,
+                let total_duration = arr[Field.totalDuration.rawValue] as? CGFloat
                 else {
                     debugPrint("Failed instantiating member object with data: \(arr)")
                     callback(.error,nil)
@@ -205,8 +209,8 @@ class Member {
                     let type = Member.MemberType(rawValue: type_raw),
                     let full_name = arr[Field.fullName.rawValue] as? String,
                     let activity_ids = arr[Field.activityIds.rawValue] as? [String],
-                    let total_distance = arr[Field.totalDistance.rawValue] as? Double,
-                    let total_duration = arr[Field.totalDuration.rawValue] as? Double
+                    let total_distance = arr[Field.totalDistance.rawValue] as? CGFloat,
+                    let total_duration = arr[Field.totalDuration.rawValue] as? CGFloat
                 else {
                     debugPrint("Failed instantiating member object with data: \(arr)")
                     continue
