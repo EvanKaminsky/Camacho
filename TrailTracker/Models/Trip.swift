@@ -19,7 +19,6 @@ class Trip {
         case status = "status"
         case title = "title"
         case path = "path"
-        case destination = "destination"
         case distance = "distance"
         case starttime = "starttime"
         case endtime = "endtime"
@@ -48,7 +47,6 @@ class Trip {
     private(set) var title: String
     
     private(set) var path: [CLLocation] = []    // Array of locations representing the path of the trip
-    private(set) var destination: CLLocation?   // Expected destination for in-progress trips, actual destination for complete trips
     private(set) var distance: Double?
     private(set) var starttime: Date?
     private(set) var endtime: Date?             // ETA for in-progress trips, actual end time for complete trips
@@ -90,8 +88,7 @@ class Trip {
         self.participant_count = participantCount
     }
     
-    private func setOptionalFields(destination: CLLocation?, distance: Double?, starttime: Date?, endtime: Date?){
-        self.destination = destination
+    private func setOptionalFields(distance: Double?, starttime: Date?, endtime: Date?){
         self.distance = distance
         self.starttime = starttime
         self.endtime = endtime
@@ -103,25 +100,21 @@ class Trip {
     
     func set(startTime: Date) {
         self.starttime = startTime
-        save()
+//        save()
     }
     
     func set(endTime: Date) {
         self.endtime = endTime
-        save()
+//        save()
     }
     
     func set(distance: Double) {
         self.distance = distance
-        save()
-    }
-    func set(destination: CLLocation) {
-        self.destination = destination
-        save()
+//        save()
     }
     func set(path: [CLLocation]) {
         self.path = path
-        save()
+//        save()
     }
     
     func add(member_id: String, callback: @escaping StatusBlock) {
@@ -213,12 +206,10 @@ class Trip {
                     }
                 let t = Trip(id: id, type: type, status: status, title: title, activity_ids: activity_ids, staffCount: staff_count, participantCount: participant_count)
                 let path = Trip.Geo2CLArray(locs: g_path)
-                let g_destination = arr[Field.destination.rawValue] as? GeoPoint
-                let destination = Geo2CL(gp: g_destination!)
                 let distance = arr[Field.distance.rawValue] as? Double
                 let starttime = arr[Field.starttime.rawValue] as? Date
                 let endtime = arr[Field.endtime.rawValue] as? Date
-                t.setOptionalFields(destination: destination, distance: distance, starttime: starttime, endtime: endtime)
+                t.setOptionalFields(distance: distance, starttime: starttime, endtime: endtime)
                 t.set(path: path)
                 callback(.success,t)
         }
@@ -264,7 +255,6 @@ class Trip {
             ref = Utils.db.collection(Collection.trips.rawValue).document(self.id)
         }
         
-        let dest = Trip.CL2Geo(loc: self.destination!)
         let paths = Trip.CL2GeoArray(locs: self.path)
         ref.setData([
             Field.type.rawValue: self.type.rawValue,
@@ -274,7 +264,6 @@ class Trip {
             Field.activityIds.rawValue : self.activity_ids,
             Field.staffCount.rawValue : self.staff_count,
             Field.participantCount.rawValue : self.participant_count,
-            Field.destination.rawValue : dest,
             Field.distance.rawValue : self.distance as Any,
             Field.starttime.rawValue : self.starttime as Any,
             Field.endtime.rawValue : self.endtime as Any,
@@ -333,13 +322,11 @@ class Trip {
                     continue
                 }
                 let t = Trip(id: id, type: type, status: status, title: title, activity_ids: activity_ids, staffCount: staff_count, participantCount: participant_count)
-                let g_destination = arr[Field.destination.rawValue] as? GeoPoint
-                let destination = Trip.Geo2CL(gp: g_destination!)
                 let distance = arr[Field.distance.rawValue] as? Double
                 let starttime = arr[Field.starttime.rawValue] as? Date
                 let endtime = arr[Field.endtime.rawValue] as? Date
                 let path = Trip.Geo2CLArray(locs: g_path)
-                t.setOptionalFields(destination: destination, distance: distance, starttime: starttime, endtime: endtime)
+                t.setOptionalFields(distance: distance, starttime: starttime, endtime: endtime)
                 t.set(path: path)
                 trips.append(t)
             }

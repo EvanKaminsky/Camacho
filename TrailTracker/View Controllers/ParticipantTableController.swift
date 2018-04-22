@@ -19,7 +19,6 @@ class ParticipantTableController: UIViewController {
     var participants: [Member] = []
     
     
-    
     // Methods //
     
     override func viewDidLoad() {
@@ -44,9 +43,7 @@ class ParticipantTableController: UIViewController {
             self.navigationController?.pushViewController(newMemberView!, animated: false)
             
         }
-        
-        
-        
+    
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +59,6 @@ class ParticipantTableController: UIViewController {
         super.viewWillDisappear(animated)
         camachoButton.removeFromSuperview()
     }
-    
     
     @objc func update() {
         Member.getMembers { [weak self] (status, members) in
@@ -103,18 +99,17 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    
     // Cell Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let _ = participants[safe: indexPath.row] else {
+        guard let participant = participants[safe: indexPath.row] else {
             return
         }
         tableView.deselectSelectedRow()
         
-        // TODO: Go to ParticipantViewController
-        // let vc = ParticipantViewController(nibName: nil, bundle: nil)
-        // vc.participant = participant
-        // self.navigationController?.pushViewController(vc, animated: true)
+        // Go to ParticipantViewController
+        let vc = ParticipantViewController(nibName: nil, bundle: nil)
+        vc.member = participant
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
