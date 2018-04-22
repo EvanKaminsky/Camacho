@@ -142,7 +142,14 @@ class Trip {
         callback(.success)
     }
     
-    func remove(memberID: String) {
+    func removeActivity(activity_id: String){
+        if let ind = activity_ids.index(of:activity_id){
+            self.activity_ids.remove(at: ind)
+        }
+        save()
+    }
+    
+    func removeMember(memberID: String) {
         //query for Activity with member_id = memberID & trip_id = self.id
         var activity_id = String()
         Utils.db.collection(Collection.activites.rawValue)
@@ -155,10 +162,7 @@ class Trip {
                     }
                 }
         }
-        if let ind = activity_ids.index(of:activity_id){
-            self.activity_ids.remove(at: ind)
-        }
-        save()
+        removeActivity(activity_id: activity_id)
         let ref = Utils.db.collection(Collection.members.rawValue).document(memberID)
         ref.getDocument{(document,error) in
             if let data = document?.data(), var activity_ids = data[IDField.activityIDs.rawValue]
@@ -171,6 +175,35 @@ class Trip {
         }
         // Remove orphaned activity
         Utils.db.collection(Collection.activites.rawValue).document(activity_id).delete(){ err in
+            if let err = err {
+                debugPrint("Error removing document: \(err)")
+            } else {
+                debugPrint("Document successfully removed!")
+            }
+        }
+    }
+    
+    // Remove Trip from database
+    func remove(){
+        
+        // Remove this activity from any members
+        var current_members = [Member]()
+        Member.getMembers{(status,members) in
+            if status == .error{
+                debugPrint("Error getting member")
+            }else{
+                current_members = members
+            }
+        }
+        for aid in self.activity_ids{
+            for m in current_members{
+                let cur_activities = m.getActivities()
+                if cur_activities.contains(aid){
+                    m.removeActivity(activity_id: aid)
+                }
+            }
+        }
+        Utils.db.collection(Collection.trips.rawValue).document(self.id).delete(){ err in
             if let err = err {
                 debugPrint("Error removing document: \(err)")
             } else {
@@ -271,6 +304,11 @@ class Trip {
         ],options: SetOptions.merge())
     }
 
+    // Get Methods //
+    
+    func getActivities() -> [String]{
+        return self.activity_ids
+    }
     
     func getMembers() -> [Member]{
         var members = [Member]()
