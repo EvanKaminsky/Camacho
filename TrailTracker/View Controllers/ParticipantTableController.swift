@@ -27,7 +27,6 @@ class ParticipantTableController: UIViewController {
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
-        //tableView.register(MemberTableCell.self, forCellReuseIdentifier: "MemberTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = refresher
@@ -68,7 +67,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return MemberTableCell.height
+        return 60
     }
     
     // Cell Creation

@@ -11,6 +11,7 @@ import UIKit
 class Color {
     
     static var white: UIColor { return UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1) }
+    static var gray: UIColor { return UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1) }
     static var shade: UIColor { return UIColor(red: 26.0/255.0, green: 26.0/255.0, blue: 26.0/255.0, alpha: 1) }
     static var black: UIColor { return UIColor.black }
     

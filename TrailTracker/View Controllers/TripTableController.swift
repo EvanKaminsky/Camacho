@@ -19,10 +19,15 @@ class TripTableController: UIViewController {
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
+        
         // Test Camacho Button (TODO: Put in front of toolbar)
         let button_width = 0.2 * view.width
         let button = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
         button.center = CGPoint(x: 0.5 * view.width, y: 0.85 * view.height)
+        button.touchUpInside = { [weak self] button in
+            button.bubble()
+            self?.startTrip()
+        }
         self.view.addSubview(button)
         
         // Test Badges (TODO: Add to table cells and overlay mapview in the TripViewController)
@@ -59,11 +64,21 @@ class TripTableController: UIViewController {
         self.view.addSubview(member_button_2)
         
     }
+
     
-    
-    
-    
+    func startTrip() {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     
     
 }
+
+
+
+
+
+
+
+
