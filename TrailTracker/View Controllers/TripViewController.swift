@@ -41,23 +41,16 @@ class TripViewController: UIViewController {
         mapView.mapType = MKMapType(rawValue: 0)!
         mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
         
-        
         //This ensures that location updates, a big battery consumer,
         //and the timer is stopped when the user navigates away from the view.
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
-        
-        
-        
-        
-        print(trip.title)
+
         stopButton.isHidden = true
         
         self.title = "Trip"
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
-        
-        
         
     }
     
@@ -79,7 +72,6 @@ class TripViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { _ in
             self.stopRun()
         })
-        
         present(alertController, animated: true)
     }
     
