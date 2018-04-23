@@ -106,8 +106,14 @@ class Member {
         }
     }
     
+    func removeActivity(activity_id: String){
+        if let index = activity_ids.index(of: activity_id) {
+            self.activity_ids.remove(at: index)
+        }
+        save()
+    }
     
-    func remove(tripID: String) {
+    func removeTrip(tripID: String) {
         var activity_id = String()
         Utils.db.collection(Collection.activites.rawValue)
             .whereField(IDField.tripID.rawValue, isEqualTo: tripID)
@@ -119,11 +125,8 @@ class Member {
                     }
                 }
         }
-        
-        if let index = activity_ids.index(of: activity_id) {
-            self.activity_ids.remove(at: index)
-        }
-        save()
+        removeActivity(activity_id: activity_id)
+
         let ref = Utils.db.collection(Collection.trips.rawValue).document(tripID)
         ref.getDocument { (document, error) in
             if let data = document?.data(), var activity_ids = data[IDField.activityIDs.rawValue] as? [String] {
@@ -142,6 +145,35 @@ class Member {
             }
         }
         
+    }
+    
+    // Remove Member from database
+    func remove(){
+        
+        // Remove this Member from any trips
+        var current_trips = [Trip]()
+        Trip.getTrips{(status,trips) in
+            if status == .error{
+                debugPrint("Error getting member")
+            }else{
+                current_trips = trips
+            }
+        }
+        for aid in self.activity_ids{
+            for t in current_trips{
+                let cur_activities = t.getActivities()
+                if cur_activities.contains(aid){
+                    t.removeActivity(activity_id: aid)
+                }
+            }
+        }
+        Utils.db.collection(Collection.members.rawValue).document(self.id).delete(){ err in
+            if let err = err {
+                debugPrint("Error removing document: \(err)")
+            } else {
+                debugPrint("Document successfully removed!")
+            }
+        }
     }
     
     private func save() {
@@ -167,6 +199,10 @@ class Member {
     
     
     // Get Methods //
+    
+    func getActivities() -> [String]{
+        return self.activity_ids
+    }
     
     static func getMember(member_id: String, callback: @escaping MemberBlock){
         Utils.db.collection(Collection.members.rawValue).document(member_id)

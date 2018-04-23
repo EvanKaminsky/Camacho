@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol getTripInfoPrototcol {
+    func getTripInfo() -> Trip
+}
+
 class TripViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -21,7 +25,11 @@ class TripViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
+    var camachoButton: CamachoButton!
+    var camanchoEndButton: CamachoButton!
     
+    var tripDelegate: getTripInfoPrototcol?
+    var isStart: Bool = false
     private let locationManager = LocationManager.shared
     private var seconds = 0
     private var timer: Timer?
@@ -31,6 +39,7 @@ class TripViewController: UIViewController {
     var trip = Trip.init(type: Trip.TripType(rawValue: "hiking")!, status: Trip.Status(rawValue: "new")!, title: "Test Run 1", activity_ids: ["1"], staffCount: 1, participantCount: 1)
     
     override func viewDidLoad() {
+       
         super.viewDidLoad()
         // Asking for permissions like a nice person
         enableBasicLocationServices(locationManager: locationManager)
@@ -52,7 +61,25 @@ class TripViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
+        //camacho button
+        let button_width = 0.2 * view.width
+        camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
+        camachoButton.addToView()
+        camachoButton.touchUpInside = { button in
+            button.bubble()
+            self.camanchoEndButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "End", backgroundColor: Color.red)
+            self.camanchoEndButton.addToView()
+            self.startRun()
+            self.camanchoEndButton.touchUpInside = { button in
+                button.bubble()
+                // add functionalith to end trip
+                
+            }
+        }
+  
     }
+
+    
     
     @IBAction func startTapped(_ sender: Any) {
         print("Start button pressed")
@@ -110,7 +137,7 @@ class TripViewController: UIViewController {
         startButton.isHidden = false
         stopButton.isHidden = true
         locationManager.stopUpdatingLocation()
-        timer?.invalidate()
+//        timer?.invalidate()
     }
     
     private func startLocationUpdates() {
@@ -122,7 +149,8 @@ class TripViewController: UIViewController {
     }
 
     private func saveRun() {
-        trip.set(distance: distance.value)
+        let distanceInMiles = distance.converted(to: .miles)
+        trip.set(distance: distanceInMiles.value)
         trip.set(endTime: Date())
         trip.set(path: locationList)
         

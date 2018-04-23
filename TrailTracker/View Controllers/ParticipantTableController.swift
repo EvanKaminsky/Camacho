@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParticipantTableController: UIViewController {
+class ParticipantTableController: UIViewController, getMemberInfoPrototcol {
     
     // Fields //
     
@@ -18,11 +18,14 @@ class ParticipantTableController: UIViewController {
     
     var participants: [Member] = []
     
+    var selectedRow: Int = -1
+    
     
     // Methods //
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Nav Bar
         navigationController?.navigationBar.barTintColor = Color.forest
@@ -106,12 +109,29 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
             return
         }
         tableView.deselectSelectedRow()
+        self.selectedRow = indexPath.row
         
-        // Go to ParticipantViewController
-        let vc = ParticipantViewController(nibName: nil, bundle: nil)
-        vc.member = participant
-        self.navigationController?.pushViewController(vc, animated: true)
+   
     }
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "memberSegue",
+            let destination = segue.destination as? ParticipantViewController
+        {
+            destination.membersDelegate = self
+        }
+        
+    }
+    
+    func getMemberInfo() -> Member {
+        return participants[self.selectedRow]
+        
+        
+    }
+    
+    
+
     
 }
 

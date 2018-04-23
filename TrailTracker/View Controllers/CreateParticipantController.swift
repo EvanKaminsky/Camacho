@@ -102,9 +102,11 @@ class CreateParticipantController: UIViewController {
     func setMember(type: Member.MemberType) {
         switch type {
         case .staff:
+            self.memberType = .staff
             staffButton.setIsSelected()
             participantButton.setIsNotSelected()
         case .participant:
+            self.memberType = .participant
             staffButton.setIsNotSelected()
             participantButton.setIsSelected()
         }
