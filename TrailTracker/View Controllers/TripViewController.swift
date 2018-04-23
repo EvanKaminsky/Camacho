@@ -46,60 +46,77 @@ class TripViewController: UIViewController {
         
         //mapview setup to show user location
         mapView.delegate = self
-        mapView.showsUserLocation = true
-        mapView.mapType = MKMapType(rawValue: 0)!
-        mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
+        
         
         //This ensures that location updates, a big battery consumer,
         //and the timer is stopped when the user navigates away from the view.
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
+        
+        // Checking to see if this is a Start Trip or view completed trip
+        if isStart {
+            mapView.showsUserLocation = true
+            mapView.mapType = MKMapType(rawValue: 0)!
+            mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
+        }
+        else {
+            self.trip = (tripDelegate?.getTripInfo())!
+            print(trip.title)
+            print(trip.distance)
+            configureView()
+        }
+        
 
-        stopButton.isHidden = true
         
         self.title = "Trip"
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
         //camacho button
-        let button_width = 0.2 * view.width
-        camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
-        camachoButton.addToView()
-        camachoButton.touchUpInside = { button in
-            button.bubble()
-            self.camanchoEndButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "End", backgroundColor: Color.red)
-            self.camanchoEndButton.addToView()
-            self.startRun()
-            self.camanchoEndButton.touchUpInside = { button in
-                button.bubble()
-                // add functionalith to end trip
-                
-            }
-        }
+        createCamachoButton(buttonText: "Start")
   
     }
-
     
-    
-    @IBAction func startTapped(_ sender: Any) {
-        print("Start button pressed")
-        startRun()
+    func createCamachoButton(buttonText: String) {
+        let button_width = 0.2 * view.width
+        if buttonText == "Start" { //Start button
+            camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: buttonText, backgroundColor: Color.forest)
+            camachoButton.addToView()
+            camachoButton.addTarget(self, action: #selector(pressedCamachoStartButton), for: .touchUpInside)
+        }
+        else { // End button
+            camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: buttonText, backgroundColor: Color.red)
+            camachoButton.addToView()
+            camachoButton.addTarget(self, action: #selector(pressedCamachoStopButton), for: .touchUpInside)
+        }
     }
     
-    @IBAction func stopTapped(_ sender: Any) {
-        print("Stop button pressed")
+    @objc func pressedCamachoStartButton () {
+        print("CamachoStartButton was pressed!")
+        startRun()
+        camachoButton.removeFromSuperview()
+        createCamachoButton(buttonText: "End")
+    }
+    
+    @objc func pressedCamachoStopButton () {
+        print("CamachoStopButton was pressed!")
+        self.camachoButton.removeFromSuperview()
         let alertController = UIAlertController(title: "End run?",
                                                 message: "Do you wish to end your run?",
                                                 preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.createCamachoButton(buttonText: "End")
+        })
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
             self.stopRun()
             self.saveRun()
         })
         alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { _ in
             self.stopRun()
+            self.createCamachoButton(buttonText: "Start")
         })
         present(alertController, animated: true)
+        
     }
     
     func eachSecond() {
@@ -117,10 +134,7 @@ class TripViewController: UIViewController {
     }
 
     private func startRun() {
-        startButton.isHidden = true
-        stopButton.isHidden = false
         trip.set(startTime: Date())
-//        trip.set(status: status)
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         locationList.removeAll()
@@ -129,15 +143,14 @@ class TripViewController: UIViewController {
             self.eachSecond()
         }
         startLocationUpdates()
-        
     }
     
    
     private func stopRun() {
-        startButton.isHidden = false
-        stopButton.isHidden = true
         locationManager.stopUpdatingLocation()
-//        timer?.invalidate()
+        // if save, switch to complete screen
+        // Clear display values
+        
     }
     
     private func startLocationUpdates() {
@@ -149,14 +162,102 @@ class TripViewController: UIViewController {
     }
 
     private func saveRun() {
+        print("Saving Trip")
+        // Stopping trip
+        timer?.invalidate()
+        locationManager.stopUpdatingLocation()
+        
         let distanceInMiles = distance.converted(to: .miles)
-        trip.set(distance: distanceInMiles.value)
+        trip.set(distance: Double(distanceInMiles.value))
         trip.set(endTime: Date())
         trip.set(path: locationList)
         
         
         // Save Trip
         trip.save()
+        configureView()
+    }
+    
+    
+    
+    // Completed Run view
+    private func configureView() {
+        let distance = Measurement(value: trip.distance!, unit: UnitLength.miles)
+        print("duration: ")
+//        print(trip.duration)
+        let seconds = Int(trip.duration!)
+        let formattedDistance = FormatDisplay.distance(distance.converted(to: .meters))
+        let formattedDate = FormatDisplay.date(trip.endtime)
+        let formattedTime = FormatDisplay.time(seconds)
+        let formattedPace = FormatDisplay.pace(distance: distance,
+                                               seconds: seconds,
+                                               outputUnit: UnitSpeed.minutesPerMile)
+        
+        distanceLabel.text = "Distance:  \(formattedDistance)"
+        dateLabel.text = formattedDate
+        timeLabel.text = "Time:  \(formattedTime)"
+        paceLabel.text = "Pace:  \(formattedPace)"
+        
+        loadMap()
+    }
+    
+    
+    // An MKCoordinateRegion represents the display region for the map.
+    // You define it by supplying a center point and a span that defines horizontal and vertical ranges.
+    private func mapRegion() -> MKCoordinateRegion? {
+        let locations = trip.path
+        if locations.count < 1 {
+            return nil
+        }
+        let latitudes = locations.map { location -> Double in
+            return location.coordinate.latitude
+        }
+        
+        let longitudes = locations.map { location -> Double in
+            return location.coordinate.longitude
+        }
+        
+        let maxLat = latitudes.max()!
+        let minLat = latitudes.min()!
+        let maxLong = longitudes.max()!
+        let minLong = longitudes.min()!
+        
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
+                                            longitude: (minLong + maxLong) / 2)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3,
+                                    longitudeDelta: (maxLong - minLong) * 1.3)
+        return MKCoordinateRegion(center: center, span: span)
+    }
+    
+    // Here, you turn each recorded location from the run into a CLLocationCoordinate2D as required by MKPolyline.
+    private func polyLine() -> MKPolyline {
+        let locations = trip.path
+        
+        if locations.count < 1 {
+            return MKPolyline()
+        }
+        
+        let coords: [CLLocationCoordinate2D] = locations.map { location in
+            return CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        }
+        return MKPolyline(coordinates: coords, count: coords.count)
+    }
+    
+    // Here, you make sure there is something to draw. Then you set the map region and add the overlay.
+    private func loadMap() {
+        let locations = trip.path
+        let region = mapRegion()
+        if locations.count < 1 {
+            let alert = UIAlertController(title: "Error",
+                                          message: "Sorry, this run has no locations saved",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+            return
+        }
+        
+        mapView.setRegion(region!, animated: true)
+        mapView.add(polyLine())
     }
     
 }
