@@ -14,6 +14,9 @@ import Firebase
 
 let DEBUG_ON = true
 
+var SHOULD_RELOAD_MEMBERS = false
+var SHOULD_RELOAD_TRIPS = false
+
 typealias HardJSON = [String : Any]
 typealias JSON     = [String : Any]?
 typealias ObjJSON  = [String : AnyObject]
@@ -71,7 +74,7 @@ extension CGFloat {
     func roundDigits(from minSig: Int, to maxSig: Int) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.minimumIntegerDigits = 1
+        formatter.minimumIntegerDigits = 0
         formatter.minimumSignificantDigits = minSig
         formatter.maximumSignificantDigits = maxSig
         

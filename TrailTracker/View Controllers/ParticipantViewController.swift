@@ -15,10 +15,8 @@ class ParticipantViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var participantLabel: UILabel!
     @IBOutlet weak var guardianInfoLabel: UILabel!
-    
     @IBOutlet weak var durationBadge: Badge!
     @IBOutlet weak var distanceBadge: Badge!
-    
     
     var member: Member!
     
@@ -29,7 +27,6 @@ class ParticipantViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.title = member.full_name
-
     }
     
     
@@ -38,20 +35,13 @@ class ParticipantViewController: UIViewController {
         // Set member before coming here!
         
         // Nav Bar
-        
         //navigationController?.navigationBar.barTintColor = Color.forest
         //navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
-        
         
         // Table
         //tableView.register(TripTableController, forCellReuseIdentifier: "TripTableCell")
         
-        
     }
-    
-    
-    
-    
     
     
 }

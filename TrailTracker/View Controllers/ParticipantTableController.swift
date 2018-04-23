@@ -49,9 +49,10 @@ class ParticipantTableController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         camachoButton.addToView()
-        if self.participants.isEmpty {
+        if self.participants.isEmpty || SHOULD_RELOAD_MEMBERS {
             refresher.beginRefreshingManually(animated: false)
             self.update()
+            SHOULD_RELOAD_MEMBERS = false
         }
     }
     

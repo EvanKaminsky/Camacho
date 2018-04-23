@@ -27,7 +27,6 @@
 		A89450BE2071698800949948 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BD2071698800949948 /* Trip.swift */; };
 		A89450C020716BA400949948 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BF20716BA400949948 /* Date+.swift */; };
 		A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724A2069EB910084546D /* AppDelegate.swift */; };
-		A8B0724D2069EB910084546D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724C2069EB910084546D /* HomeController.swift */; };
 		A8B072502069EB910084546D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B0724E2069EB910084546D /* Main.storyboard */; };
 		A8B072522069EB910084546D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B072512069EB910084546D /* Assets.xcassets */; };
 		A8B072552069EB910084546D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B072532069EB910084546D /* LaunchScreen.storyboard */; };
@@ -83,7 +82,6 @@
 		A89450BF20716BA400949948 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		A8B072472069EB910084546D /* TrailTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrailTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8B0724A2069EB910084546D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A8B0724C2069EB910084546D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		A8B0724F2069EB910084546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8B072512069EB910084546D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8B072542069EB910084546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -241,14 +239,13 @@
 		A8F0F188207EC6B200CDFE1D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A8B0724C2069EB910084546D /* HomeController.swift */,
+				A73C2286208D32CB006A84A1 /* TabViewController.swift */,
 				A8F0F186207EC5E600CDFE1D /* TripViewController.swift */,
 				A8F0F17E207EC53900CDFE1D /* TripTableController.swift */,
 				A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */,
 				A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */,
 				A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */,
 				A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */,
-				A73C2286208D32CB006A84A1 /* TabViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -529,7 +526,6 @@
 				A73C2287208D32CB006A84A1 /* TabViewController.swift in Sources */,
 				A8D76985207FE86300F1A4A0 /* CamachoButton.swift in Sources */,
 				A89450BE2071698800949948 /* Trip.swift in Sources */,
-				A8B0724D2069EB910084546D /* HomeController.swift in Sources */,
 				A8F0F185207EC5AC00CDFE1D /* CreateParticipantController.swift in Sources */,
 				A8D7698B207FEB7100F1A4A0 /* Color.swift in Sources */,
 				A7928F12208535630080671A /* TripTableCell.swift in Sources */,

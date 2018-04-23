@@ -60,9 +60,10 @@ class TripTableController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         camachoButton.addToView()
-        if self.trips.isEmpty {
+        if self.trips.isEmpty || SHOULD_RELOAD_TRIPS {
             refresher.beginRefreshingManually(animated: false)
             self.update()
+            SHOULD_RELOAD_TRIPS = false
         }
     }
     

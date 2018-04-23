@@ -59,6 +59,12 @@ class Member {
     
     // Networking //
     
+    static func create(type: MemberType, name: String, guardianName: String?, guardianEmail: String?) {
+        let member = Member(id: IDField.none.rawValue, type: type, name: name, activity_ids: [], totalDistance: 0, totalDuration: 0)
+        member.setOptionalFields(guardianName: guardianName, guardianEmail: guardianEmail)
+        member.save()
+    }
+    
     func set(name: String) {
         self.full_name = name
         save()
@@ -73,11 +79,12 @@ class Member {
         self.guardian_email = guardianEmail
         save()
     }
-    
+
     func add(trip_id: String, callback: @escaping StatusBlock) {
         let a = Activity(trip_id: trip_id, member_id: self.id)
         self.activity_ids.append(a.id)
         save()
+        
         // Add activity id to the Trip
         var activity_ids = [String]()
         Utils.db.collection(Collection.trips.rawValue).document(trip_id)
@@ -90,12 +97,13 @@ class Member {
                 let arr: HardJSON = document.data()!
                 activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
                 activity_ids.append(a.id)
+                
+                let ref = Utils.db.collection(Collection.trips.rawValue).document(trip_id)
+                ref.setData([
+                    Field.activityIds.rawValue: activity_ids
+                    ], options: SetOptions.merge())
+                callback(.success)
         }
-        let ref = Utils.db.collection(Collection.trips.rawValue).document(trip_id)
-        ref.setData([
-            Field.activityIds.rawValue: activity_ids
-            ], options: SetOptions.merge())
-        callback(.success)
     }
     
     

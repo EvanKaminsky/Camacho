@@ -26,7 +26,7 @@ class Badge: UIView {
         self.makeRound(radius: 5)
         
         label.textAlignment = .center
-        label.frame = self.frame
+        label.frame = CGRect(x: 0, y: 0, width: 0.9 * self.width, height: 0.95 * self.height)
         label.isUserInteractionEnabled = false
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1

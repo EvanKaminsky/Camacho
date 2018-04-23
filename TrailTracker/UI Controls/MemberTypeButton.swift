@@ -51,7 +51,7 @@ class MemberTypeButton: ClosureButton {
         }
     }
     
-    private func setIsSelected() {
+    func setIsSelected() {
         self.is_selected = true
         self.backgroundColor = self.theme_color
         self.setText(color: Color.white)
@@ -59,7 +59,7 @@ class MemberTypeButton: ClosureButton {
         self.deleteBorder()
     }
     
-    private func setIsNotSelected() {
+    func setIsNotSelected() {
         self.is_selected = false
         self.backgroundColor = Color.white
         self.setText(color: self.theme_color)

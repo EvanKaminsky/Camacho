@@ -27,7 +27,7 @@ extension Date {
     }
     
     static func deltaString(for interval: TimeInterval, display: TimeUnit.Display) -> String {
-        let seconds: TimeInterval = max(1.0, fabs(interval))
+        let seconds: TimeInterval = max(0, fabs(interval))
         if seconds < 60 {
             return Date.makeDeltaString(interval: seconds, unit: .second, display: display)
         }
