@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hQI-q7-bxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hQI-q7-bxb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,10 +23,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2ge-2D-0YG" firstAttribute="bottom" secondItem="hTN-M2-mvX" secondAttribute="bottom" id="Ujn-xP-WiF"/>
-                            <constraint firstItem="2ge-2D-0YG" firstAttribute="top" secondItem="H5i-5K-Zco" secondAttribute="top" id="Wv9-Yn-NjM"/>
-                            <constraint firstItem="2ge-2D-0YG" firstAttribute="leading" secondItem="hTN-M2-mvX" secondAttribute="leading" id="YTr-Xx-OsX"/>
-                            <constraint firstItem="2ge-2D-0YG" firstAttribute="trailing" secondItem="hTN-M2-mvX" secondAttribute="trailing" id="fxa-ld-euS"/>
+                            <constraint firstItem="2ge-2D-0YG" firstAttribute="leading" secondItem="hTN-M2-mvX" secondAttribute="leading" id="CjS-Tq-6aZ"/>
+                            <constraint firstAttribute="bottom" secondItem="2ge-2D-0YG" secondAttribute="bottom" id="XW6-MZ-Cow"/>
+                            <constraint firstItem="2ge-2D-0YG" firstAttribute="top" secondItem="H5i-5K-Zco" secondAttribute="top" id="gJZ-Xn-trL"/>
+                            <constraint firstItem="2ge-2D-0YG" firstAttribute="trailing" secondItem="hTN-M2-mvX" secondAttribute="trailing" id="zxb-EB-0tu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hTN-M2-mvX"/>
                     </view>
