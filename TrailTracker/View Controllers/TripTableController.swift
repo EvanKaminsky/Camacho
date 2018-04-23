@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class TripTableController: UIViewController {
+class TripTableController: UIViewController, getTripInfoPrototcol {
     
     // Fields //
     
@@ -19,7 +19,7 @@ class TripTableController: UIViewController {
     
     let refresher = UIRefreshControl()
     var trips: [Trip] = []
-    
+    var selectedRow: Int = -1
     
     
     // Methods //
@@ -88,10 +88,25 @@ class TripTableController: UIViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
 
         vc.trip = Trip.init(type: Trip.TripType(rawValue: "hiking")!, status: Trip.Status(rawValue: "new")!, title: "Test Run From View Controller!", activity_ids: ["1"], staffCount: 1, participantCount: 1)
+        vc.isStart = true
         
         // Open MapView ViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tripSegue",
+            let destination = segue.destination as? TripViewController
+        {
+            destination.tripDelegate = self
+        }
+        
+    }
+    
+    func getTripInfo() -> Trip {
+        return trips[self.selectedRow]
+    }
+    
     
     
     
@@ -130,7 +145,7 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         tableView.deselectSelectedRow()
-        
+        self.selectedRow = indexPath.row
         // TODO: Go to TripViewController, something like
         // self.startTrip(trip)
     }

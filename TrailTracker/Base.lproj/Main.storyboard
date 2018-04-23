@@ -219,7 +219,7 @@
                                             <outlet property="participantsLabel" destination="PtK-op-PEg" id="aJo-qw-mX9"/>
                                             <outlet property="staffLabel" destination="DNG-QF-NaJ" id="T91-i1-BLm"/>
                                             <outlet property="tripLabel" destination="cgg-Fq-Qba" id="uDC-Lh-Qwo"/>
-                                            <segue destination="yHX-5P-15N" kind="show" id="wlC-DX-4MB"/>
+                                            <segue destination="yHX-5P-15N" kind="show" identifier="tripSegue" id="wlC-DX-4MB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
