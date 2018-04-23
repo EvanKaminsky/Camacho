@@ -70,6 +70,9 @@ class CreateParticipantController: UIViewController {
             self?.setMember(type: .participant)
         }
         
+        // Keyboard Management
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(CreateParticipantController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
         // Set default member type
         self.memberType = .participant
@@ -122,6 +125,11 @@ class CreateParticipantController: UIViewController {
         super.viewWillDisappear(animated)
         camachoButton.removeFromSuperview()
     }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     
 
     

@@ -19,6 +19,9 @@ class TripTableCell: UITableViewCell {
     @IBOutlet weak var distanceBadge: Badge!
     @IBOutlet weak var durationBadge: Badge!
     
+    static let height: CGFloat = 80
+    static let identifier: String = "TripTableCell"
+    
     
     // Methods //
     

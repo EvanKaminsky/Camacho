@@ -47,14 +47,6 @@ class TripTableController: UIViewController, getTripInfoPrototcol {
             self?.startTrip()
         }
         
-        // Test Member Type Button
-        // let member_button_1 = MemberTypeButton(frame: CGRect(x: 0, y: 0, width: member_width, height: member_height), text: "Staff", image: "staff", isSelected: true, themeColor: Color.orange)
-        // member_button_1.center = CGPoint(x: 0.7 * view.width, y: 0.15 * view.height)
-        // member_button_1.touchUpInside = { button in
-        //     button.bubble(x: 0.9, y: 0.9, velocity: 5, options: .allowUserInteraction)
-        //     member_button_1.toggleSelected()
-        // }
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +76,6 @@ class TripTableController: UIViewController, getTripInfoPrototcol {
         }
     }
 
-    
     func startTrip() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
 
@@ -96,22 +87,15 @@ class TripTableController: UIViewController, getTripInfoPrototcol {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "tripSegue",
-            let destination = segue.destination as? TripViewController
-        {
+        if segue.identifier == "tripSegue", let destination = segue.destination as? TripViewController {
             destination.tripDelegate = self
         }
-        
     }
     
     func getTripInfo() -> Trip {
         return trips[self.selectedRow]
     }
     
-    
-    
-    
-
 }
 
 
@@ -126,7 +110,7 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return TripTableCell.height
     }
     
     // Cell Creation
@@ -145,8 +129,10 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
         guard let _ = trips[safe: indexPath.row] else {
             return
         }
-        tableView.deselectSelectedRow()
+        
         self.selectedRow = indexPath.row
+        tableView.deselectSelectedRow()
+        
         // TODO: Go to TripViewController, something like
         // self.startTrip(trip)
     }

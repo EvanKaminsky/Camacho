@@ -60,7 +60,7 @@ class Member {
     // Networking //
     
     static func create(type: MemberType, name: String, guardianName: String?, guardianEmail: String?) {
-        let member = Member(id: IDField.none.rawValue, type: type, name: name, activity_ids: [], totalDistance: 0, totalDuration: 0)
+        let member = Member(id: IDField.none.rawValue, type: type, name: name, activity_ids: [], totalDistance: 0, totalDuration: 0)        
         member.setOptionalFields(guardianName: guardianName, guardianEmail: guardianEmail)
         member.save()
     }
@@ -236,26 +236,29 @@ class Member {
     }
     
     
-    func getTrips() -> [Trip]{
+    func getTrips(callback: @escaping TripsBlock) {
         var trips = [Trip]()
-        for aid in self.activity_ids{
-            Utils.db.collection(Collection.activites.rawValue).document(aid).getDocument{(document,err) in
-                if let err = err{
-                    debugPrint("Error getting document: \(err)")
-                }else{
-                    var arr : HardJSON = document!.data()!
-                    let trip_id  = arr[IDField.tripID.rawValue] as? String
-                    Trip.getTrip(trip_id: trip_id!) { (status,trip) in
-                        if status == .error{
-                            debugPrint("Trip does not Exist: \(status)")
-                        }else{
-                            trips.append(trip!)
-                        }
+        
+        for aid in self.activity_ids {
+            Utils.db.collection(Collection.activites.rawValue).document(aid).getDocument{ (document, error) in
+                guard let arr: HardJSON = document?.data(), let trip_id = arr[IDField.tripID.rawValue] as? String, error == nil else {
+                    debugPrint("Error getting document: \(String(describing: error))")
+                    return
+                }
+            
+                Trip.getTrip(trip_id: trip_id) { (status, trip) in
+                    if status == .success, let trip = trip {
+                        trips.append(trip)
+                    } else {
+                        debugPrint("Trip \(trip_id) does not exist, Status: \(status)")
                     }
                 }
+                
+                // This needs to be redone
+    
+                    
             }
         }
-        return trips
     }
     
     static func getMembers(callback: @escaping MembersBlock) {

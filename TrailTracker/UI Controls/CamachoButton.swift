@@ -21,7 +21,7 @@ class CamachoButton: ClosureButton {
         self.makeShadowAndCircular()
         self.makeBorder(width: 2, color: Color.white)
         
-        label.attributedText = Font.make(text: text, size: 40, color: Color.white, type: .sunn)
+        label.attributedText = Font.make(text: text, size: 35, color: Color.white, type: .sunn)
         label.textAlignment = .center
         label.frame = self.frame
         label.isUserInteractionEnabled = false

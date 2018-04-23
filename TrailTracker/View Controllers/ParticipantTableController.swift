@@ -14,10 +14,9 @@ class ParticipantTableController: UIViewController, getMemberInfoPrototcol {
     
     @IBOutlet weak var tableView: UITableView!
     var camachoButton: CamachoButton!
-    let refresher = UIRefreshControl()
-    
+   
     var participants: [Member] = []
-    
+    let refresher = UIRefreshControl()
     var selectedRow: Int = -1
     
     
@@ -25,7 +24,6 @@ class ParticipantTableController: UIViewController, getMemberInfoPrototcol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Nav Bar
         navigationController?.navigationBar.barTintColor = Color.forest
@@ -44,9 +42,7 @@ class ParticipantTableController: UIViewController, getMemberInfoPrototcol {
             button.bubble()
             let newMemberView = self.storyboard?.instantiateViewController(withIdentifier: "CreateParticipantController")
             self.navigationController?.pushViewController(newMemberView!, animated: false)
-            
         }
-    
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -105,20 +101,16 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
     
     // Cell Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let participant = participants[safe: indexPath.row] else {
+        guard let _ = participants[safe: indexPath.row] else {
             return
         }
-        tableView.deselectSelectedRow()
-        self.selectedRow = indexPath.row
         
-   
+        self.selectedRow = indexPath.row
+        tableView.deselectSelectedRow()
     }
     
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "memberSegue",
-            let destination = segue.destination as? ParticipantViewController
-        {
+        if segue.identifier == "memberSegue", let destination = segue.destination as? ParticipantViewController {
             destination.membersDelegate = self
         }
         
@@ -126,12 +118,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
     
     func getMemberInfo() -> Member {
         return participants[self.selectedRow]
-        
-        
     }
-    
-    
-
     
 }
 

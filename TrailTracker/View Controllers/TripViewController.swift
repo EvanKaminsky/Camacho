@@ -61,10 +61,9 @@ class TripViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
-        //camacho button
+        // Camacho button
         let button_width = 0.2 * view.width
         camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
-        camachoButton.addToView()
         camachoButton.touchUpInside = { button in
             button.bubble()
             self.camanchoEndButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "End", backgroundColor: Color.red)
@@ -73,10 +72,19 @@ class TripViewController: UIViewController {
             self.camanchoEndButton.touchUpInside = { button in
                 button.bubble()
                 // add functionalith to end trip
-                
             }
         }
   
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        camachoButton.addToView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        camachoButton.removeFromSuperview()
     }
 
     
