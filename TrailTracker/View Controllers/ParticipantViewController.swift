@@ -86,7 +86,7 @@ class ParticipantViewController: UIViewController {
         tableView.dataSource = self
         tableView.refreshControl = refresher
         refresher.addTarget(self, action: #selector(ParticipantViewController.update), for: .valueChanged)
-        tripLabel.attributedText = Font.make(text: "Trips (\(member.activity_ids.count))", size: 20, color: Color.white, type: .paneuropa)
+        tripLabel.attributedText = Font.make(text: "Trips (\(member.trip_ids.count))", size: 20, color: Color.white, type: .paneuropa)
         
         // Camacho Button
         let button_width = 0.2 * view.width
