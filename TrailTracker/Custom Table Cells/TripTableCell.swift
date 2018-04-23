@@ -41,7 +41,7 @@ class TripTableCell: UITableViewCell {
         
         var distance_text: String!
         if let distance = trip.distance {
-            distance_text = "\(CGFloat(distance).roundDigits(from: 1, to: 3))\(distance > 999 ? "+" : "") mi"
+            distance_text = "\(CGFloat(distance).roundDigits(from: 1, to: 3)) mi"
         } else {
             distance_text = "? mi"
         }

@@ -86,16 +86,6 @@ class TripTableController: UIViewController, getTripInfoPrototcol {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "tripSegue", let destination = segue.destination as? TripViewController {
-            destination.tripDelegate = self
-        }
-    }
-    
-    func getTripInfo() -> Trip {
-        return trips[self.selectedRow]
-    }
-    
 }
 
 
@@ -118,7 +108,7 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
         guard let trip = trips[safe: indexPath.row] else {
             return UITableViewCell()
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TripTableCell", for: indexPath) as! TripTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TripTableCell.identifier, for: indexPath) as! TripTableCell
         cell.update(with: trip)
         return cell
     }
@@ -135,6 +125,16 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
         
         // TODO: Go to TripViewController, something like
         // self.startTrip(trip)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tripSegue", let destination = segue.destination as? TripViewController {
+            destination.tripDelegate = self
+        }
+    }
+    
+    func getTripInfo() -> Trip {
+        return trips[self.selectedRow]
     }
     
 }

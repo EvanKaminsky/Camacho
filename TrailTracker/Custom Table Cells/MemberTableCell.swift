@@ -18,7 +18,8 @@ class MemberTableCell: UITableViewCell {
     @IBOutlet weak var milesBadge: Badge!
     @IBOutlet weak var timeBadge: Badge!
     
-    
+    static let height: CGFloat = 60
+    static let identifier: String = "MemberTableViewCell"
     
         
     // Methods //
@@ -36,10 +37,10 @@ class MemberTableCell: UITableViewCell {
         
         // Badges
         
-        let trip_text = "\(member.total_trips.roundDigits(from: 1, to: 2))\(member.total_trips > 99 ? "+" : "") Trip\(member.total_trips == 1 ? "" : "s")"
+        let trip_text = "\(member.total_trips.roundDigits(from: 1, to: 3)) Trip\(member.total_trips == 1 ? "" : "s")"
         tripsBadge.set(text: trip_text, backgroundColor: Color.blue)
         
-        let miles_text = "\(member.total_distance.roundDigits(from: 1, to: 3))\(member.total_distance > 999 ? "+" : "") mi"
+        let miles_text = "\(member.total_distance.roundDigits(from: 1, to: 3)) mi"
         milesBadge.set(text: miles_text, backgroundColor: Color.green)
         
         let time_text = Date.deltaString(for: TimeInterval(member.total_duration), display: .abbrv)

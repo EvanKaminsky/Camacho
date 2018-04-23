@@ -38,6 +38,8 @@ class TripViewController: UIViewController {
     
     var trip = Trip.init(type: Trip.TripType(rawValue: "hiking")!, status: Trip.Status(rawValue: "new")!, title: "Test Run 1", activity_ids: ["1"], staffCount: 1, participantCount: 1)
     
+    // Methods //
+    
     override func viewDidLoad() {
        
         super.viewDidLoad()
@@ -66,6 +68,7 @@ class TripViewController: UIViewController {
         camachoButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "Start", backgroundColor: Color.forest)
         camachoButton.touchUpInside = { button in
             button.bubble()
+            
             self.camanchoEndButton = CamachoButton(frame: CGRect(x: 0, y: 0, width: button_width, height: button_width), text: "End", backgroundColor: Color.red)
             self.camanchoEndButton.addToView()
             self.startRun()
@@ -87,8 +90,6 @@ class TripViewController: UIViewController {
         camachoButton.removeFromSuperview()
     }
 
-    
-    
     @IBAction func startTapped(_ sender: Any) {
         print("Start button pressed")
         startRun()
@@ -96,9 +97,7 @@ class TripViewController: UIViewController {
     
     @IBAction func stopTapped(_ sender: Any) {
         print("Stop button pressed")
-        let alertController = UIAlertController(title: "End run?",
-                                                message: "Do you wish to end your run?",
-                                                preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "End run?", message: "Do you wish to end your run?", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
             self.stopRun()
@@ -162,6 +161,7 @@ class TripViewController: UIViewController {
         trip.set(endTime: Date())
         trip.set(path: locationList)
         
+        SHOULD_RELOAD_TRIPS = true
         
         // Save Trip
         trip.save()

@@ -56,7 +56,7 @@ class ParticipantViewController: UIViewController {
 
         
         // Badges
-        let duration_text = "\(member.total_distance.roundDigits(from: 1, to: 3))\(member.total_distance > 999 ? "+" : "") mi"
+        let duration_text = "\(member.total_distance.roundDigits(from: 1, to: 3)) mi"
         durationBadge.set(text: duration_text, backgroundColor: Color.green)
         
         let distance_text = Date.deltaString(for: TimeInterval(member.total_duration), display: .abbrv)
