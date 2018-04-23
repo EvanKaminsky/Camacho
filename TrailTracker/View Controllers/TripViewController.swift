@@ -18,6 +18,7 @@ class TripViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -46,7 +47,7 @@ class TripViewController: UIViewController {
         
         //mapview setup to show user location
         mapView.delegate = self
-        
+        backgroundView.backgroundColor = Color.black
         
         //This ensures that location updates, a big battery consumer,
         //and the timer is stopped when the user navigates away from the view.
@@ -108,7 +109,6 @@ class TripViewController: UIViewController {
             self.createCamachoButton(buttonText: "End")
         })
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
-            self.stopRun()
             self.saveRun()
         })
         alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { _ in
@@ -147,10 +147,19 @@ class TripViewController: UIViewController {
     
    
     private func stopRun() {
+        timer?.invalidate()
         locationManager.stopUpdatingLocation()
-        // if save, switch to complete screen
         // Clear display values
+        self.clearFields()
         
+        // Go back to previous screen???
+    }
+    
+    private func clearFields () {
+        distanceLabel.text = "Distance"
+        dateLabel.text = "Date"
+        timeLabel.text = "Time"
+        paceLabel.text = "Pace"
     }
     
     private func startLocationUpdates() {
