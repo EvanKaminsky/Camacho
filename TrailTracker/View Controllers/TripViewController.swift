@@ -125,6 +125,8 @@ class TripViewController: UIViewController {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedTime = FormatDisplay.time(seconds)
         let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        let formattedDate = FormatDisplay.date(Date())
+        dateLabel.text = formattedDate
         distanceLabel.text = "Distance:  \(formattedDistance)"
         timeLabel.text = "Time:  \(formattedTime)"
         paceLabel.text = "Pace:  \(formattedPace)"
@@ -178,7 +180,6 @@ class TripViewController: UIViewController {
         trip.set(endTime: Date())
         trip.set(path: locationList)
         
-        
         // Save Trip
         trip.save()
         configureView()
@@ -189,14 +190,13 @@ class TripViewController: UIViewController {
     // Completed Run view
     private func configureView() {
         mapView.showsUserLocation = false
-        let distance = Measurement(value: trip.distance!, unit: UnitLength.miles)
-        print("duration: ")
-        //        print(trip.duration)
+        let distInMiles = Measurement(value: trip.distance!, unit: UnitLength.miles)
+        let distInMeters = distInMiles.converted(to: .meters)
         let seconds = Int(trip.duration!)
-        let formattedDistance = FormatDisplay.distance(distance.converted(to: .meters))
+        let formattedDistance = FormatDisplay.distance(distInMeters)
         let formattedDate = FormatDisplay.date(trip.endtime)
         let formattedTime = FormatDisplay.time(seconds)
-        let formattedPace = FormatDisplay.pace(distance: distance,
+        let formattedPace = FormatDisplay.pace(distance: distInMeters,
                                                seconds: seconds,
                                                outputUnit: UnitSpeed.minutesPerMile)
         
