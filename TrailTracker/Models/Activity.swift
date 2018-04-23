@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Firebase
 
 class Activity{
     
@@ -17,6 +17,7 @@ class Activity{
     private(set) var trip_id: String
     private(set) var member_id: String
     
+    
     // Methods //
     
     init(id: String, trip_id: String, member_id: String) {
@@ -24,23 +25,43 @@ class Activity{
         self.trip_id = trip_id
         self.member_id = member_id
     }
+    
     init(trip_id: String, member_id: String) {
-        self.id = "Activity1"
+
+        self.id = "none"
         self.trip_id = trip_id
         self.member_id = member_id
     }
     
     
-    // Spoof Data //
+    // Networking
     
-    static func SpoofA() -> Activity{
-        let activity = Activity(id:"activity1",trip_id: "tripA", member_id: "member1")
-        return activity
+    func save(){
+        if (self.id == IDField.none.rawValue) {
+            save2()
+            return
+        }
+        
+        let ref = Utils.db.collection(Collection.trips.rawValue).document(self.id)
+        ref.setData([
+            IDField.tripID.rawValue: self.trip_id,
+            IDField.memberID.rawValue: self.member_id
+        ],options: SetOptions.merge())
     }
     
-    static func SpoofB() -> Activity{
-        let activity = Activity(id:"activity2",trip_id: "tripA", member_id: "member2")
-        return activity
+    // Creates ID before saving to Firestore and keeps it
+    func save2(){
+        let ref = Utils.db.collection(Collection.trips.rawValue).document()
+        self.id = ref.documentID
+        ref.setData([
+            IDField.tripID.rawValue: self.trip_id,
+            IDField.memberID.rawValue: self.member_id
+        ],options: SetOptions.merge())
     }
+    
 }
+
+
+
+
 

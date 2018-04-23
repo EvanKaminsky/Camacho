@@ -7,148 +7,148 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		152FD4B2207EB398009049FF /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4B1207EB398009049FF /* Home.storyboard */; };
-		152FD4B5207EB3CB009049FF /* TripTracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4B4207EB3CB009049FF /* TripTracking.storyboard */; };
-		152FD4B9207EB3F0009049FF /* AddTrip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4B8207EB3F0009049FF /* AddTrip.storyboard */; };
-		152FD4BF207EB446009049FF /* CreateParticipants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4BE207EB446009049FF /* CreateParticipants.storyboard */; };
-		152FD4C2207EB46F009049FF /* ManageParticipants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 152FD4C1207EB46F009049FF /* ManageParticipants.storyboard */; };
+		15C509BF208D1F2200087812 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C509BE208D1F2200087812 /* UnitExtensions.swift */; };
+		15C509C1208D1F4300087812 /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C509C0208D1F4300087812 /* FormatDisplay.swift */; };
+		15C509C3208D1F5D00087812 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C509C2208D1F5D00087812 /* LocationManager.swift */; };
+		15C509C5208D28C500087812 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C509C4208D28C500087812 /* MapKit.framework */; };
 		345F9BCE206C3EDC0003A725 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */; };
 		349741C22075DB270088B94E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349741C12075DB270088B94E /* Activity.swift */; };
+		34C057D820802861004C3BF9 /* TrailTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C057D720802861004C3BF9 /* TrailTrackerTests.swift */; };
+		953F1034EFBC770F3C8C14CA /* Pods_TrailTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D20D31595C7F8B66A207B25 /* Pods_TrailTracker.framework */; };
+		A73C2287208D32CB006A84A1 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73C2286208D32CB006A84A1 /* TabViewController.swift */; };
+		A7928F10208534D20080671A /* MemberTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F0F208534D20080671A /* MemberTableCell.swift */; };
+		A7928F12208535630080671A /* TripTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F11208535630080671A /* TripTableCell.swift */; };
+		A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */; };
+		A815F9992086B87800D42011 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815F9982086B87800D42011 /* UIExtensions.swift */; };
+		A831DCC2208943D50058019A /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A831DCC1208943D50058019A /* Badge.swift */; };
+		A831DCC420894CA20058019A /* MemberTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A831DCC320894CA20058019A /* MemberTypeButton.swift */; };
 		A89450BA2071684800949948 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450B92071684800949948 /* Member.swift */; };
 		A89450BC2071691600949948 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BB2071691600949948 /* Utils.swift */; };
 		A89450BE2071698800949948 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BD2071698800949948 /* Trip.swift */; };
 		A89450C020716BA400949948 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89450BF20716BA400949948 /* Date+.swift */; };
 		A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724A2069EB910084546D /* AppDelegate.swift */; };
-		A8B0724D2069EB910084546D /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0724C2069EB910084546D /* MainController.swift */; };
 		A8B072502069EB910084546D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B0724E2069EB910084546D /* Main.storyboard */; };
 		A8B072522069EB910084546D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B072512069EB910084546D /* Assets.xcassets */; };
 		A8B072552069EB910084546D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B072532069EB910084546D /* LaunchScreen.storyboard */; };
 		A8B072612069ECD70084546D /* SUNN.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8B072602069ECD70084546D /* SUNN.otf */; };
 		A8B072632069ECF00084546D /* PaneuropaNeueRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */; };
-		C2F0223D0F401AF660FCFA98 /* Pods_TrailTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14692E58D7222312F85B14BD /* Pods_TrailTracker.framework */; };
+		A8D76985207FE86300F1A4A0 /* CamachoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D76984207FE86300F1A4A0 /* CamachoButton.swift */; };
+		A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D76986207FE98C00F1A4A0 /* ClosureButton.swift */; };
+		A8D76989207FE9F800F1A4A0 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D76988207FE9F800F1A4A0 /* Font.swift */; };
+		A8D7698B207FEB7100F1A4A0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D7698A207FEB7100F1A4A0 /* Color.swift */; };
+		A8D7698D207FEDF700F1A4A0 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D7698C207FEDF700F1A4A0 /* UIView+.swift */; };
+		A8F0F17F207EC53900CDFE1D /* TripTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F17E207EC53900CDFE1D /* TripTableController.swift */; };
+		A8F0F181207EC55900CDFE1D /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */; };
+		A8F0F183207EC58A00CDFE1D /* ParticipantTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */; };
+		A8F0F185207EC5AC00CDFE1D /* CreateParticipantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */; };
+		A8F0F187207EC5E600CDFE1D /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F0F186207EC5E600CDFE1D /* TripViewController.swift */; };
+		C4DC6B0F367E2A211C209789 /* Pods_TrailTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D170723383DA51FF244C7A /* Pods_TrailTrackerTests.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		34C057DA20802861004C3BF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8B0723F2069EB910084546D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8B072462069EB910084546D;
+			remoteInfo = TrailTracker;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		14692E58D7222312F85B14BD /* Pods_TrailTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrailTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		152FD4B1207EB398009049FF /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		152FD4B4207EB3CB009049FF /* TripTracking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TripTracking.storyboard; sourceTree = "<group>"; };
-		152FD4B8207EB3F0009049FF /* AddTrip.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTrip.storyboard; sourceTree = "<group>"; };
-		152FD4BE207EB446009049FF /* CreateParticipants.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateParticipants.storyboard; sourceTree = "<group>"; };
-		152FD4C1207EB46F009049FF /* ManageParticipants.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ManageParticipants.storyboard; sourceTree = "<group>"; };
+		15C509BE208D1F2200087812 /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
+		15C509C0208D1F4300087812 /* FormatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
+		15C509C2208D1F5D00087812 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		15C509C4208D28C500087812 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		243F54609B4311F7D4D1DC05 /* Pods-TrailTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		349741C12075DB270088B94E /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		45E07772B75B0DB72E6D0D6E /* Pods-TrailTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.release.xcconfig"; sourceTree = "<group>"; };
+		34C057D520802861004C3BF9 /* TrailTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrailTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		34C057D720802861004C3BF9 /* TrailTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailTrackerTests.swift; sourceTree = "<group>"; };
+		34C057D920802861004C3BF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D20D31595C7F8B66A207B25 /* Pods_TrailTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrailTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		662D67A647B7BDD03F8A1149 /* Pods-TrailTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTrackerTests/Pods-TrailTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		7BE0265BC6EE8FBEC0404A81 /* Pods-TrailTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTrackerTests/Pods-TrailTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A73C2286208D32CB006A84A1 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		A7928F0F208534D20080671A /* MemberTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableCell.swift; sourceTree = "<group>"; };
+		A7928F11208535630080671A /* TripTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableCell.swift; sourceTree = "<group>"; };
+		A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripParticipantTableViewController.swift; sourceTree = "<group>"; };
+		A815F9982086B87800D42011 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		A831DCC1208943D50058019A /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		A831DCC320894CA20058019A /* MemberTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTypeButton.swift; sourceTree = "<group>"; };
 		A89450B92071684800949948 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		A89450BB2071691600949948 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A89450BD2071698800949948 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		A89450BF20716BA400949948 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		A8B072472069EB910084546D /* TrailTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrailTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8B0724A2069EB910084546D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A8B0724C2069EB910084546D /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		A8B0724F2069EB910084546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8B072512069EB910084546D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8B072542069EB910084546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8B072562069EB910084546D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8B072602069ECD70084546D /* SUNN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SUNN.otf; sourceTree = "<group>"; };
 		A8B072622069ECF00084546D /* PaneuropaNeueRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaneuropaNeueRegular.otf; sourceTree = "<group>"; };
-		F4194C9F05F65DF62F820500 /* Pods-TrailTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		A8D76984207FE86300F1A4A0 /* CamachoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamachoButton.swift; sourceTree = "<group>"; };
+		A8D76986207FE98C00F1A4A0 /* ClosureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureButton.swift; sourceTree = "<group>"; };
+		A8D76988207FE9F800F1A4A0 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		A8D7698A207FEB7100F1A4A0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A8D7698C207FEDF700F1A4A0 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		A8F0F17E207EC53900CDFE1D /* TripTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableController.swift; sourceTree = "<group>"; };
+		A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
+		A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantTableController.swift; sourceTree = "<group>"; };
+		A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateParticipantController.swift; sourceTree = "<group>"; };
+		A8F0F186207EC5E600CDFE1D /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		C9D170723383DA51FF244C7A /* Pods_TrailTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrailTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8E3CB12A8E9CBB2D536A25 /* Pods-TrailTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrailTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		34C057D220802861004C3BF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4DC6B0F367E2A211C209789 /* Pods_TrailTrackerTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A8B072442069EB910084546D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2F0223D0F401AF660FCFA98 /* Pods_TrailTracker.framework in Frameworks */,
+				15C509C5208D28C500087812 /* MapKit.framework in Frameworks */,
+				953F1034EFBC770F3C8C14CA /* Pods_TrailTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		152FD4B0207EB37C009049FF /* Features */ = {
+		34C057D620802861004C3BF9 /* TrailTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				152FD4B3207EB3A4009049FF /* Home Screen */,
-				152FD4BC207EB40B009049FF /* Trip */,
-				152FD4C4207EB47C009049FF /* Participants */,
+				34C057D720802861004C3BF9 /* TrailTrackerTests.swift */,
+				34C057D920802861004C3BF9 /* Info.plist */,
 			);
-			name = Features;
+			path = TrailTrackerTests;
 			sourceTree = "<group>";
 		};
-		152FD4B3207EB3A4009049FF /* Home Screen */ = {
+		743AFA77367DAA1E0B572C4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				152FD4B1207EB398009049FF /* Home.storyboard */,
-			);
-			name = "Home Screen";
-			sourceTree = "<group>";
-		};
-		152FD4B7207EB3DD009049FF /* Trip Tracking */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B4207EB3CB009049FF /* TripTracking.storyboard */,
-			);
-			name = "Trip Tracking";
-			sourceTree = "<group>";
-		};
-		152FD4BB207EB3FC009049FF /* Add Trip Workflow */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B8207EB3F0009049FF /* AddTrip.storyboard */,
-			);
-			name = "Add Trip Workflow";
-			sourceTree = "<group>";
-		};
-		152FD4BC207EB40B009049FF /* Trip */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4B7207EB3DD009049FF /* Trip Tracking */,
-				152FD4BB207EB3FC009049FF /* Add Trip Workflow */,
-			);
-			name = Trip;
-			sourceTree = "<group>";
-		};
-		152FD4C0207EB451009049FF /* Create Participants */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4BE207EB446009049FF /* CreateParticipants.storyboard */,
-			);
-			name = "Create Participants";
-			sourceTree = "<group>";
-		};
-		152FD4C3207EB472009049FF /* Manage Participants */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4C1207EB46F009049FF /* ManageParticipants.storyboard */,
-			);
-			name = "Manage Participants";
-			sourceTree = "<group>";
-		};
-		152FD4C4207EB47C009049FF /* Participants */ = {
-			isa = PBXGroup;
-			children = (
-				152FD4C0207EB451009049FF /* Create Participants */,
-				152FD4C3207EB472009049FF /* Manage Participants */,
-			);
-			name = Participants;
-			sourceTree = "<group>";
-		};
-		190C4C49D0846162751B877D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				14692E58D7222312F85B14BD /* Pods_TrailTracker.framework */,
+				15C509C4208D28C500087812 /* MapKit.framework */,
+				3D20D31595C7F8B66A207B25 /* Pods_TrailTracker.framework */,
+				C9D170723383DA51FF244C7A /* Pods_TrailTrackerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1DD2C0260310D1322826600D /* Pods */ = {
+		A7928F0E208534AD0080671A /* Custom Table Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F4194C9F05F65DF62F820500 /* Pods-TrailTracker.debug.xcconfig */,
-				45E07772B75B0DB72E6D0D6E /* Pods-TrailTracker.release.xcconfig */,
+				A7928F0F208534D20080671A /* MemberTableCell.swift */,
+				A7928F11208535630080671A /* TripTableCell.swift */,
 			);
-			name = Pods;
+			path = "Custom Table Cells";
 			sourceTree = "<group>";
 		};
 		A89450B8207165D300949948 /* Models */ = {
@@ -164,10 +164,11 @@
 		A8B0723E2069EB910084546D = {
 			isa = PBXGroup;
 			children = (
+				34C057D620802861004C3BF9 /* TrailTrackerTests */,
 				A8B072482069EB910084546D /* Products */,
-				1DD2C0260310D1322826600D /* Pods */,
-				190C4C49D0846162751B877D /* Frameworks */,
 				A8B072492069EB910084546D /* TrailTracker */,
+				AD27054400D5E3F905256623 /* Pods */,
+				743AFA77367DAA1E0B572C4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				A8B072472069EB910084546D /* TrailTracker.app */,
+				34C057D520802861004C3BF9 /* TrailTrackerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,42 +184,34 @@
 		A8B072492069EB910084546D /* TrailTracker */ = {
 			isa = PBXGroup;
 			children = (
-				152FD4B0207EB37C009049FF /* Features */,
 				A8B0724A2069EB910084546D /* AppDelegate.swift */,
 				A8B072562069EB910084546D /* Info.plist */,
 				345F9BCD206C3EDC0003A725 /* GoogleService-Info.plist */,
 				A8B072512069EB910084546D /* Assets.xcassets */,
+				A8B0724E2069EB910084546D /* Main.storyboard */,
+				A8B072532069EB910084546D /* LaunchScreen.storyboard */,
+				A8F0F188207EC6B200CDFE1D /* View Controllers */,
+				A7928F0E208534AD0080671A /* Custom Table Cells */,
 				A8B0725F2069EC320084546D /* Resources */,
 				A8B0725E2069EBFC0084546D /* Utilities */,
-				A8B0725C2069EBF10084546D /* Storyboards */,
-				A8B0725D2069EBF60084546D /* View Controllers */,
 				A89450B8207165D300949948 /* Models */,
+				A8D76983207FE82E00F1A4A0 /* UI Controls */,
 			);
 			path = TrailTracker;
-			sourceTree = "<group>";
-		};
-		A8B0725C2069EBF10084546D /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				A8B072532069EB910084546D /* LaunchScreen.storyboard */,
-				A8B0724E2069EB910084546D /* Main.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		A8B0725D2069EBF60084546D /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A8B0724C2069EB910084546D /* MainController.swift */,
-			);
-			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		A8B0725E2069EBFC0084546D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				A89450BB2071691600949948 /* Utils.swift */,
+				A8D76988207FE9F800F1A4A0 /* Font.swift */,
+				A8D7698A207FEB7100F1A4A0 /* Color.swift */,
 				A89450BF20716BA400949948 /* Date+.swift */,
+				A8D7698C207FEDF700F1A4A0 /* UIView+.swift */,
+				A815F9982086B87800D42011 /* UIExtensions.swift */,
+				15C509BE208D1F2200087812 /* UnitExtensions.swift */,
+				15C509C0208D1F4300087812 /* FormatDisplay.swift */,
+				15C509C2208D1F5D00087812 /* LocationManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -231,19 +225,76 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A8D76983207FE82E00F1A4A0 /* UI Controls */ = {
+			isa = PBXGroup;
+			children = (
+				A8D76986207FE98C00F1A4A0 /* ClosureButton.swift */,
+				A8D76984207FE86300F1A4A0 /* CamachoButton.swift */,
+				A831DCC320894CA20058019A /* MemberTypeButton.swift */,
+				A831DCC1208943D50058019A /* Badge.swift */,
+			);
+			path = "UI Controls";
+			sourceTree = "<group>";
+		};
+		A8F0F188207EC6B200CDFE1D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A73C2286208D32CB006A84A1 /* TabViewController.swift */,
+				A8F0F186207EC5E600CDFE1D /* TripViewController.swift */,
+				A8F0F17E207EC53900CDFE1D /* TripTableController.swift */,
+				A8F0F180207EC55900CDFE1D /* ParticipantViewController.swift */,
+				A8F0F182207EC58A00CDFE1D /* ParticipantTableController.swift */,
+				A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */,
+				A8F0F184207EC5AC00CDFE1D /* CreateParticipantController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		AD27054400D5E3F905256623 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				243F54609B4311F7D4D1DC05 /* Pods-TrailTracker.debug.xcconfig */,
+				DB8E3CB12A8E9CBB2D536A25 /* Pods-TrailTracker.release.xcconfig */,
+				7BE0265BC6EE8FBEC0404A81 /* Pods-TrailTrackerTests.debug.xcconfig */,
+				662D67A647B7BDD03F8A1149 /* Pods-TrailTrackerTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		34C057D420802861004C3BF9 /* TrailTrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34C057DE20802861004C3BF9 /* Build configuration list for PBXNativeTarget "TrailTrackerTests" */;
+			buildPhases = (
+				AC8C87869640B122D81DE018 /* [CP] Check Pods Manifest.lock */,
+				34C057D120802861004C3BF9 /* Sources */,
+				34C057D220802861004C3BF9 /* Frameworks */,
+				34C057D320802861004C3BF9 /* Resources */,
+				AE41E5D57B98C6FB586D5113 /* [CP] Embed Pods Frameworks */,
+				4083384E27B4D8A9644F71DC /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34C057DB20802861004C3BF9 /* PBXTargetDependency */,
+			);
+			name = TrailTrackerTests;
+			productName = TrailTrackerTests;
+			productReference = 34C057D520802861004C3BF9 /* TrailTrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A8B072462069EB910084546D /* TrailTracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8B072592069EB910084546D /* Build configuration list for PBXNativeTarget "TrailTracker" */;
 			buildPhases = (
-				E62265DBDB67E339DD561B28 /* [CP] Check Pods Manifest.lock */,
+				4C1F7BD969BD23A016778352 /* [CP] Check Pods Manifest.lock */,
 				A8B072432069EB910084546D /* Sources */,
 				A8B072442069EB910084546D /* Frameworks */,
 				A8B072452069EB910084546D /* Resources */,
-				F9038C2447B3733D17A7BFE6 /* [CP] Embed Pods Frameworks */,
-				F909DEA7954C490E00405AE7 /* [CP] Copy Pods Resources */,
+				9BD34BF5BD19353EC58455D3 /* [CP] Embed Pods Frameworks */,
+				DEFD2A85B20409E4B0A1A748 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -264,9 +315,19 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Camacho;
 				TargetAttributes = {
+					34C057D420802861004C3BF9 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A8B072462069EB910084546D;
+					};
 					A8B072462069EB910084546D = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -284,33 +345,51 @@
 			projectRoot = "";
 			targets = (
 				A8B072462069EB910084546D /* TrailTracker */,
+				34C057D420802861004C3BF9 /* TrailTrackerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		34C057D320802861004C3BF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A8B072452069EB910084546D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				152FD4BF207EB446009049FF /* CreateParticipants.storyboard in Resources */,
-				152FD4B5207EB3CB009049FF /* TripTracking.storyboard in Resources */,
-				152FD4B2207EB398009049FF /* Home.storyboard in Resources */,
 				A8B072632069ECF00084546D /* PaneuropaNeueRegular.otf in Resources */,
 				A8B072552069EB910084546D /* LaunchScreen.storyboard in Resources */,
-				152FD4C2207EB46F009049FF /* ManageParticipants.storyboard in Resources */,
 				A8B072522069EB910084546D /* Assets.xcassets in Resources */,
 				A8B072502069EB910084546D /* Main.storyboard in Resources */,
 				A8B072612069ECD70084546D /* SUNN.otf in Resources */,
 				345F9BCE206C3EDC0003A725 /* GoogleService-Info.plist in Resources */,
-				152FD4B9207EB3F0009049FF /* AddTrip.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E62265DBDB67E339DD561B28 /* [CP] Check Pods Manifest.lock */ = {
+		4083384E27B4D8A9644F71DC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrailTrackerTests/Pods-TrailTrackerTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C1F7BD969BD23A016778352 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -328,7 +407,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F9038C2447B3733D17A7BFE6 /* [CP] Embed Pods Frameworks */ = {
+		9BD34BF5BD19353EC58455D3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -362,7 +441,59 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrailTracker/Pods-TrailTracker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F909DEA7954C490E00405AE7 /* [CP] Copy Pods Resources */ = {
+		AC8C87869640B122D81DE018 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TrailTrackerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE41E5D57B98C6FB586D5113 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TrailTrackerTests/Pods-TrailTrackerTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrailTrackerTests/Pods-TrailTrackerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEFD2A85B20409E4B0A1A748 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -380,21 +511,56 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		34C057D120802861004C3BF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34C057D820802861004C3BF9 /* TrailTrackerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A8B072432069EB910084546D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73C2287208D32CB006A84A1 /* TabViewController.swift in Sources */,
+				A8D76985207FE86300F1A4A0 /* CamachoButton.swift in Sources */,
 				A89450BE2071698800949948 /* Trip.swift in Sources */,
-				A8B0724D2069EB910084546D /* MainController.swift in Sources */,
+				A8F0F185207EC5AC00CDFE1D /* CreateParticipantController.swift in Sources */,
+				A8D7698B207FEB7100F1A4A0 /* Color.swift in Sources */,
+				A7928F12208535630080671A /* TripTableCell.swift in Sources */,
+				A8F0F183207EC58A00CDFE1D /* ParticipantTableController.swift in Sources */,
+				15C509BF208D1F2200087812 /* UnitExtensions.swift in Sources */,
+				15C509C1208D1F4300087812 /* FormatDisplay.swift in Sources */,
+				A8D7698D207FEDF700F1A4A0 /* UIView+.swift in Sources */,
 				A89450BA2071684800949948 /* Member.swift in Sources */,
+				A7928F10208534D20080671A /* MemberTableCell.swift in Sources */,
+				15C509C3208D1F5D00087812 /* LocationManager.swift in Sources */,
 				349741C22075DB270088B94E /* Activity.swift in Sources */,
 				A89450C020716BA400949948 /* Date+.swift in Sources */,
+				A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */,
+				A831DCC2208943D50058019A /* Badge.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
 				A89450BC2071691600949948 /* Utils.swift in Sources */,
+				A815F9992086B87800D42011 /* UIExtensions.swift in Sources */,
+				A8F0F187207EC5E600CDFE1D /* TripViewController.swift in Sources */,
+				A8D76989207FE9F800F1A4A0 /* Font.swift in Sources */,
+				A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */,
+				A8F0F181207EC55900CDFE1D /* ParticipantViewController.swift in Sources */,
+				A8F0F17F207EC53900CDFE1D /* TripTableController.swift in Sources */,
+				A831DCC420894CA20058019A /* MemberTypeButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		34C057DB20802861004C3BF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8B072462069EB910084546D /* TrailTracker */;
+			targetProxy = 34C057DA20802861004C3BF9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A8B0724E2069EB910084546D /* Main.storyboard */ = {
@@ -416,6 +582,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		34C057DC20802861004C3BF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BE0265BC6EE8FBEC0404A81 /* Pods-TrailTrackerTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrailTrackerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Camacho..TrailTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrailTracker.app/TrailTracker";
+			};
+			name = Debug;
+		};
+		34C057DD20802861004C3BF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 662D67A647B7BDD03F8A1149 /* Pods-TrailTrackerTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrailTrackerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Camacho..TrailTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrailTracker.app/TrailTracker";
+			};
+			name = Release;
+		};
 		A8B072572069EB910084546D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -525,39 +723,50 @@
 		};
 		A8B0725A2069EB910084546D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4194C9F05F65DF62F820500 /* Pods-TrailTracker.debug.xcconfig */;
+			baseConfigurationReference = 243F54609B4311F7D4D1DC05 /* Pods-TrailTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JT6N58ZYM7;
 				INFOPLIST_FILE = TrailTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Camacho.TrailTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		A8B0725B2069EB910084546D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45E07772B75B0DB72E6D0D6E /* Pods-TrailTracker.release.xcconfig */;
+			baseConfigurationReference = DB8E3CB12A8E9CBB2D536A25 /* Pods-TrailTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JT6N58ZYM7;
 				INFOPLIST_FILE = TrailTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Camacho.TrailTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		34C057DE20802861004C3BF9 /* Build configuration list for PBXNativeTarget "TrailTrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34C057DC20802861004C3BF9 /* Debug */,
+				34C057DD20802861004C3BF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A8B072422069EB910084546D /* Build configuration list for PBXProject "TrailTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
