@@ -27,7 +27,7 @@ class TripTableCell: UITableViewCell {
     
     func update(with trip: Trip) {
         
-        tripLabel.attributedText = Font.make(text: trip.title, size: 30, color: Color.shade, type: .sunn)
+        tripLabel.attributedText = Font.make(text: trip.title, size: 20, color: Color.shade, type: .paneuropa)
         
         // Participant & Staff labels
         

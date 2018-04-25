@@ -52,11 +52,14 @@ class TripViewController: UIViewController {
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
         
+        createCamachoButton(buttonText: "Start")
+
         // Checking to see if this is a Start Trip or view completed trip
         if isStart {
             mapView.showsUserLocation = true
             mapView.mapType = MKMapType(rawValue: 0)!
             mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
+            
         }
         else {
             self.trip = (tripDelegate?.getTripInfo())!
@@ -64,15 +67,19 @@ class TripViewController: UIViewController {
             configureView()
         }
         
-        
-        
         self.title = "Trip"
         navigationController?.navigationBar.barTintColor = Color.forest
         navigationController?.navigationBar.titleTextAttributes = Font.makeAttrs(size: 30, color: Color.white, type: .sunn)
         
         //camacho button
-        createCamachoButton(buttonText: "Start")
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if camachoButton != nil {
+            camachoButton.removeFromSuperview()
+        }
     }
     
     func createCamachoButton(buttonText: String) {
@@ -206,6 +213,8 @@ class TripViewController: UIViewController {
         paceLabel.text = "Pace:  \(formattedPace)"
         
         loadMap()
+        
+        camachoButton.removeFromSuperview()
     }
     
     
