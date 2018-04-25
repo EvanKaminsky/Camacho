@@ -183,7 +183,7 @@ class TripViewController: UIViewController {
         locationManager.stopUpdatingLocation()
         
         let distanceInMiles = distance.converted(to: .miles)
-        trip.set(distance: Double(distanceInMiles.value))
+        trip.set(distance: CGFloat(distanceInMiles.value))
         trip.set(endTime: Date())
         trip.set(path: locationList)
         
@@ -197,7 +197,7 @@ class TripViewController: UIViewController {
     // Completed Run view
     private func configureView() {
         mapView.showsUserLocation = false
-        let distInMiles = Measurement(value: trip.distance!, unit: UnitLength.miles)
+        let distInMiles = Measurement(value: Double(trip.distance!), unit: UnitLength.miles)
         let distInMeters = distInMiles.converted(to: .meters)
         let seconds = Int(trip.duration!)
         let formattedDistance = FormatDisplay.distance(distInMeters)
@@ -307,8 +307,8 @@ extension TripViewController: CLLocationManagerDelegate {
         if let oldLocationNew = oldLocation as CLLocation?{
             let oldCoordinates = oldLocationNew.coordinate
             let newCoordinates = newLocation.coordinate
-            var area = [oldCoordinates, newCoordinates]
-            var polyline = MKPolyline(coordinates: area, count: area.count)
+            let area = [oldCoordinates, newCoordinates]
+            let polyline = MKPolyline(coordinates: area, count: area.count)
             mapView.add(polyline)
             print("getting new location!!")
         }
@@ -337,6 +337,7 @@ extension TripViewController: CLLocationManagerDelegate {
 }
 
 extension TripViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView!, rendererFor overlay: MKOverlay!) -> MKOverlayRenderer! {
         if (overlay is MKPolyline) {
             print("in mapView function about to return PR")
@@ -348,5 +349,6 @@ extension TripViewController: MKMapViewDelegate {
         print("Going to return nil as the overlay")
         return nil
     }
+    
 }
 

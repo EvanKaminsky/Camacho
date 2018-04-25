@@ -19,6 +19,7 @@
 		A7928F10208534D20080671A /* MemberTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F0F208534D20080671A /* MemberTableCell.swift */; };
 		A7928F12208535630080671A /* TripTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7928F11208535630080671A /* TripTableCell.swift */; };
 		A7E621BB207ED017004A15F7 /* TripParticipantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */; };
+		A809720220903D0E008C8711 /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A809720120903D0E008C8711 /* FirebaseUtils.swift */; };
 		A815F9992086B87800D42011 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815F9982086B87800D42011 /* UIExtensions.swift */; };
 		A831DCC2208943D50058019A /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A831DCC1208943D50058019A /* Badge.swift */; };
 		A831DCC420894CA20058019A /* MemberTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A831DCC320894CA20058019A /* MemberTypeButton.swift */; };
@@ -73,6 +74,7 @@
 		A7928F0F208534D20080671A /* MemberTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableCell.swift; sourceTree = "<group>"; };
 		A7928F11208535630080671A /* TripTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableCell.swift; sourceTree = "<group>"; };
 		A7E621BA207ED017004A15F7 /* TripParticipantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripParticipantTableViewController.swift; sourceTree = "<group>"; };
+		A809720120903D0E008C8711 /* FirebaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
 		A815F9982086B87800D42011 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		A831DCC1208943D50058019A /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		A831DCC320894CA20058019A /* MemberTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTypeButton.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		A89450B8207165D300949948 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A809720120903D0E008C8711 /* FirebaseUtils.swift */,
 				A89450B92071684800949948 /* Member.swift */,
 				A89450BD2071698800949948 /* Trip.swift */,
 				349741C12075DB270088B94E /* Activity.swift */,
@@ -541,6 +544,7 @@
 				A8D76987207FE98C00F1A4A0 /* ClosureButton.swift in Sources */,
 				A831DCC2208943D50058019A /* Badge.swift in Sources */,
 				A8B0724B2069EB910084546D /* AppDelegate.swift in Sources */,
+				A809720220903D0E008C8711 /* FirebaseUtils.swift in Sources */,
 				A89450BC2071691600949948 /* Utils.swift in Sources */,
 				A815F9992086B87800D42011 /* UIExtensions.swift in Sources */,
 				A8F0F187207EC5E600CDFE1D /* TripViewController.swift in Sources */,

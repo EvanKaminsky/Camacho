@@ -28,25 +28,6 @@ typealias TripsBlock = (NetworkingStatus, [Trip]) -> ()
 typealias TripBlock = (NetworkingStatus, Trip?) -> ()
 
 
-enum NetworkingStatus {
-    case success
-    case error
-}
-
-enum Collection: String {
-    case activites = "activities"
-    case members   = "members"
-    case trips     = "trips"
-}
-
-enum IDField: String {
-    case tripID      = "trip_id"
-    case memberID    = "member_id"
-    case activityIDs = "activity_ids"
-    case none        = "none"
-}
-
-
 // Global Functions //
 
 func debugPrint(_ text: String) {
