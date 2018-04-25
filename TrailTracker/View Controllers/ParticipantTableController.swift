@@ -86,7 +86,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return MemberTableCell.height
     }
     
     // Cell Creation
@@ -94,7 +94,7 @@ extension ParticipantTableController: UITableViewDelegate, UITableViewDataSource
         guard let participant = participants[safe: indexPath.row] else {
             return UITableViewCell()
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MemberTableViewCell", for: indexPath) as! MemberTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MemberTableCell.identifier, for: indexPath) as! MemberTableCell
         cell.update(with: participant)
         return cell
     }

@@ -79,21 +79,12 @@ class TripTableController: UIViewController, getTripInfoPrototcol {
     func startTrip() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
 
-        vc.trip = Trip.init(type: Trip.TripType(rawValue: "hiking")!, status: Trip.Status(rawValue: "new")!, title: "Test Run From View Controller!", member_ids: ["1"], staffCount: 1, participantCount: 1)
+
+        vc.trip = Trip.init(type: Trip.TripType(rawValue: "biking")!, status: Trip.Status(rawValue: "new")!, title: "Biking", member_ids: ["5"], staffCount: 1, participantCount: 1)
         vc.isStart = true
         
         // Open MapView ViewController
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "tripSegue", let destination = segue.destination as? TripViewController {
-            destination.tripDelegate = self
-        }
-    }
-    
-    func getTripInfo() -> Trip {
-        return trips[self.selectedRow]
     }
     
 }
@@ -118,7 +109,7 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
         guard let trip = trips[safe: indexPath.row] else {
             return UITableViewCell()
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TripTableCell", for: indexPath) as! TripTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TripTableCell.identifier, for: indexPath) as! TripTableCell
         cell.update(with: trip)
         return cell
     }
@@ -135,6 +126,16 @@ extension TripTableController: UITableViewDelegate, UITableViewDataSource {
         
         // TODO: Go to TripViewController, something like
         // self.startTrip(trip)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tripSegue", let destination = segue.destination as? TripViewController {
+            destination.tripDelegate = self
+        }
+    }
+    
+    func getTripInfo() -> Trip {
+        return trips[self.selectedRow]
     }
     
 }
