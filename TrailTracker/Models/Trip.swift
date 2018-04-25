@@ -22,7 +22,7 @@ class Trip {
         case distance = "distance"
         case starttime = "starttime"
         case endtime = "endtime"
-        case activityIds = "activity_ids"
+        case memberIds = "member_ids"
         case staffCount = "staff_count"
         case participantCount = "participant_count"
         case duration = "duration"
@@ -51,7 +51,7 @@ class Trip {
     private(set) var starttime: Date?
     private(set) var endtime: Date?             // ETA for in-progress trips, actual end time for complete trips
     
-    private(set) var activity_ids: [String]
+    private(set) var member_ids: [String]
     private(set) var staff_count: Int
     private(set) var participant_count: Int
     
@@ -66,24 +66,24 @@ class Trip {
     
     // Methods //
     
-    init(id: String, type: TripType, status: Status, title: String, activity_ids: [String], staffCount: Int, participantCount: Int) {
+    init(id: String, type: TripType, status: Status, title: String, member_ids: [String], staffCount: Int, participantCount: Int) {
         self.id = id
         self.type = type
         self.status = status
         self.title = title
         self.path = []
-        self.activity_ids = activity_ids
+        self.member_ids = member_ids
         self.staff_count = staffCount
         self.participant_count = participantCount
     }
     
-    init(type: TripType, status: Status, title: String, activity_ids: [String], staffCount: Int, participantCount: Int) {
-        self.id = "none"
+    init(type: TripType, status: Status, title: String, member_ids: [String], staffCount: Int, participantCount: Int) {
+        self.id = IDField.none.rawValue
         self.type = type
         self.status = status
         self.title = title
         self.path = []
-        self.activity_ids = activity_ids
+        self.member_ids = member_ids
         self.staff_count = staffCount
         self.participant_count = participantCount
     }
@@ -118,12 +118,11 @@ class Trip {
     }
     
     func add(member_id: String, callback: @escaping StatusBlock) {
-        let a = Activity(trip_id: self.id,member_id: member_id)
-        self.activity_ids.append(a.id)
+        self.member_ids.append(member_id)
         save()
         
-        // Add activity id to the member
-        var activity_ids = [String]()
+        // Add trip id to the member
+        var trip_ids = [String]()
         Utils.db.collection(Collection.members.rawValue).document(member_id)
         .addSnapshotListener{(documentSnapshot,error) in
             guard let document = documentSnapshot, error == nil else{
@@ -132,53 +131,32 @@ class Trip {
                 return
             }
             let arr: HardJSON = document.data()!
-            activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
-            activity_ids.append(a.id)
+            trip_ids = (arr[Member.Field.tripIds.rawValue] as? [String])!
+            trip_ids.append(member_id)
+            
+            let ref = Utils.db.collection(Collection.members.rawValue).document(member_id)
+            ref.setData([
+                Member.Field.tripIds.rawValue: trip_ids
+                ], options: SetOptions.merge())
+            callback(.success)
         }
-        let ref = Utils.db.collection(Collection.members.rawValue).document(member_id)
-        ref.setData([
-            Field.activityIds.rawValue: activity_ids
-            ], options: SetOptions.merge())
-        callback(.success)
+        
     }
     
-    func removeActivity(activity_id: String){
-        if let ind = activity_ids.index(of:activity_id){
-            self.activity_ids.remove(at: ind)
+    
+    func removeMember(member_id: String) {
+        if let ind = member_ids.index(of:member_id){
+            self.member_ids.remove(at: ind)
         }
         save()
-    }
-    
-    func removeMember(memberID: String) {
-        //query for Activity with member_id = memberID & trip_id = self.id
-        var activity_id = String()
-        Utils.db.collection(Collection.activites.rawValue)
-            .whereField(IDField.tripID.rawValue, isEqualTo: self.id)
-            .whereField(IDField.memberID.rawValue, isEqualTo: memberID)
-            .getDocuments{(snapshot,error) in
-                if let documents = snapshot?.documents{
-                    for document in documents{
-                        activity_id = document.documentID
-                    }
-                }
-        }
-        removeActivity(activity_id: activity_id)
-        let ref = Utils.db.collection(Collection.members.rawValue).document(memberID)
+        let ref = Utils.db.collection(Collection.members.rawValue).document(member_id)
         ref.getDocument{(document,error) in
-            if let data = document?.data(), var activity_ids = data[IDField.activityIDs.rawValue]
+            if let data = document?.data(), var trip_ids = data[Member.Field.tripIds.rawValue]
                 as? [String]{
-                if let index = activity_ids.index(of: activity_id) {
-                    activity_ids.remove(at: index)
-                    ref.updateData([IDField.activityIDs.rawValue: activity_ids])
+                if let index = trip_ids.index(of: self.id) {
+                    trip_ids.remove(at: index)
+                    ref.updateData([Member.Field.tripIds.rawValue: trip_ids])
                 }
-            }
-        }
-        // Remove orphaned activity
-        Utils.db.collection(Collection.activites.rawValue).document(activity_id).delete(){ err in
-            if let err = err {
-                debugPrint("Error removing document: \(err)")
-            } else {
-                debugPrint("Document successfully removed!")
             }
         }
     }
@@ -186,23 +164,19 @@ class Trip {
     // Remove Trip from database
     func remove(){
         
-        // Remove this activity from any members
-        var current_members = [Member]()
-        Member.getMembers{(status,members) in
-            if status == .error{
-                debugPrint("Error getting member")
-            }else{
-                current_members = members
-            }
-        }
-        for aid in self.activity_ids{
-            for m in current_members{
-                let cur_activities = m.getActivities()
-                if cur_activities.contains(aid){
-                    m.removeActivity(activity_id: aid)
+        var ref: DocumentReference!
+        for mid in self.member_ids{
+            ref = Utils.db.collection(Collection.members.rawValue).document(mid)
+            ref.getDocument{(document, err) in
+                let arr: HardJSON = document!.data()!
+                var trip_ids = arr[Member.Field.tripIds.rawValue] as! [String]
+                if let index = trip_ids.index(of: self.id) {
+                    trip_ids.remove(at: index)
+                    ref.updateData([Member.Field.tripIds.rawValue: trip_ids])
                 }
             }
         }
+        
         Utils.db.collection(Collection.trips.rawValue).document(self.id).delete(){ err in
             if let err = err {
                 debugPrint("Error removing document: \(err)")
@@ -229,7 +203,7 @@ class Trip {
                     let status = Trip.Status(rawValue: status_raw),
                     let title = arr[Field.title.rawValue] as? String,
                     let g_path = arr[Field.path.rawValue] as? [GeoPoint],
-                    let activity_ids = arr[Field.activityIds.rawValue] as? [String],
+                    let member_ids = arr[Field.memberIds.rawValue] as? [String],
                     let staff_count = arr[Field.staffCount.rawValue] as? Int,
                     let participant_count = arr[Field.participantCount.rawValue] as? Int
                     else{
@@ -237,7 +211,7 @@ class Trip {
                         callback(.error,nil)
                         return
                     }
-                let t = Trip(id: id, type: type, status: status, title: title, activity_ids: activity_ids, staffCount: staff_count, participantCount: participant_count)
+                let t = Trip(id: id, type: type, status: status, title: title, member_ids: member_ids, staffCount: staff_count, participantCount: participant_count)
                 let path = Trip.Geo2CLArray(locs: g_path)
                 let distance = arr[Field.distance.rawValue] as? Double
                 let starttime = arr[Field.starttime.rawValue] as? Date
@@ -294,7 +268,7 @@ class Trip {
             Field.status.rawValue : self.status.rawValue,
             Field.title.rawValue : self.title,
             Field.path.rawValue : paths,
-            Field.activityIds.rawValue : self.activity_ids,
+            Field.memberIds.rawValue : self.member_ids,
             Field.staffCount.rawValue : self.staff_count,
             Field.participantCount.rawValue : self.participant_count,
             Field.distance.rawValue : self.distance as Any,
@@ -306,30 +280,20 @@ class Trip {
 
     // Get Methods //
     
-    func getActivities() -> [String]{
-        return self.activity_ids
-    }
     
-    func getMembers() -> [Member]{
+    func getMembers(callback: @escaping MembersBlock){
         var members = [Member]()
-        for aid in self.activity_ids{
-            Utils.db.collection(Collection.activites.rawValue).document(aid).getDocument{(document,err) in
-                if let err = err{
-                    debugPrint("Error getting document: \(err)")
-                }else{
-                    var arr : HardJSON = document!.data()!
-                    let member_id  = arr[IDField.memberID.rawValue] as? String
-                    Member.getMember(member_id: member_id!) { (status, member) in
-                        if status == .error{
-                            debugPrint("Member does not Exist: \(status)")
-                        }else{
-                            members.append(member!)
-                        }
-                    }
+        for mid in self.member_ids{
+            Member.getMember(member_id: mid) { (status,member) in
+                if status == .success, let member = member {
+                    members.append(member)
+                } else {
+                    debugPrint("Trip \(mid) does not exist, Status: \(status)")
+                    callback(.error,[])
                 }
             }
         }
-        return members
+        callback(.success,members)
     }
     
     static func getTrips(callback: @escaping TripsBlock){
@@ -352,14 +316,14 @@ class Trip {
                     let status = Trip.Status(rawValue: status_raw),
                     let title = arr[Field.title.rawValue] as? String,
                     let g_path = arr[Field.path.rawValue] as? [GeoPoint],
-                    let activity_ids = arr[Field.activityIds.rawValue] as? [String],
+                    let member_ids = arr[Field.memberIds.rawValue] as? [String],
                     let staff_count = arr[Field.staffCount.rawValue] as? Int,
                     let participant_count = arr[Field.participantCount.rawValue] as? Int
                 else{
                     debugPrint("Failed instantiating Trip object with data: \(arr)")
                     continue
                 }
-                let t = Trip(id: id, type: type, status: status, title: title, activity_ids: activity_ids, staffCount: staff_count, participantCount: participant_count)
+                let t = Trip(id: id, type: type, status: status, title: title, member_ids: member_ids, staffCount: staff_count, participantCount: participant_count)
                 let distance = arr[Field.distance.rawValue] as? Double
                 let starttime = arr[Field.starttime.rawValue] as? Date
                 let endtime = arr[Field.endtime.rawValue] as? Date

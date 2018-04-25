@@ -18,7 +18,7 @@ class Member {
         case fullName = "full_name"
         case guardianName = "guardian_name"
         case guardianEmail = "guardian_email"
-        case activityIds = "activity_ids"
+        case tripIds = "trip_ids"
         case totalDistance = "total_distance"
         case totalDuration = "total_duration"
     }
@@ -34,19 +34,19 @@ class Member {
     private(set) var guardian_name: String?
     private(set) var guardian_email: String?
     
-    private(set) var activity_ids: Array<String>
+    private(set) var trip_ids: Array<String>
     private(set) var total_distance: CGFloat
     private(set) var total_duration: CGFloat
     
     var total_trips: Int {
-        return activity_ids.count
+        return trip_ids.count
     }
     
-    init(id: String, type: MemberType, name: String, activity_ids: [String], totalDistance: CGFloat, totalDuration: CGFloat) {
+    init(id: String, type: MemberType, name: String, trip_ids: [String], totalDistance: CGFloat, totalDuration: CGFloat) {
         self.id = id
         self.type = type
         self.full_name = name
-        self.activity_ids = activity_ids
+        self.trip_ids = trip_ids
         self.total_distance = totalDistance
         self.total_duration = totalDuration
     }
@@ -60,7 +60,7 @@ class Member {
     // Networking //
     
     static func create(type: MemberType, name: String, guardianName: String?, guardianEmail: String?) {
-        let member = Member(id: IDField.none.rawValue, type: type, name: name, activity_ids: [], totalDistance: 0, totalDuration: 0)        
+        let member = Member(id: IDField.none.rawValue, type: type, name: name, trip_ids: [], totalDistance: 0, totalDuration: 0)
         member.setOptionalFields(guardianName: guardianName, guardianEmail: guardianEmail)
         member.save()
     }
@@ -81,12 +81,10 @@ class Member {
     }
 
     func add(trip_id: String, callback: @escaping StatusBlock) {
-        let a = Activity(trip_id: trip_id, member_id: self.id)
-        self.activity_ids.append(a.id)
+        self.trip_ids.append(trip_id)
         save()
-        
-        // Add activity id to the Trip
-        var activity_ids = [String]()
+        // Query for the trip and add member to it
+        var member_ids = [String]()
         Utils.db.collection(Collection.trips.rawValue).document(trip_id)
             .addSnapshotListener{(documentSnapshot,error) in
                 guard let document = documentSnapshot, error == nil else{
@@ -95,53 +93,31 @@ class Member {
                     return
                 }
                 let arr: HardJSON = document.data()!
-                activity_ids = (arr[Field.activityIds.rawValue] as? [String])!
-                activity_ids.append(a.id)
+                member_ids = (arr[Trip.Field.memberIds.rawValue] as? [String])!
+                member_ids.append(trip_id)
                 
                 let ref = Utils.db.collection(Collection.trips.rawValue).document(trip_id)
                 ref.setData([
-                    Field.activityIds.rawValue: activity_ids
+                    Trip.Field.memberIds.rawValue: member_ids
                     ], options: SetOptions.merge())
                 callback(.success)
         }
     }
     
-    func removeActivity(activity_id: String){
-        if let index = activity_ids.index(of: activity_id) {
-            self.activity_ids.remove(at: index)
+    
+    func removeTrip(trip_id: String) {
+        if let index = trip_ids.index(of: trip_id) {
+            self.trip_ids.remove(at: index)
         }
         save()
-    }
-    
-    func removeTrip(tripID: String) {
-        var activity_id = String()
-        Utils.db.collection(Collection.activites.rawValue)
-            .whereField(IDField.tripID.rawValue, isEqualTo: tripID)
-            .whereField(IDField.memberID.rawValue, isEqualTo: self.id)
-            .getDocuments { (snapshot, error) in
-                if let documents = snapshot?.documents {
-                    for document in documents {
-                        activity_id = document.documentID
-                    }
-                }
-        }
-        removeActivity(activity_id: activity_id)
-
-        let ref = Utils.db.collection(Collection.trips.rawValue).document(tripID)
+        
+        let ref = Utils.db.collection(Collection.trips.rawValue).document(trip_id)
         ref.getDocument { (document, error) in
-            if let data = document?.data(), var activity_ids = data[IDField.activityIDs.rawValue] as? [String] {
-                if let index = activity_ids.index(of: activity_id) {
-                    activity_ids.remove(at: index)
-                    ref.updateData([IDField.activityIDs.rawValue: activity_ids])
+            if let data = document?.data(), var member_ids = data[Trip.Field.memberIds.rawValue] as? [String] {
+                if let index = member_ids.index(of: self.id) {
+                    member_ids.remove(at: index)
+                    ref.updateData([Trip.Field.memberIds.rawValue: member_ids])
                 }
-            }
-        }
-        // Remove orphaned activity
-        Utils.db.collection(Collection.activites.rawValue).document(activity_id).delete(){ err in
-            if let err = err {
-                debugPrint("Error removing document: \(err)")
-            } else {
-                debugPrint("Document successfully removed!")
             }
         }
         
@@ -150,23 +126,19 @@ class Member {
     // Remove Member from database
     func remove(){
         
-        // Remove this Member from any trips
-        var current_trips = [Trip]()
-        Trip.getTrips{(status,trips) in
-            if status == .error{
-                debugPrint("Error getting member")
-            }else{
-                current_trips = trips
-            }
-        }
-        for aid in self.activity_ids{
-            for t in current_trips{
-                let cur_activities = t.getActivities()
-                if cur_activities.contains(aid){
-                    t.removeActivity(activity_id: aid)
+        var ref: DocumentReference!
+        for tid in self.trip_ids{
+            ref = Utils.db.collection(Collection.trips.rawValue).document(tid)
+            ref.getDocument{(document, err) in
+                let arr: HardJSON = document!.data()!
+                var member_ids = arr[Trip.Field.memberIds.rawValue] as! [String]
+                if let index = member_ids.index(of: self.id) {
+                    member_ids.remove(at: index)
+                    ref.updateData([Trip.Field.memberIds.rawValue: member_ids])
                 }
             }
         }
+ 
         Utils.db.collection(Collection.members.rawValue).document(self.id).delete(){ err in
             if let err = err {
                 debugPrint("Error removing document: \(err)")
@@ -191,7 +163,7 @@ class Member {
             Field.fullName.rawValue: self.full_name,
             Field.guardianName.rawValue: self.guardian_name as Any,
             Field.guardianEmail.rawValue: self.guardian_email as Any,
-            Field.activityIds.rawValue: self.activity_ids,
+            Field.tripIds.rawValue: self.trip_ids,
             Field.totalDistance.rawValue: self.total_distance,
             Field.totalDuration.rawValue : self.total_duration
         ], options: SetOptions.merge())
@@ -200,9 +172,6 @@ class Member {
     
     // Get Methods //
     
-    func getActivities() -> [String]{
-        return self.activity_ids
-    }
     
     static func getMember(member_id: String, callback: @escaping MemberBlock){
         Utils.db.collection(Collection.members.rawValue).document(member_id)
@@ -218,7 +187,7 @@ class Member {
                 let type_raw = arr[Field.type.rawValue] as? String,
                 let type = Member.MemberType(rawValue: type_raw),
                 let full_name = arr[Field.fullName.rawValue] as? String,
-                let activity_ids = arr[Field.activityIds.rawValue] as? [String],
+                let trip_ids = arr[Field.tripIds.rawValue] as? [String],
                 let total_distance = arr[Field.totalDistance.rawValue] as? CGFloat,
                 let total_duration = arr[Field.totalDuration.rawValue] as? CGFloat
                 else {
@@ -226,7 +195,7 @@ class Member {
                     callback(.error,nil)
                     return
                 }
-            let m = Member(id: id, type: type, name: full_name, activity_ids: activity_ids, totalDistance: total_distance, totalDuration: total_duration)
+            let m = Member(id: id, type: type, name: full_name, trip_ids: trip_ids, totalDistance: total_distance, totalDuration: total_duration)
             
             let guardian_name = arr[Field.guardianName.rawValue] as? String
             let guardian_email = arr[Field.guardianEmail.rawValue] as? String
@@ -239,26 +208,17 @@ class Member {
     func getTrips(callback: @escaping TripsBlock) {
         var trips = [Trip]()
         
-        for aid in self.activity_ids {
-            Utils.db.collection(Collection.activites.rawValue).document(aid).getDocument{ (document, error) in
-                guard let arr: HardJSON = document?.data(), let trip_id = arr[IDField.tripID.rawValue] as? String, error == nil else {
-                    debugPrint("Error getting document: \(String(describing: error))")
-                    return
+        for tid in self.trip_ids {
+            Trip.getTrip(trip_id: tid) { (status, trip) in
+                if status == .success, let trip = trip {
+                    trips.append(trip)
+                } else {
+                    debugPrint("Trip \(tid) does not exist, Status: \(status)")
+                    callback(.error,[])
                 }
-            
-                Trip.getTrip(trip_id: trip_id) { (status, trip) in
-                    if status == .success, let trip = trip {
-                        trips.append(trip)
-                    } else {
-                        debugPrint("Trip \(trip_id) does not exist, Status: \(status)")
-                    }
-                }
-                
-                // This needs to be redone
-    
-                    
             }
         }
+        callback(.success,trips)
     }
     
     static func getMembers(callback: @escaping MembersBlock) {
@@ -278,7 +238,7 @@ class Member {
                     let type_raw = arr[Field.type.rawValue] as? String,
                     let type = Member.MemberType(rawValue: type_raw),
                     let full_name = arr[Field.fullName.rawValue] as? String,
-                    let activity_ids = arr[Field.activityIds.rawValue] as? [String],
+                    let trip_ids = arr[Field.tripIds.rawValue] as? [String],
                     let total_distance = arr[Field.totalDistance.rawValue] as? CGFloat,
                     let total_duration = arr[Field.totalDuration.rawValue] as? CGFloat
                 else {
@@ -286,7 +246,7 @@ class Member {
                     continue
                 }
 
-                let m = Member(id: id, type: type, name: full_name, activity_ids: activity_ids, totalDistance: total_distance, totalDuration: total_duration)
+                let m = Member(id: id, type: type, name: full_name, trip_ids: trip_ids, totalDistance: total_distance, totalDuration: total_duration)
                 
                 let guardian_name = arr[Field.guardianName.rawValue] as? String
                 let guardian_email = arr[Field.guardianEmail.rawValue] as? String
