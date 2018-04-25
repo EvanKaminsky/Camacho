@@ -79,7 +79,8 @@ class TripTableController: UIViewController, getTripInfoPrototcol {
     func startTrip() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TripViewController") as! TripViewController
 
-        vc.trip = Trip.init(type: Trip.TripType(rawValue: "biking")!, status: Trip.Status(rawValue: "new")!, title: "Biking", activity_ids: ["5"], staffCount: 1, participantCount: 1)
+
+        vc.trip = Trip.init(type: Trip.TripType(rawValue: "biking")!, status: Trip.Status(rawValue: "new")!, title: "Biking", member_ids: ["5"], staffCount: 1, participantCount: 1)
         vc.isStart = true
         
         // Open MapView ViewController

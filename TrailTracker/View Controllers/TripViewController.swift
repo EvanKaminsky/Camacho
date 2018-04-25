@@ -35,7 +35,7 @@ class TripViewController: UIViewController {
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private var locationList: [CLLocation] = []
     
-    var trip = Trip.init(type: Trip.TripType(rawValue: "hiking")!, status: Trip.Status(rawValue: "new")!, title: "Test Run 1", activity_ids: ["1"], staffCount: 1, participantCount: 1)
+    var trip = Trip.init(type: Trip.TripType(rawValue: "hiking")!, status: Trip.Status(rawValue: "new")!, title: "Test Run 1", member_ids: ["1"], staffCount: 1, participantCount: 1)
     
     override func viewDidLoad() {
         
